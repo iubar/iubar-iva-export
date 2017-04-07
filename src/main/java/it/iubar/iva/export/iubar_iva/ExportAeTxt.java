@@ -5,9 +5,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class ExportAeTxt {
+	
 	private static final String DECIMAL_PATTERN = "###.###";
 	private static final String DATE_PATTERN = "ddMMyyyy";
 
@@ -45,7 +45,7 @@ public class ExportAeTxt {
 	public String buildPositionalField(String value, String format, int lenght) {
 		Formatter fm = new Formatter();
 		String formattedString = new String();
-		Utility ut = new Utility();
+		Utility utility = new Utility();
 
 		int delta = lenght - value.length();
 
@@ -89,10 +89,9 @@ public class ExportAeTxt {
 				}
 				break;
 			case "DT":
-
 				if (value.length() == 8) {
 					if (value.matches("[0-9]+")) {
-						if (ut.dateFormatCheck(value)) {
+						if (utility.dateFormatCheck(value)) {
 							formattedString = fm.stringFormatterDelta(value, delta, 0);
 						} else {
 							throw new IllegalArgumentException(
@@ -174,7 +173,7 @@ public class ExportAeTxt {
 	public String buildNonPositionalField(String value, String format, int lenght) {
 		Formatter fm = new Formatter();
 		String formattedString = new String();
-		Utility ut = new Utility();
+		Utility utility = new Utility();
 
 		int delta = lenght - value.length();
 
@@ -269,7 +268,7 @@ public class ExportAeTxt {
 				if (lenght == 16) {
 					if (value.length() == 8) {
 						if (value.matches("[0-9]+")) {
-							if (ut.dateFormatCheck(value)) {
+							if (utility.dateFormatCheck(value)) {
 								formattedString = fm.stringFormatterDelta(value.substring(4, 8), delta + 4, 2);
 							} else {
 								throw new IllegalArgumentException(
@@ -289,8 +288,8 @@ public class ExportAeTxt {
 				if (lenght == 16) {
 					if (value.length() == 8) {
 						if (value.matches("[0-9]+")) {
-							if (ut.dateFormatCheck(value)) {
-								if (ut.dateRange(value, 1880, Year.now().getValue())) {
+							if (utility.dateFormatCheck(value)) {
+								if (utility.dateRange(value, 1880, Year.now().getValue())) {
 									formattedString = fm.stringFormatterDelta(value, delta, 2);
 								} else {
 									throw new IllegalArgumentException(
@@ -316,8 +315,8 @@ public class ExportAeTxt {
 				if (lenght == 16) {
 					if (value.length() == 8) {
 						if (value.matches("[0-9]+")) {
-							if (ut.dateFormatCheck(value)) {
-								if (ut.dateRange(value, 1980, 2050)) {
+							if (utility.dateFormatCheck(value)) {
+								if (utility.dateRange(value, 1980, 2050)) {
 									formattedString = fm.stringFormatterDelta(value, delta, 2);
 								} else {
 									throw new IllegalArgumentException(
@@ -343,7 +342,7 @@ public class ExportAeTxt {
 				if (lenght == 16) {
 					if (value.length() == 8) {
 						if (value.matches("[0-9]+")) {
-							if (ut.dateFormatCheck(value)) {
+							if (utility.dateFormatCheck(value)) {
 								formattedString = fm.stringFormatterDelta(value.substring(0, 4), delta + 4, 2);
 							} else {
 								throw new IllegalArgumentException(
@@ -365,7 +364,7 @@ public class ExportAeTxt {
 				if (lenght == 16) {
 					if (value.length() == 8) {
 						if (value.matches("[0-9]+")) {
-							if (ut.dateFormatCheck(value)) {
+							if (utility.dateFormatCheck(value)) {
 								formattedString = fm.stringFormatterDelta(value.substring(2, 8), delta + 2, 2);
 							} else {
 								throw new IllegalArgumentException(

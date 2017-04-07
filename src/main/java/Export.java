@@ -14,19 +14,20 @@ public class Export {
 	private Map<String, String> pSpecs = new HashMap<String, String>();
 	private Map<String, String> nSpecs = new HashMap<String, String>();
 
-
-
 	public void dumpData(String value, int field) {
 
-		String[] split = pSpecs.get(Integer.toString(field)).split("\\s"); 	//get the specs corresponding to field already split
+		String[] split = pSpecs.get(Integer.toString(field)).split("\\s"); // get
+																			// the
+																			// specs
+																			// corresponding
+																			// to
+																			// field
+																			// already
+																			// split
 		if (split.length != 4) {
 			System.out.println("Error with the specs");
 		} else {
-			this.writeField(field,
-					Integer.parseInt(split[1]),
-					Integer.parseInt(split[2]),
-					split[3],
-					value);
+			this.writeField(field, Integer.parseInt(split[1]), Integer.parseInt(split[2]), split[3], value);
 		}
 	}
 
@@ -41,12 +42,16 @@ public class Export {
 
 	private void writeField(int field, int position, int length, String format, String value) {
 
-		/*FileChannel rwChannel = new RandomAccessFile("textfile.txt", "rw").getChannel();
-		ByteBuffer wrBuf = rwChannel.map(FileChannel.MapMode.READ_WRITE, 0, textToSave.length());
-
-		wrBuf.put(textToSave.getBytes());
-
-		rwChannel.close();*/
+		/*
+		 * FileChannel rwChannel = new RandomAccessFile("textfile.txt",
+		 * "rw").getChannel(); ByteBuffer wrBuf =
+		 * rwChannel.map(FileChannel.MapMode.READ_WRITE, 0,
+		 * textToSave.length());
+		 * 
+		 * wrBuf.put(textToSave.getBytes());
+		 * 
+		 * rwChannel.close();
+		 */
 	}
 
 	public void writeField(String field, String format, String value) {
@@ -55,7 +60,7 @@ public class Export {
 
 	public Export() {
 
-		try{
+		try {
 			BufferedReader reader = new BufferedReader(new FileReader(SPECS_PATH));
 			Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}");
 			Pattern positional = Pattern.compile("[0-9]+");
@@ -75,9 +80,7 @@ public class Export {
 
 	}
 
-	public static void main (String[] args) {
-
-
+	public static void main(String[] args) {
 
 	}
 
