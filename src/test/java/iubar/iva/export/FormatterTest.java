@@ -1,8 +1,8 @@
-package it.iubar.iva.export.iubar_iva;
-
-import static org.junit.Assert.*;
+package iubar.iva.export;
 
 import iubar.iva.export.Formatter;
+
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class FormatterTest {

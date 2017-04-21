@@ -1,12 +1,15 @@
-package it.iubar.iva.export.iubar_iva;
+package iubar.iva.export;
+
+import iubar.iva.export.ExportAeTxt;
 
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import iubar.iva.export.ExportAeTxt;
-import org.junit.Test;
+
+
 
 public class ExportAeTxtTest {
 

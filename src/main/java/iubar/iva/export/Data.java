@@ -10,9 +10,9 @@ public class Data {
 
     private final static String SPECS_PATH = "/home/yawn/temp/iva.cfg";
 
-    private ArrayList<String> db = new ArrayList<>();
-    private ArrayList<Integer> pfield = new ArrayList<>();
-    private ArrayList<String> nfield = new ArrayList<>();
+    private ArrayList<String> db = new ArrayList<String>();
+    private ArrayList<Integer> pfield = new ArrayList<Integer>();
+    private ArrayList<String> nfield = new ArrayList<String>();
 
     private int dbIndex;
     private int fieldIndex;
