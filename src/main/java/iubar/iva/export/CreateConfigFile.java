@@ -12,7 +12,7 @@ public final class CreateConfigFile {
 	private static final String FILE_PATH = "/home/yawn/temp/iva.cfg";
 
 	private PrintWriter writer;
-	private int last_field;
+	private int field_count;
 
 	public void getTextFromPDF(int start_page, int end_page) {
 
@@ -54,7 +54,7 @@ public final class CreateConfigFile {
 				String[] split = pdfLine.split("\\+");
 
 				try {
-					int field = Integer.parseInt(split[0]);
+					//int field = Integer.parseInt(split[0]);
 					int position = Integer.parseInt(split[split.length - 3]);
 					int length = Integer.parseInt(split[split.length - 2]);
 					String format = split[split.length - 1];
@@ -64,12 +64,9 @@ public final class CreateConfigFile {
 					 * position + " " + "Length: " + length + " " + "Format: " +
 					 * format + "\n");
 					 */
-					if (field < this.last_field) {
-						field += this.last_field;
-					}
 
-					writer.print(field + " " + position + " " + length + " " + format + "\n");
-					last_field = field;
+					this.field_count++;
+					writer.print(this.field_count + " " + position + " " + length + " " + format + "\n");
 
 				} catch (ArrayIndexOutOfBoundsException e) {
 					e.printStackTrace();
