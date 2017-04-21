@@ -82,8 +82,7 @@ public class FormatterTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void test5Delta() throws IllegalArgumentException {
 		Formatter fm = new Formatter();
-		String actual = null;
-		actual = fm.stringFormatterDelta("ciao", 4, 4);
+		fm.stringFormatterDelta("ciao", 4, 4);
 	}
 
 }

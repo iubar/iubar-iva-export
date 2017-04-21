@@ -1,0 +1,5 @@
+﻿language: java
+
+install: true # The install step runs before script step, and with Maven you don't usually need the install step,at least I personally haven't ever found it useful — Maven will download dependencies on script step anyway
+
+script: mvn clean verify
