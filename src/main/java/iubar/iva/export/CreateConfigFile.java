@@ -79,6 +79,11 @@ public final class CreateConfigFile {
 			if (pdfLine != null) {
 				String[] split = pdfLine.split("\\+");
 				if (split.length == 2) {
+					// System.out.println(pdfLine);
+					/*
+					 * writer.print("Field: " + split[0] + "Format: " + split[1]
+					 * + "\n");
+					 */
 					writer.print(split[0] + " " + split[1] + "\n");
 				}
 			}
@@ -93,13 +98,11 @@ public final class CreateConfigFile {
 			if (StringUtils.isNumeric(split[0])) {
 
 				for (int i = 0; i < split.length; i++) {
-					if (i > 0) {
-						if (split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1")) {
-							if (split[i].equals("N1")) {
-								split[i] = "NU";
-							}
-							return split[0] + "+" + split[i - 2] + "+" + split[i - 1] + "+" + split[i];
+					if ((i > 0) && (split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1"))) {
+						if (split[i].equals("N1")) {
+							split[i] = "NU";
 						}
+						return split[0] + "+" + split[i - 2] + "+" + split[i - 1] + "+" + split[i];
 					}
 				}
 			}
@@ -119,7 +122,10 @@ public final class CreateConfigFile {
 				for (int i = 0; i < split.length; i++) {
 
 					if (split[i].matches(
-							"AN|CB|CB12|CF|CN|PI|" + "DA|DT|DN|D4|D6|NP|NU|" + "N1|N2|N3|N4|N5|N6|" + "PC|PR|PN|QU")) {
+							"AN|CB|CB12|CF|CN|PI|" +
+									"DA|DT|DN|D4|D6|NP|NU|" +
+									"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16" +
+									"PC|PR|PN|QU")) {
 
 						return split[0] + "+" + split[i];
 					}
@@ -145,7 +151,6 @@ public final class CreateConfigFile {
 		iubar.iva.export.CreateConfigFile file = new iubar.iva.export.CreateConfigFile();
 		file.getTextFromPDF(16, 20);
 		file.getTextFromPDF(21, 41);
-		file.getTextFromPDF(42, 42);
 		file.close();
 	}
 

@@ -34,6 +34,7 @@ public class Export {
 
 	private String record;
 	private int last_record_line = 3;
+	private final static int n_length = 16;
 
 	public void writeField(String value, int field) throws IOException {
 		String format;
@@ -67,7 +68,7 @@ public class Export {
 	}
 
 	private String getFinalRecord(String value, int field, int position, int length) {
-		this.setRecord(field);
+		this.setPRecord(field);
 		//check if indexOf() starts counting from 0 or 1
 		if (this.record.length() >= position + length) {
 			return record.substring(0, position - 1) +
@@ -84,7 +85,7 @@ public class Export {
 		}
 	}
 
-	private void setRecord(int field) {
+	private void setPRecord(int field) {
 		try{
 			//check if seek() starts counting from 0 or 1
 			if (field >= 118) { 			//start of record D
@@ -101,7 +102,7 @@ public class Export {
 	}
 
 	public void writeField(String value, String field) {
-		String format;
+		String format = null;
 		String[] split = nSpecs.get(field).split("\\s");
 
 		if (split.length != 2) {
@@ -110,7 +111,7 @@ public class Export {
 			format = split[1];
 		}
 
-		this.record = this.getFinalRecord(value, field);
+		this.record = this.getFinalRecord(field, format, value);
 
 		try {
 			this.rw.writeBytes(this.record);
@@ -119,12 +120,13 @@ public class Export {
 		}
 	}
 
-	private String getFinalRecord(String value, String field) {
+	private String getFinalRecord(String field, String format, String value) {
 		int line = this.last_record_line;
 		int index;
+		String tmp = null;
 
 		do {
-			this.setRecord(field, line);
+			this.setNRecord(line);
 			index = getIndexOfLastNField(field, 0);
 			line++;
 		} while ((index == -1) && (this.record != null));
@@ -132,19 +134,24 @@ public class Export {
 		if (this.record == null) {
 			index = this.getIndexOfPrecedentField(field);
 		} else {
-			index += value.length() + 7;	//8 = number of digits of the header(field) - 1
+			index += n_length + 7;	//8 = number of digits of the header(field) - 1
+		}
+
+		String[] split = new String[10];
+
+		for (int i = 0 ; i < split.length ; i++) {
+			tmp += field + split[i];
 		}
 
 		return this.record.substring(0, index) +
-				field +
-				value +
+				tmp +
 				this.record.substring(index);
 	}
 
 	private int getIndexOfPrecedentField(String field) {
 		int line = this.last_record_line;
 		int index = 0;
-		String before_field = null;
+		String before_field;
 		try {
 			do {
 				rw.seek(line);
@@ -164,7 +171,7 @@ public class Export {
 				this.record = "";
 				index = 0;
 			} else {
-				index += this.getValueSize(before_field, index) + 7;
+				index += n_length + 7;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -172,7 +179,7 @@ public class Export {
 		return index;
 	}
 
-	private void setRecord(String field, int line) {
+	private void setNRecord(int line) {
 		try{
 			this.rw.seek(line);
 			this.record = rw.readLine();
@@ -195,23 +202,6 @@ public class Export {
 				return response;
 			}
 		}
-	}
-
-	private int getValueSize(String field, int startIndex) {
-		if (this.record == null) {
-			throw new IllegalArgumentException("record is null");
-		}
-		int index = -1;
-		int counter = 1;
-		while ((nKeys.indexOf(field) + counter < nKeys.size()) && (index == -1)) {
-			String nextField = nKeys.get(nKeys.indexOf(field) + counter);
-			index = this.record.indexOf(nextField, startIndex);
-			counter++;
-		}
-		if (index == -1) {
-			return -7;
-		}
-		return index - field.length() - 1;
 	}
 
 	public void close () {
