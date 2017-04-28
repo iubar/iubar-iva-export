@@ -110,7 +110,7 @@ public class Export {
 			format = split[1];
 		}
 
-		this.putValueInRecord(value, field);
+		this.record = this.getFinalRecord(value, field);
 
 		try {
 			this.rw.writeBytes(this.record);
@@ -119,7 +119,7 @@ public class Export {
 		}
 	}
 
-	private String putValueInRecord(String value, String field) {
+	private String getFinalRecord(String value, String field) {
 		int line = this.last_record_line;
 		int index;
 
