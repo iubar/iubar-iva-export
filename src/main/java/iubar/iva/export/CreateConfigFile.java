@@ -79,11 +79,6 @@ public final class CreateConfigFile {
 			if (pdfLine != null) {
 				String[] split = pdfLine.split("\\+");
 				if (split.length == 2) {
-					// System.out.println(pdfLine);
-					/*
-					 * writer.print("Field: " + split[0] + "Format: " + split[1]
-					 * + "\n");
-					 */
 					writer.print(split[0] + " " + split[1] + "\n");
 				}
 			}
@@ -150,6 +145,7 @@ public final class CreateConfigFile {
 		iubar.iva.export.CreateConfigFile file = new iubar.iva.export.CreateConfigFile();
 		file.getTextFromPDF(16, 20);
 		file.getTextFromPDF(21, 41);
+		file.getTextFromPDF(42, 42);
 		file.close();
 	}
 
