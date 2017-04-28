@@ -260,9 +260,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalAN1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("ciao", "AN", 8);
+		actual = export.buildNonPositionalField("ciao", "AN");
 		
 		String expected = "ciao    ";
 		assertEquals(expected, actual);
@@ -271,9 +271,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalAN2() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("ciao", "an", 8);
+		actual = export.buildNonPositionalField("ciao", "an");
 		
 		String expected = "ciao    ";
 		assertEquals(expected, actual);
@@ -282,15 +282,15 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalAN3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("ciao", "an", 2);
+		export.buildNonPositionalField("ciao", "an");
 	}
 	
 	@Test
 	public void testNonPositionalCB1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String actual[] = null;
 		
-		actual = export.buildNonPositionalField("1", "CB", 16);
+		actual = export.buildNonPositionalField("1", "CB");
 		
 		String expected = "0000000000000001";
 		assertEquals(expected, actual);
@@ -299,55 +299,54 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCB2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("1", "CB", 6);
+		export.buildNonPositionalField("1", "CB");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCB3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("10", "CB", 16);
+		export.buildNonPositionalField("10", "CB");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCB4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("2", "CB", 16);
+		export.buildNonPositionalField("2", "CB");
 	}
 	
 	@Test
 	public void testNonPositionalCB121() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
 		
-		actual = export.buildNonPositionalField("101101001011", "CB12", 16);
+		String[] actual = export.buildNonPositionalField("101101001011", "CB12");
 		
-		String expected = "0000101101001011";
-		assertEquals(expected, actual);
+		String[] expected = {"0000101101001011"};
+		assertEquals(expected[0], actual[0]);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCB122() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("101101", "CB12", 6);
+		export.buildNonPositionalField("101101", "CB12");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCB123() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("10", "CB12", 16);
+		export.buildNonPositionalField("10", "CB12");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCB124() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("0110g0111210", "CB12", 16);
+		export.buildNonPositionalField("0110g0111210", "CB12");
 	}
 	@Test
 	public void testNonPositionalCF1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("RSSDRL96F57I967O", "CF", 16);
+		actual = export.buildNonPositionalField("RSSDRL96F57I967O", "CF");
 		
 		String expected = "RSSDRL96F57I967O";
 		assertEquals(expected, actual);
@@ -356,9 +355,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalCF2() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("02685978945", "CF", 16);
+		actual = export.buildNonPositionalField("02685978945", "CF");
 		
 		String expected = "02685978945     ";
 		assertEquals(expected, actual);
@@ -367,21 +366,21 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCF3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("RSSDRL96F57I967O", "CF", 6);
+		export.buildNonPositionalField("RSSDRL96F57I967O", "CF");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCF4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("1d1", "CF", 16);
+		export.buildNonPositionalField("1d1", "CF");
 	}
 	
 	@Test
 	public void testNonPositionalCN1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("02685978945", "CN", 16);
+		actual = export.buildNonPositionalField("02685978945", "CN");
 		
 		String expected = "02685978945     ";
 		assertEquals(expected, actual);
@@ -390,27 +389,27 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCN2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("02685978945", "CN", 6);
+		export.buildNonPositionalField("02685978945", "CN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalCN3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("568", "CN", 16);
+		export.buildNonPositionalField("568", "CN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalCN4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("RSSDRL96F57", "CN", 16);
+		export.buildNonPositionalField("RSSDRL96F57", "CN");
 	}
 	
 	@Test
 	public void testNonPositionalPI1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("02685978945", "PI", 16);
+		actual = export.buildNonPositionalField("02685978945", "PI");
 		
 		String expected = "02685978945     ";
 		assertEquals(expected, actual);
@@ -419,27 +418,27 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalPI2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("02685978945", "PI", 6);
+		export.buildNonPositionalField("02685978945", "PI");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPI3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("568", "PI", 16);
+		export.buildNonPositionalField("568", "PI");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPI4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("RSSDRL96F57", "PI", 16);
+		export.buildNonPositionalField("RSSDRL96F57", "PI");
 	}
 	
 	@Test
 	public void testNonPositionalDA1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("20102008", "DA", 16);
+		actual = export.buildNonPositionalField("20102008", "DA");
 		
 		String expected = "            2008";
 		assertEquals(expected, actual);
@@ -448,33 +447,33 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDA2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("20102008", "DA", 6);
+		export.buildNonPositionalField("20102008", "DA");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDA3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("201020085645", "DA", 6);
+		export.buildNonPositionalField("201020085645", "DA");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDA4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("5DSF5898", "DA", 16);
+		export.buildNonPositionalField("5DSF5898", "DA");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDA5() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("32202000", "DT", 16);
+		export.buildNonPositionalField("32202000", "DT");
 	}
 	
 	@Test
 	public void testNonPositionalDT1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("25062000", "DT", 16);
+		actual = export.buildNonPositionalField("25062000", "DT");
 		
 		String expected = "        25062000";
 		assertEquals(expected, actual);
@@ -483,45 +482,45 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDT2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25062000", "DT", 6);
+		export.buildNonPositionalField("25062000", "DT");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDT3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("2106", "DT", 16);
+		export.buildNonPositionalField("2106", "DT");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDT4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25g62000", "DT", 16);
+		export.buildNonPositionalField("25g62000", "DT");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDT5() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("32202000", "DT", 16);
+		export.buildNonPositionalField("32202000", "DT");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDT6() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25061800", "DT", 16);
+		export.buildNonPositionalField("25061800", "DT");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDT7() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25062020", "DT", 16);
+		export.buildNonPositionalField("25062020", "DT");
 	}
 
 	@Test
 	public void testNonPositionalDN1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("25062000", "DN", 16);
+		actual = export.buildNonPositionalField("25062000", "DN");
 		
 		String expected = "        25062000";
 		assertEquals(expected, actual);
@@ -530,45 +529,45 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDN2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25062000", "DN", 6);
+		export.buildNonPositionalField("25062000", "DN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDN3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("2106", "DN", 16);
+		export.buildNonPositionalField("2106", "DN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDN4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25g62000", "DN", 16);
+		export.buildNonPositionalField("25g62000", "DN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDN5() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("32202000", "DN", 16);
+		export.buildNonPositionalField("32202000", "DN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDN6() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25061900", "DN", 16);
+		export.buildNonPositionalField("25061900", "DN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalDN7() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("25062100", "DN", 16);
+		export.buildNonPositionalField("25062100", "DN");
 	}
 	
 	@Test
 	public void testNonPositionalD41() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("20102008", "D4", 16);
+		actual = export.buildNonPositionalField("20102008", "D4");
 		
 		String expected = "            2010";
 		assertEquals(expected, actual);
@@ -577,33 +576,33 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalD42() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("20102008", "D4", 6);
+		export.buildNonPositionalField("20102008", "D4");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalD43() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("2010", "D4", 16);
+		export.buildNonPositionalField("2010", "D4");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalD44() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("20g020s8", "D4", 16);
+		export.buildNonPositionalField("20g020s8", "D4");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalD45() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("50102008", "D4", 16);
+		export.buildNonPositionalField("50102008", "D4");
 	}
 	
 	@Test
 	public void testNonPositionalD61() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("20102008", "D6", 16);
+		actual = export.buildNonPositionalField("20102008", "D6");
 		
 		String expected = "          102008";
 		assertEquals(expected, actual);
@@ -612,33 +611,33 @@ public class ExportAeTxtTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalD62() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("20102008", "D6", 8);
+		export.buildNonPositionalField("20102008", "D6");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalD63() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("102008", "D6", 16);
+		export.buildNonPositionalField("102008", "D6");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalD64() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("20d020g8", "D6", 16);
+		export.buildNonPositionalField("20d020g8", "D6");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalD65() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("202000", "D6", 16);
+		export.buildNonPositionalField("202000", "D6");
 	}
 	
 	@Test
 	public void testNonPositionalNP1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("25", "NP", 10);
+		actual = export.buildNonPositionalField("25", "NP");
 		
 		String expected = "        25";
 		assertEquals(expected, actual);
@@ -647,21 +646,21 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalNP2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("-25", "NP", 10);
+		export.buildNonPositionalField("-25", "NP");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalNP3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("ghr", "NP", 10);
+		export.buildNonPositionalField("ghr", "NP");
 	}
 	
 	@Test
 	public void testNonPositionalNU1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("25", "NU", 10);
+		actual = export.buildNonPositionalField("25", "NU");
 		
 		String expected = "        25";
 		assertEquals(expected, actual);
@@ -670,9 +669,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalNU2() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("-25", "NU", 10);
+		actual = export.buildNonPositionalField("-25", "NU");
 		
 		String expected = "       -25";
 		assertEquals(expected, actual);
@@ -681,15 +680,15 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalNU3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("ghr", "NU", 10);
+		export.buildNonPositionalField("ghr", "NU");
 	}
 	
 	@Test
 	public void testNonPositionalNX1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("25", "Nx", 10);
+		actual = export.buildNonPositionalField("25", "Nx");
 		
 		String expected = "        25";
 		assertEquals(expected, actual);
@@ -698,21 +697,21 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalNX2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("56897894584455789553248654", "Nx", 10);
+		export.buildNonPositionalField("56897894584455789553248654", "Nx");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalNX3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("ghr", "Nx", 10);
+		export.buildNonPositionalField("ghr", "Nx");
 	}
 	
 	@Test
 	public void testNonPositionalPC1A() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("25", "PC", 10);
+		actual = export.buildNonPositionalField("25", "PC");
 		
 		String expected = "        25";
 		assertEquals(expected, actual);
@@ -721,9 +720,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1B() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("2", "PC", 10);
+		actual = export.buildNonPositionalField("2", "PC");
 		
 		String expected = "         2";
 		assertEquals(expected, actual);
@@ -732,9 +731,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1C() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("100", "PC", 10);
+		actual = export.buildNonPositionalField("100", "PC");
 		
 		String expected = "       100";
 		assertEquals(expected, actual);
@@ -743,9 +742,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1D() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("0.9", "PC", 10);
+		actual = export.buildNonPositionalField("0.9", "PC");
 		
 		String expected = "       0.9";
 		assertEquals(expected, actual);
@@ -754,9 +753,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1E() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("9.9", "PC", 10);
+		actual = export.buildNonPositionalField("9.9", "PC");
 		
 		String expected = "       9.9";
 		assertEquals(expected, actual);
@@ -765,9 +764,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1F() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("9.99", "PC", 10);
+		actual = export.buildNonPositionalField("9.99", "PC");
 		
 		String expected = "      9.99";
 		assertEquals(expected, actual);
@@ -776,9 +775,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1G() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("9.999", "PC", 10);
+		actual = export.buildNonPositionalField("9.999", "PC");
 		
 		String expected = "     9.999";
 		assertEquals(expected, actual);
@@ -786,9 +785,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1H() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("99.9", "PC", 10);
+		actual = export.buildNonPositionalField("99.9", "PC");
 		
 		String expected = "      99.9";
 		assertEquals(expected, actual);
@@ -797,9 +796,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1I() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("99.99", "PC", 10);
+		actual = export.buildNonPositionalField("99.99", "PC");
 		
 		String expected = "     99.99";
 		assertEquals(expected, actual);
@@ -808,9 +807,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPC1J() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("99.999", "PC", 10);
+		actual = export.buildNonPositionalField("99.999", "PC");
 		
 		String expected = "    99.999";
 		assertEquals(expected, actual);
@@ -819,15 +818,15 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPC2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("100.9", "PC", 10);
+		export.buildNonPositionalField("100.9", "PC");
 	}
 	
 	@Test
 	public void testNonPositionalPR1() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("BO", "PR", 16);
+		actual = export.buildNonPositionalField("BO", "PR");
 		
 		String expected = "BO              ";
 		assertEquals(expected, actual);
@@ -836,33 +835,33 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPR2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("BO", "PR", 10);
+		export.buildNonPositionalField("BO", "PR");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPR3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("BOG", "PR", 16);
+		export.buildNonPositionalField("BOG", "PR");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPR4() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("EE", "PR", 16);
+		export.buildNonPositionalField("EE", "PR");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPR5() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("00", "PR", 16);
+		export.buildNonPositionalField("00", "PR");
 	}
 	
 	@Test
 	public void testNonPositionalPN1A() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("BO", "PN", 16);
+		actual = export.buildNonPositionalField("BO", "PN");
 		
 		String expected = "BO              ";
 		assertEquals(expected, actual);
@@ -871,9 +870,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPN1B() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("EE", "PN", 16);
+		actual = export.buildNonPositionalField("EE", "PN");
 		
 		String expected = "EE              ";
 		assertEquals(expected, actual);
@@ -882,9 +881,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalPN1C() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("00", "PN", 16);
+		actual = export.buildNonPositionalField("00", "PN");
 		
 		String expected = "00              ";
 		assertEquals(expected, actual);
@@ -893,21 +892,21 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPN2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("BO", "PN", 10);
+		export.buildNonPositionalField("BO", "PN");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalPN3() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("BOG", "PN", 16);
+		export.buildNonPositionalField("BOG", "PN");
 	}
 	
 	@Test
 	public void testNonPositionalQU1A() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("0,2554", "QU", 16);
+		actual = export.buildNonPositionalField("0,2554", "QU");
 		
 		String expected = "          0,2554";
 		assertEquals(expected, actual);
@@ -916,9 +915,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalQU1B() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("0.2554", "QU", 16);
+		actual = export.buildNonPositionalField("0.2554", "QU");
 		
 		String expected = "          0.2554";
 		assertEquals(expected, actual);
@@ -927,9 +926,9 @@ public class ExportAeTxtTest {
 	@Test
 	public void testNonPositionalQU1C() {
 		ExportAeTxt export = new ExportAeTxt();
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField("500000000", "QU", 16);
+		actual = export.buildNonPositionalField("500000000", "QU");
 		
 		String expected = "       500000000";
 		assertEquals(expected, actual);
@@ -938,7 +937,7 @@ public class ExportAeTxtTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testNonPositionalQU2() throws IllegalArgumentException {
 		ExportAeTxt export = new ExportAeTxt();
-		export.buildNonPositionalField("5,589785489", "PN", 16);
+		export.buildNonPositionalField("5,589785489", "PN");
 	}
 	
 	@Test
@@ -969,9 +968,9 @@ public class ExportAeTxtTest {
 	public void testBuildNonPositionalBigDecimal1() {
 		ExportAeTxt export = new ExportAeTxt();
 		BigDecimal n = new BigDecimal("10.568");
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField(n, "NU", 10);
+		actual = export.buildNonPositionalField(n, "NU");
 		
 		String expected = "    10,568";
 		assertEquals(expected, actual);
@@ -995,11 +994,15 @@ public class ExportAeTxtTest {
 		ExportAeTxt export = new ExportAeTxt();
 		
 		Date n = new Date(1224460800000L); //20/10/2008
-		String actual = null;
+		int l = export.buildNonPositionalField(n, "DT").length;
 		
-		actual = export.buildNonPositionalField(n, "DT", 16);
+		String[] actual = new String[l];
 		
-		String expected = "        20102008";
+		for(int i = 0; i < l; i++) {
+			actual = export.buildNonPositionalField(n, "DT");
+		}
+		
+		String[] expected = {"        20102008"};
 		assertEquals(expected, actual);
 	}
 	
@@ -1008,9 +1011,9 @@ public class ExportAeTxtTest {
 		ExportAeTxt export = new ExportAeTxt();
 		
 		Date n = new Date(1224460800000L); //20/10/2008
-		String actual = null;
+		String[] actual = null;
 		
-		actual = export.buildNonPositionalField(n, "DA", 16);
+		actual = export.buildNonPositionalField(n, "DA");
 		
 		String expected = "            2008";
 		assertEquals(expected, actual);

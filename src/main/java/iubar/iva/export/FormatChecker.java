@@ -70,114 +70,60 @@ public class FormatChecker {
 		}
 	}
 
-	public boolean checkNonPositionalCB(String value, int length) {
-		// if (length == 16 && value.length() == 1 && (value.equals("0") ||
-		// value.equals("1"))) {
-		if (length == 16 && this.checkPositionalCB(value)) {
+	public boolean checkNonPositionalCB(String value) {
+		return this.checkPositionalCB(value);
+	}
+
+	public boolean checkNonPositionalCB12(String value) {
+		if (value.length() == 12 && value.matches("[0-1]+")) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public boolean checkNonPositionalCB12(String value, int length) {
-		if (length == 16 && value.length() == 12 && value.matches("[0-1]+")) {
+	public boolean checkNonPositionalCF(String value) {
+		return this.checkPositionalCF(value);
+	}
+
+	public boolean checkNonPositionalCN(String value) {
+		return this.checkPositionalCN(value);
+	}
+
+	public boolean checkNonPositionalPI(String value) {
+		return this.checkNonPositionalCN(value);
+	}
+
+	public boolean checkNonPositionalDA(String value) {
+		return this.checkPositionalDT(value);
+	}
+
+	public boolean checkNonPositionalDT(String value) {
+		if (this.checkNonPositionalDA(value) && this.dateRange(value, 1880, Year.now().getValue())) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public boolean checkNonPositionalCF(String value, int length) {
-		// if (length == 16 && (value.length() == 16 || value.length() == 11) &&
-		// value.matches("[A-Za-z0-9]")) {
-		if (length == 16 && this.checkPositionalCF(value)) {
+	public boolean checkNonPositionalDN(String value) {
+		if (this.checkNonPositionalDA(value) && this.dateRange(value, 1980, 2050)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public boolean checkNonPositionalCN(String value, int length) {
-		// if (length == 16 && value.length() == 11 && value.matches("[0-9]+"))
-		// {
-		if (length == 16 && this.checkPositionalCN(value)) {
-			return true;
-		} else {
-			return false;
-		}
+	public boolean checkNonPositionalD4(String value) {
+		return this.checkNonPositionalDA(value);
 	}
 
-	public boolean checkNonPositionalPI(String value, int length) {
-		return this.checkNonPositionalCN(value, length);
-		// if (length == 16 && value.length() == 11 && value.matches("[0-9]+"))
-		// {
-		// return true;
-		// } else {
-		// return false;
-		// }
-	}
-
-	public boolean checkNonPositionalDA(String value, int length) {
-		// if (length == 16 && value.length() == 8 && value.matches("[0-9]+") &&
-		// this.dateFormatCheck(value)) {
-		if (length == 16 && this.checkPositionalDT(value)) {
-
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean checkNonPositionalDT(String value, int length) {
-		// if (lenght == 16 && value.length() == 8 && value.matches("[0-9]+") &&
-		// this.dateFormatCheck(value) && this.dateRange(value, 1880,
-		// Year.now().getValue()))
-		if (this.checkNonPositionalDA(value, length) && this.dateRange(value, 1880, Year.now().getValue())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean checkNonPositionalDN(String value, int length) {
-		// if (length == 16 && value.length() == 8 && value.matches("[0-9]+") &&
-		// this.dateFormatCheck(value) && this.dateRange(value, 1980, 2050)) {
-		if (this.checkNonPositionalDA(value, length) && this.dateRange(value, 1980, 2050)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean checkNonPositionalD4(String value, int length) {
-		return this.checkNonPositionalDA(value, length);
-		// if (length == 16 && value.length() == 8 && value.matches("[0-9]+") &&
-		// this.dateFormatCheck(value)) {
-		// return true;
-		// } else {
-		// return false;
-		// }
-	}
-
-	public boolean checkNonPositionalD6(String value, int length) {
-		return this.checkNonPositionalDA(value, length);
-		// if (length == 16 && value.length() == 8 && value.matches("[0-9]+") &&
-		// this.dateFormatCheck(value)) {
-		// return true;
-		// } else {
-		// return false;
-		// }
+	public boolean checkNonPositionalD6(String value) {
+		return this.checkNonPositionalDA(value);
 	}
 
 	public boolean checkNonPositionalNP(String value) {
 		return this.checkPositionalNU(value);
-		// if (value.indexOf("-") == -1 && (value.matches("[0-9]+") ||
-		// value.matches("[0-9]+[,.]?[0-9]+"))) {
-		// return true;
-		// } else {
-		// return false;
-		// }
 	}
 
 	public boolean checkNonPositionalNU(String value) {
@@ -189,8 +135,8 @@ public class FormatChecker {
 		}
 	}
 
-	public boolean checkNonPositionalNX(String value, int length) {
-		if (length < 17 && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"))) {
+	public boolean checkNonPositionalNX(String value) {
+		if (value.length() < 17 && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"))) {
 			return true;
 		} else {
 			return false;
@@ -206,24 +152,12 @@ public class FormatChecker {
 		}
 	}
 
-	public boolean checkNonPositionalPR(String value, int length) {
-		// if (length == 16 && value.length() == 2 && value.matches("[a-zA-Z]+")
-		// && (!value.equals("EE") || !value.equals("00"))) {
-		if (length == 16 && this.checkPositionalPR(value)) {
-			return true;
-		} else {
-			return false;
-		}
+	public boolean checkNonPositionalPR(String value) {
+		return this.checkPositionalPR(value);
 	}
 
-	public boolean checkNonPositionalPN(String value, int length) {
-		// if (length == 16 && value.length() == 2 && value.matches("[a-zA-Z]+")
-		// && (!value.equals("EE") || !value.equals("00"))) {
-		if (length == 16 && this.checkPositionalPN(value)) {
-			return true;
-		} else {
-			return false;
-		}
+	public boolean checkNonPositionalPN(String value) {
+		return this.checkPositionalPN(value);
 	}
 
 	public boolean checkNonPositionalQU(String value) {
