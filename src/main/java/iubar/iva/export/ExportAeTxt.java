@@ -5,8 +5,6 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import sun.applet.Main;
-
 public class ExportAeTxt {
 
 	private static final String DECIMAL_PATTERN = "###.###";
@@ -18,6 +16,20 @@ public class ExportAeTxt {
 
 		String str = myFormatter.format(value);
 		return buildPositionalField(str, format, length);
+	}
+	
+	public String dataToString(BigDecimal value) {
+		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
+
+		String str = myFormatter.format(value);
+		return str;
+	}
+	
+	public String dataToString(Data value) {
+		SimpleDateFormat myFormatter = new SimpleDateFormat(DATE_PATTERN);
+
+		String str = myFormatter.format(value);
+		return str;
 	}
 
 	public String[] buildNonPositionalField(BigDecimal value, String format) {
