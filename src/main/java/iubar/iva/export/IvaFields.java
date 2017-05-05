@@ -45,7 +45,7 @@ public class IvaFields {
 	public static String getFormatField(String value, String format, int length) {
 		Formatter fm = new Formatter();
 		FormatChecker fc = new FormatChecker();
-		String formattedString = new String();
+		String formattedString = "";
 
 		int delta = length - value.length();
 
