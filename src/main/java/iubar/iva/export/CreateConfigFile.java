@@ -29,8 +29,10 @@ public final class CreateConfigFile {
 
 			for (String obj : split) {
 				obj = obj.replaceAll("[a-z\\W ]{1,}", " ");
-				if (start_page > 20 && end_page < 42) {
+				if (start_page > 20 && end_page < 41) {
 					this.dumpData(obj, false);
+				} else if (start_page == 41 && end_page == 41) {
+					this.dumpLastNField(obj);
 				} else {
 					this.dumpData(obj, true);
 				}
@@ -79,12 +81,45 @@ public final class CreateConfigFile {
 			if (pdfLine != null) {
 				String[] split = pdfLine.split("\\+");
 				if (split.length == 2) {
-					// System.out.println(pdfLine);
-					/*
-					 * writer.print("Field: " + split[0] + "Format: " + split[1]
-					 * + "\n");
-					 */
 					writer.print(split[0] + " " + split[1] + "\n");
+				}
+			}
+		}
+	}
+
+	private void dumpLastNField(String line) {
+		String pdfLine;
+
+		pdfLine = checkType2(line);
+
+		if (pdfLine != null) {
+			String[] split = pdfLine.split("\\+");
+			if (split.length == 2) {
+				writer.print(split[0] + " " + split[1] + "\n");
+			}
+		} else {
+			pdfLine = checkType1(line);
+
+			if (pdfLine != null) {
+				String[] split = pdfLine.split("\\+");
+
+				try {
+					//int field = Integer.parseInt(split[0]);
+					int position = Integer.parseInt(split[split.length - 3]);
+					int length = Integer.parseInt(split[split.length - 2]);
+					String format = split[split.length - 1];
+
+					/*
+					 * writer.print("Field: " + field + " " + "Position: " +
+					 * position + " " + "Length: " + length + " " + "Format: " +
+					 * format + "\n");
+					 */
+
+					this.field_count++;
+					writer.print(this.field_count + " " + position + " " + length + " " + format + "\n");
+
+				} catch (ArrayIndexOutOfBoundsException e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -98,11 +133,13 @@ public final class CreateConfigFile {
 			if (StringUtils.isNumeric(split[0])) {
 
 				for (int i = 0; i < split.length; i++) {
-					if ((i > 0) && (split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1"))) {
-						if (split[i].equals("N1")) {
-							split[i] = "NU";
+					if (i > 0) {
+						if (split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1")) {
+							if (split[i].equals("N1")) {
+								split[i] = "NU";
+							}
+							return split[0] + "+" + split[i - 2] + "+" + split[i - 1] + "+" + split[i];
 						}
-						return split[0] + "+" + split[i - 2] + "+" + split[i - 1] + "+" + split[i];
 					}
 				}
 			}
@@ -124,7 +161,7 @@ public final class CreateConfigFile {
 					if (split[i].matches(
 							"AN|CB|CB12|CF|CN|PI|" +
 									"DA|DT|DN|D4|D6|NP|NU|" +
-									"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16" +
+									"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16|" +
 									"PC|PR|PN|QU")) {
 
 						return split[0] + "+" + split[i];
@@ -150,7 +187,9 @@ public final class CreateConfigFile {
 	public static void main(String[] args) {
 		iubar.iva.export.CreateConfigFile file = new iubar.iva.export.CreateConfigFile();
 		file.getTextFromPDF(16, 20);
-		file.getTextFromPDF(21, 41);
+		file.getTextFromPDF(21, 40);
+		file.getTextFromPDF(41, 41);
+		file.getTextFromPDF(42, 42);
 		file.close();
 	}
 
