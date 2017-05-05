@@ -258,10 +258,9 @@
 */
 package iubar.iva.export;
 
-<<<<<<< HEAD
-        import java.math.BigDecimal;
+import java.math.BigDecimal;
 
-        public class Data {
+public class Data {
 
 	public static void main(String[] args) {
 	    Export export = new Export();
@@ -270,12 +269,4 @@ package iubar.iva.export;
         export.writeField(Boolean.TRUE, export.getFieldToString(127));
         export.writeField(new BigDecimal(""), export.getFieldToString(128));
     }
-=======
-public class Data {
-	
-	public static void main(String[] args) {
-
-	}
-	
->>>>>>> ecb9811db1e5dc8080618c1ebcdcd9590801f22f
 }
