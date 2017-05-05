@@ -5,58 +5,44 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ExportAeTxt {
+public class IvaFields {
 
 	private static final String DECIMAL_PATTERN = "###.###";
 	private static final String DATE_PATTERN = "ddMMyyyy";
 	private static final int NON_POSITIONAL_STD_LENGHT = 16;
 
-	public String buildPositionalField(BigDecimal value, String format, int length) {
+	public static String getFormatField(BigDecimal value, String format, int length) {
 		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
 		String str = myFormatter.format(value);
-		return buildPositionalField(str, format, length);
+		return getFormatField(str, format, length);
 	}
-	
-	public String dataToString(BigDecimal value) {
+
+	public static String[] getFormatField(BigDecimal value, String format) {
 		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
 		String str = myFormatter.format(value);
-		return str;
-	}
-	
-	public String dataToString(Data value) {
-		SimpleDateFormat myFormatter = new SimpleDateFormat(DATE_PATTERN);
-
-		String str = myFormatter.format(value);
-		return str;
+		return getFormatField(str, format);
 	}
 
-	public String[] buildNonPositionalField(BigDecimal value, String format) {
-		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
-
-		String str = myFormatter.format(value);
-		return buildNonPositionalField(str, format);
-	}
-
-	public String buildPositionalField(Date value, String format, int length) {
+	public static String getFormatField(Date value, String format, int length) {
 		SimpleDateFormat myFormatter = new SimpleDateFormat(DATE_PATTERN);
 
 		String str = myFormatter.format(value);
 
-		return buildPositionalField(str, format, length);
+		return getFormatField(str, format, length);
 	}
 
-	public String[] buildNonPositionalField(Date value, String format) {
+	public static String[] getFormatField(Date value, String format) {
 		SimpleDateFormat myFormatter = new SimpleDateFormat(DATE_PATTERN);
 
 		String str = myFormatter.format(value);
 
-		return buildNonPositionalField(str, format);
+		return getFormatField(str, format);
 
 	}
 
-	public String buildPositionalField(String value, String format, int length) {
+	public static String getFormatField(String value, String format, int length) {
 		Formatter fm = new Formatter();
 		FormatChecker fc = new FormatChecker();
 		String formattedString = new String();
@@ -139,37 +125,38 @@ public class ExportAeTxt {
 		return formattedString;
 	}
 
-	private String[] splitter(String value) {
+	private static String[] splitter(String value) {
 		int fieldNumber = value.length() / NON_POSITIONAL_STD_LENGHT;
 		int modulo = value.length() % NON_POSITIONAL_STD_LENGHT;
-		String[] out ;
-		
+		String[] out;
+
 		if (modulo == 0) {
-			out = new String[fieldNumber];	
+			out = new String[fieldNumber];
 		} else {
 			out = new String[fieldNumber + 1];
-			out[out.length - 1] = value.substring(NON_POSITIONAL_STD_LENGHT * fieldNumber, (NON_POSITIONAL_STD_LENGHT * fieldNumber) + modulo);
+			out[out.length - 1] = value.substring(NON_POSITIONAL_STD_LENGHT * fieldNumber,
+					(NON_POSITIONAL_STD_LENGHT * fieldNumber) + modulo);
 		}
-		
+
 		for (int i = 0; i < fieldNumber; i++) {
 			out[i] = value.substring(NON_POSITIONAL_STD_LENGHT * i,
 					NON_POSITIONAL_STD_LENGHT * i + (NON_POSITIONAL_STD_LENGHT));
 		}
-		
+
 		return out;
 	}
 
-	public String[] buildNonPositionalField(String value, String format) {
+	public static String[] getFormatField(String value, String format) {
 		Formatter fm = new Formatter();
 		FormatChecker fc = new FormatChecker();
 
-		String[] split = this.splitter(value);
+		String[] split = splitter(value);
 		int fieldNumber = split.length;
 		String[] formattedString = new String[fieldNumber];
 
 		for (int i = 0; i < fieldNumber; i++) {
 			int delta = NON_POSITIONAL_STD_LENGHT - split[i].length();
-			
+
 			switch (format.toUpperCase()) {
 			case "AN":
 				formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
@@ -304,16 +291,16 @@ public class ExportAeTxt {
 		}
 		return formattedString;
 	}
-	
+
 	public static void main(String[] args) {
-		ExportAeTxt e = new ExportAeTxt();
+
 		String a = "abcdefghijklmnopabcdefgh";
-		
-		String[] out = e.buildNonPositionalField(a, "AN");
-		
-		for(int i = 0; i < out.length; i++){
+
+		String[] out = getFormatField(a, "AN");
+
+		for (int i = 0; i < out.length; i++) {
 			System.out.println(out[i].toString() + "a");
 		}
-		
+
 	}
 }
