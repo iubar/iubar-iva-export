@@ -2,10 +2,8 @@ package iubar.iva.export;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,7 +40,7 @@ public class Export {
 	}
 
 	public <T> void writeField(T value, int field) {
-		String format;
+		String format = "";
 		int position = 0, length = 0;
 
 		String[] split = pSpecs.get(Integer.toString(field)).split("\\s");
@@ -55,10 +53,22 @@ public class Export {
 			format = split[3];
 		}
 
+		String val = getRightValue(value, format, length);
+
 		this.fRecords.set(this.last_record,
-				this.getFinalRecord((String) value, field, position, length));
+				this.getFinalRecord(val, field, position, length));
 
 		this.writeOnFile();
+	}
+
+	private <T> String getRightValue(T value, String format, int length) {
+		if (value instanceof String) {
+			return IvaFields.getFormatField((String) value, format, length);
+		} else if (value instanceof BigDecimal) {
+			return IvaFields.getFormatField((BigDecimal) value, format, length);
+		} else {
+			return IvaFields.getFormatField((Date) value, format, length);
+		}
 	}
 
 	private String getFinalRecord(String value, int field, int position, int length) {
@@ -101,7 +111,9 @@ public class Export {
 			format = split[1];
 		}
 
-		this.record = this.getFinalRecord(field, (String[]) value);
+		String[] val = this.getRightValue(value, format);
+
+		this.record = this.getFinalRecord(field, val);
 		if (this.record.length() > 1800) {
 			this.fRecords.set(this.last_record, this.record.substring(0, 1800));
 			this.fRecords.set(this.last_record, this.record.substring(1800) +
@@ -111,6 +123,23 @@ public class Export {
 		}
 
 		this.writeOnFile();
+	}
+
+	/*private <T> boolean checkCB(T value) {
+		if (value instanceof Boolean) {
+			return ((Boolean) value).booleanValue();
+		}
+		return true;
+	}*/
+
+	private <T> String[] getRightValue(T value, String format) {
+		if (value instanceof String) {
+			return IvaFields.getFormatField((String) value, format);
+		} else if (value instanceof BigDecimal) {
+			return IvaFields.getFormatField((BigDecimal) value, format);
+		} else {
+			return IvaFields.getFormatField((Date) value, format);
+		}
 	}
 
 	private String getFinalRecord(String field, String[] value) {
