@@ -22,12 +22,6 @@ public class FormatChecker {
 
 	public boolean checkPositionalPI(String value) {
 		return this.checkPositionalCN(value);
-
-		// if (value.length() == 11 && value.matches("[0-9]+")) {
-		// return true;
-		// } else {
-		// return false;
-		// }
 	}
 
 	public boolean checkPositionalDT(String value) {
@@ -39,23 +33,19 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalNU(String value) {
-		if (value.indexOf("-") == -1 && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"))) {
-			return true;
-		} else {
-			return false;
-		}
+		if (value.indexOf("-") == -1)
+			return (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"));
+		return false;
 	}
 
 	public boolean checkPositionalPN(String value) {
-		if (value.length() == 2 && (value.matches("[a-zA-Z]+") || value.matches("[0]{2}"))) {
-			return true;
-		} else {
-			return false;
-		}
+		if (value.length() == 2)
+			return (value.matches("[a-zA-Z]+") || value.matches("[0]{2}"));
+		return false;
 	}
 
 	public boolean checkPositionalPR(String value) {
-		if (value.length() == 2 && value.matches("[a-zA-Z]+") && !value.equals("EE") && !value.equals("00")) {
+		if (value.length() == 2 && value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value)) {
 			return true;
 		} else {
 			return false;
@@ -63,7 +53,7 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalCB(String value) {
-		if (value.length() == 1 && (value.equals("0") || value.equals("1"))) {
+		if (value.length() == 1 && ("0".equals(value) || "1".equals(value))) {
 			return true;
 		} else {
 			return false;

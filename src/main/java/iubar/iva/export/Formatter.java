@@ -27,13 +27,13 @@ public class Formatter {
 					local += " ";
 				}
 			} else if (type == 2) { // destra + spazi
-				String prefix = new String();
+				String prefix = "";
 				for (int i = 0; i < delta; i++) {
 					prefix += " ";
 				}
 				local = prefix + local;
 			} else { // destra + zeri
-				String prefix = new String();
+				String prefix = "";
 				for (int i = 0; i < delta; i++) {
 					prefix += "0";
 				}

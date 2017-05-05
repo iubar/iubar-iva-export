@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ExportAeTxtTest {
+public class IvaFieldTest {
 
 	@Test
 	public void testPositionalAN1() {
