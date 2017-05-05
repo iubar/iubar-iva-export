@@ -258,9 +258,15 @@
 */
 package iubar.iva.export;
 
-public class Data {
+        import java.math.BigDecimal;
+
+        public class Data {
 
 	public static void main(String[] args) {
-
+	    Export export = new Export();
+        export.writeField("A", 1);
+        export.writeField("IVA17", 3);
+        export.writeField(Boolean.TRUE, export.getFieldToString(127));
+        export.writeField(new BigDecimal(""), export.getFieldToString(128));
     }
 }

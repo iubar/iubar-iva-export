@@ -239,7 +239,7 @@ public class Export {
 		}
 	}
 
-	public void close () {
+	/*public void close () {
 		if (rw != null) {
 			try {
 				rw.close();
@@ -247,7 +247,7 @@ public class Export {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 	private void getSpecs() {
 		try {
