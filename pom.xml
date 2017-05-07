@@ -23,6 +23,16 @@
             <plugin>
                 <!-- Code coverage plugin, generates coverage report to target/site/jacoco/
                 To skip coverage generation add -Djacoco.skip=true -->
+                
+                <!-- With the destFile parameter, you changed the location where the prepare-agent goal will write 
+                the execution data file. By default, this is ${project.build.directory}/jacoco.exec, 
+                meaning (still by default) target/jacoco.exec. 
+                However, the report goal expects the path to the execution file to be passed in the dataFile parameter, 
+                which, of course, defaults to ${project.build.directory}/jacoco.exec, so that they are in sync. 
+                Therefore, if you want to change the path to this execution file, you need to match those two parameters. 
+                In order not to duplicate the path, you can use a Maven property to do that
+                -->
+                
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.9</version>
@@ -85,6 +95,12 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <!-- By default, report files are generated in ${basedir}/target/surefire-reports/TEST-*.xml. -->
             </plugin>
         </plugins>
     </build>
