@@ -1,23 +1,23 @@
 # JaCoCo
 # http://www.jacoco.org/jacoco/trunk/doc/maven.html
+#
 # codacy-coverage-reporter
 # https://github.com/codacy/codacy-coverage-reporter
+#
 # Travis
 # https://docs.travis-ci.com/user/customizing-the-build
+#
 language: java
 install: true # The install step runs before script step, and with Maven you don't usually need the install step. 
-              # Maven will download dependencies on script step anyway
-              
+              # Maven will download dependencies on script step anyway              
 export CODACY_PROJECT_TOKEN=de583c6e383243528533d8a9b81cbe5a
 before_install:
   - sudo apt-get install jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
-
 script: mvn clean verify
-
 after_success:
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
-
+#
 # In alternativa a codacy-coverage-reporter è possibile utilizzare il seguente plugin Maven
-# https://github.com/halkeye/codacy-maven-plugin/blob/master/README.md#usage
 # https://github.com/halkeye/codacy-maven-plugin
+# after_success: - mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=blah -DapiToken=blah
