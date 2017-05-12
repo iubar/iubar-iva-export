@@ -147,19 +147,17 @@ public final class CreateConfigFile {
 	private String checkType2(String pdfLine) {
 		String[] split = pdfLine.split("\\s+");
 
-		if (split.length > 0) {
-			if (split[0].matches("V[A-Z]{1}[0-9]{6}")) {
+		if ((split.length > 0) && (split[0].matches("V[A-Z]{1}[0-9]{6}"))) {
 
-				for (int i = 0; i < split.length; i++) {
+			for (int i = 0; i < split.length; i++) {
 
-					if (split[i].matches(
-							"AN|CB|CB12|CF|CN|PI|" +
-									"DA|DT|DN|D4|D6|NP|NU|" +
-									"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16|" +
-									"PC|PR|PN|QU")) {
+				if (split[i].matches(
+						"AN|CB|CB12|CF|CN|PI|" +
+								"DA|DT|DN|D4|D6|NP|NU|" +
+								"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16|" +
+								"PC|PR|PN|QU")) {
 
-						return split[0] + "+" + split[i];
-					}
+					return split[0] + "+" + split[i];
 				}
 			}
 		}
