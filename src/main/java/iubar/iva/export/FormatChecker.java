@@ -1,6 +1,7 @@
 package iubar.iva.export;
 
-import java.time.Year;
+import java.util.Calendar;
+
 
 public class FormatChecker {
 
@@ -16,6 +17,7 @@ public class FormatChecker {
 		if (value.length() == 11 && value.matches("[0-9]+")) {
 			return true;
 		} else {
+		
 			return false;
 		}
 	}
@@ -89,7 +91,9 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalDT(String value) {
-		if (this.checkNonPositionalDA(value) && this.dateRange(value, 1880, Year.now().getValue())) {
+		
+		
+		if (this.checkNonPositionalDA(value) && this.dateRange(value, 1880,Calendar.getInstance().get(Calendar.YEAR))) {
 			return true;
 		} else {
 			return false;
@@ -125,8 +129,8 @@ public class FormatChecker {
 		}
 	}
 
-	public boolean checkNonPositionalNX(String value) {
-		if (value.length() < 17 && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"))) {
+	public boolean checkNonPositionalNX(String value, String format) {
+		if (value.length() == Integer.parseInt(format.substring(1)) && value.length() < 17 && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"))) {
 			return true;
 		} else {
 			return false;
@@ -183,7 +187,6 @@ public class FormatChecker {
 		} else {
 			return false;
 		}
-
 	}
 
 	private boolean dateRange(String date, int start, int end) {
