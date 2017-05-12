@@ -16,7 +16,6 @@ public final class CreateConfigFile {
 
 	public void getTextFromPDF(int start_page, int end_page) {
 		try {
-
 			PDDocument pdf = PDDocument.load(new File(PDF_PATH));
 			Writer stream = new StringWriter();
 			PDFTextStripper stripper = new PDFTextStripper();
@@ -28,10 +27,8 @@ public final class CreateConfigFile {
 
 			for (String obj : split) {
 				obj = obj.replaceAll("[a-z\\W ]{1,}", " ");
-				if (start_page > 20 && end_page < 41) {
+				if (start_page > 20 && end_page < 42) {
 					this.dumpData(obj, false);
-				} else if (start_page == 41 && end_page == 41) {
-					this.dumpLastNField(obj);
 				} else {
 					this.dumpData(obj, true);
 				}
@@ -42,70 +39,41 @@ public final class CreateConfigFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void dumpData(String line, boolean field_type) {
-		String pdfLine = line;
-
 		if (field_type) {
-			pdfLine = checkType1(pdfLine);
-
-			if (pdfLine != null) {
-				String[] split = pdfLine.split("\\+");
-
-				try {
-					//int field = Integer.parseInt(split[0]);
-					int position = Integer.parseInt(split[split.length - 3]);
-					int length = Integer.parseInt(split[split.length - 2]);
-					String format = split[split.length - 1];
-
-					/*
-					 * writer.print("Field: " + field + " " + "Position: " +
-					 * position + " " + "Length: " + length + " " + "Format: " +
-					 * format + "\n");
-					 */
-
-					this.field_count++;
-					writer.print(this.field_count + " " + position + " " + length + " " + format + "\n");
-
-				} catch (ArrayIndexOutOfBoundsException e) {
-					e.printStackTrace();
-				}
-			}
-
+			pDumpData(line);
 		} else {
-			pdfLine = checkType2(pdfLine);
-
-			if (pdfLine != null) {
-				String[] split = pdfLine.split("\\+");
-				if (split.length == 2) {
-					writer.print(split[0] + " " + split[1] + "\n");
-				}
-			}
+			nDumpData(line);
 		}
 	}
 
-	private void dumpLastNField(String line) {
-		String pdfLine;
-		pdfLine = checkType2(line);
+	private void nDumpData(String line) {
+		String pdfLine = checkType2(line);
 
 		if (pdfLine != null) {
+
 			String[] split = pdfLine.split("\\+");
 			if (split.length == 2) {
 				writer.print(split[0] + " " + split[1] + "\n");
 			}
 		} else {
-			pdfLine = checkType1(line);
+			pDumpData(line);
+		}
+	}
 
-			if (pdfLine != null) {
-				String[] split = pdfLine.split("\\+");
+	private void pDumpData(String line) {
+		String pdfLine = checkType1(line);
 
-				try {
-					//int field = Integer.parseInt(split[0]);
-					int position = Integer.parseInt(split[split.length - 3]);
-					int length = Integer.parseInt(split[split.length - 2]);
-					String format = split[split.length - 1];
+		if (pdfLine != null) {
+			String[] split = pdfLine.split("\\+");
+
+			try {
+				//int field = Integer.parseInt(split[0]);
+				int position = Integer.parseInt(split[split.length - 3]);
+				int length = Integer.parseInt(split[split.length - 2]);
+				String format = split[split.length - 1];
 
 					/*
 					 * writer.print("Field: " + field + " " + "Position: " +
@@ -113,15 +81,22 @@ public final class CreateConfigFile {
 					 * format + "\n");
 					 */
 
-					this.field_count++;
-					writer.print(this.field_count + " " + position + " " + length + " " + format + "\n");
+				this.field_count++;
+				writer.print(this.field_count + " " + position + " " + length + " " + format + "\n");
 
-				} catch (ArrayIndexOutOfBoundsException e) {
-					e.printStackTrace();
-				}
+			} catch (ArrayIndexOutOfBoundsException e) {
+				e.printStackTrace();
 			}
 		}
 	}
+
+	/*private void dumpLastNField(String line) {
+		if (line != null) {
+			nDumpData(line);
+		} else {
+			pDumpData(line);
+		}
+	}*/
 
 	private String checkType1(String pdfLine) {
 		String[] split = pdfLine.split("\\s+");

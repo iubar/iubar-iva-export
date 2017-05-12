@@ -393,7 +393,45 @@
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i += 15;
+		i += 38;
+		i++;
+		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+		i += 12;
+		i++;
+		export.writeField(new BigDecimal("12345678901"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("13"), export.getFieldToString(i));
+		i++;
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1001"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1000"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+		i += 9;
+        i++;
+        export.writeField(new Boolean(true), export.getFieldToString(i));
+        i += 20;
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        
 		
+
+
 
 
 */
