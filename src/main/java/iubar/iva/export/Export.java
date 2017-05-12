@@ -41,7 +41,8 @@ public class Export {
 
 	public <T> void writeField(T value, int field) {
 		String format = "";
-		int position = 0, length = 0;
+		int position = 0;
+		int length = 0;
 
 		String[] split = pSpecs.get(Integer.toString(field)).split("\\s");
 
@@ -292,10 +293,6 @@ public class Export {
 
 		getSpecs();
 		getFile();
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 }

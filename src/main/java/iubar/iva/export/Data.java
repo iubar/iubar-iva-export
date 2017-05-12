@@ -11,9 +11,9 @@
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField("", i);
+		export.writeField(new BigDecimal(""), i);
 		i++;
-		export.writeField("", i);
+		export.writeField(new BigDecimal(""), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -50,6 +50,8 @@
 		export.writeField("Alessandro", i);
 		i++;
 		export.writeField("Martone", i);
+		i++;
+		export.writeField("", i);
 		i++;
 		export.writeField("12345678901", i);
 		i++;
@@ -254,6 +256,35 @@
 		export.writeField(new BigDecimal(""), export.getFieldToString(i));
 		i++;
 		export.writeField("1", export.getFieldToString(i));
+		i++;
+		i++;
+		export.writeField("", export.getFieldToString(i));
+		i++;
+		export.writeField("", export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new Date(1451692800L), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("10000"), export.getFieldToString(i));
+		i++;///////////////////////////////////////////////////////////////////
+		i++;
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		
+
 
 */
 package iubar.iva.export;

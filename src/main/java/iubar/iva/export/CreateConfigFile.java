@@ -15,7 +15,6 @@ public final class CreateConfigFile {
 	private int field_count;
 
 	public void getTextFromPDF(int start_page, int end_page) {
-
 		try {
 
 			PDDocument pdf = PDDocument.load(new File(PDF_PATH));
@@ -46,10 +45,10 @@ public final class CreateConfigFile {
 
 	}
 
-	private void dumpData(String pdfLine, boolean field_type) {
+	private void dumpData(String line, boolean field_type) {
+		String pdfLine = line;
 
 		if (field_type) {
-
 			pdfLine = checkType1(pdfLine);
 
 			if (pdfLine != null) {
@@ -89,7 +88,6 @@ public final class CreateConfigFile {
 
 	private void dumpLastNField(String line) {
 		String pdfLine;
-
 		pdfLine = checkType2(line);
 
 		if (pdfLine != null) {
@@ -126,20 +124,17 @@ public final class CreateConfigFile {
 	}
 
 	private String checkType1(String pdfLine) {
-
 		String[] split = pdfLine.split("\\s+");
 
 		if (split.length > 0) {
 			if (StringUtils.isNumeric(split[0])) {
 
 				for (int i = 0; i < split.length; i++) {
-					if (i > 0) {
-						if (split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1")) {
-							if (split[i].equals("N1")) {
-								split[i] = "NU";
-							}
-							return split[0] + "+" + split[i - 2] + "+" + split[i - 1] + "+" + split[i];
+					if ((i > 0) && split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1")) {
+						if (split[i].equals("N1")) {
+							split[i] = "NU";
 						}
+						return split[0] + "+" + split[i - 2] + "+" + split[i - 1] + "+" + split[i];
 					}
 				}
 			}
@@ -150,7 +145,6 @@ public final class CreateConfigFile {
 	}
 
 	private String checkType2(String pdfLine) {
-
 		String[] split = pdfLine.split("\\s+");
 
 		if (split.length > 0) {
