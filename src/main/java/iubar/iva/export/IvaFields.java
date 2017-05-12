@@ -2,24 +2,29 @@ package iubar.iva.export;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class IvaFields {
-
-	private static final String DECIMAL_PATTERN = "###.###";
+	
 	private static final String DATE_PATTERN = "ddMMyyyy";
 	private static final int NON_POSITIONAL_STD_LENGHT = 16;
 
 	public static String getFormatField(BigDecimal value, String format, int length) {
-		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
-
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
+		DecimalFormat myFormatter = (DecimalFormat)nf;
+//		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
+		
 		String str = myFormatter.format(value);
 		return getFormatField(str, format, length);
 	}
 
 	public static String[] getFormatField(BigDecimal value, String format) {
-		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
+		DecimalFormat myFormatter = (DecimalFormat)nf;
+//		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
 		String str = myFormatter.format(value);
 		return getFormatField(str, format);

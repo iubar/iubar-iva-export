@@ -957,7 +957,7 @@ public class IvaFieldTest {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-
+	
 	@Test
 	public void testBuildDate1() {
 
