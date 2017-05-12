@@ -39,7 +39,30 @@ public class IvaFields {
 		String str = myFormatter.format(value);
 
 		return getFormatField(str, format);
+	}
 
+	public static String getFormatField(Boolean value, String format, int length) {
+		String str = "";
+
+		if (value.booleanValue()) {
+			str = "1";
+		} else {
+			str = "0";
+		}
+
+		return getFormatField(str, format, length);
+	}
+
+	public static String[] getFormatField(Boolean value, String format) {
+		String str = "";
+
+		if (value.booleanValue()) {
+			str = "1";
+		} else {
+			str = "0";
+		}
+
+		return getFormatField(str, format);
 	}
 
 	public static String getFormatField(String value, String format, int length) {
@@ -249,8 +272,23 @@ public class IvaFields {
 							"La stringa inserita non è coerente con il tipo di formattazione CAMPO NUMERICO");
 				}
 				break;
-			case "NX":
-				if (fc.checkNonPositionalNX(split[i])) {
+			case "N1":
+			case "N2":
+			case "N3":
+			case "N4":
+			case "N5":
+			case "N6":
+			case "N7":
+			case "N8":
+			case "N9":
+			case "N10":
+			case "N11":
+			case "N12":
+			case "N13":
+			case "N14":
+			case "N15":
+			case "N16":		 
+				if (fc.checkNonPositionalNX(split[i],format)) {
 					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
 				} else {
 					throw new IllegalArgumentException(
@@ -299,7 +337,7 @@ public class IvaFields {
 		String[] out = getFormatField(a, "AN");
 
 		for (int i = 0; i < out.length; i++) {
-			System.out.println(out[i].toString() + "a");
+			System.out.println(out[i] + "a");
 		}
 
 	}

@@ -366,7 +366,7 @@ public class IvaFieldTest {
 
 		String[] actual = IvaFields.getFormatField("02685978945", "CF");
 
-		String[] expected = { "02685978945" };
+		String[] expected = { "02685978945     " };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -379,564 +379,541 @@ public class IvaFieldTest {
 		IvaFields.getFormatField("1d1", "CF");
 	}
 
+	// controllo funzionamento CN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalCN1() {
+		String[] actual = IvaFields.getFormatField("02685978945", "CN");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("02685978945", "CN");
-
-		String expected = "02685978945     ";
-		assertEquals(expected, actual);
+		String[] expected = { "02685978945     " };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento CN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalCN2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("02685978945", "CN");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalCN3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("568", "CN");
 	}
 
+	// controllo funzionamento CN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalCN4() throws IllegalArgumentException {
+	public void testNonPositionalCN3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("RSSDRL96F57", "CN");
 	}
 
+	// controllo funzionamento PI Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPI1() {
+		String[] actual = IvaFields.getFormatField("02685978945", "PI");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("02685978945", "PI");
-
-		String expected = "02685978945     ";
-		assertEquals(expected, actual);
+		String[] expected = { "02685978945     " };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
-
+	
+	// controllo funzionamento PI Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalPI2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("02685978945", "PI");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalPI3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("568", "PI");
 	}
 
+	// controllo funzionamento PI Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalPI4() throws IllegalArgumentException {
+	public void testNonPositionalPI3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("RSSDRL96F57", "PI");
 	}
 
+	// controllo funzionamento DA Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalDA1() {
+		String[] actual = IvaFields.getFormatField("20102008", "DA");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("20102008", "DA");
-
-		String expected = "            2008";
-		assertEquals(expected, actual);
+		String[] expected = { "            2008" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento DA Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDA2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("20102008", "DA");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDA3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("201020085645", "DA");
 	}
 
+	// controllo funzionamento DA Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDA4() throws IllegalArgumentException {
+	public void testNonPositionalDA3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("5DSF5898", "DA");
 	}
 
+	// controllo funzionamento DA Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDA5() throws IllegalArgumentException {
+	public void testNonPositionalDA4() throws IllegalArgumentException {
 
-		IvaFields.getFormatField("32202000", "DT");
+		IvaFields.getFormatField("32202000", "DA");
 	}
 
+	// controllo funzionamento DT Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalDT1() {
+		String[] actual = IvaFields.getFormatField("25062000", "DT");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("25062000", "DT");
-
-		String expected = "        25062000";
-		assertEquals(expected, actual);
+		String[] expected = { "        25062000" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento DT Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDT2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("25062000", "DT");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDT3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("2106", "DT");
 	}
 
+	// controllo funzionamento DT Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDT4() throws IllegalArgumentException {
+	public void testNonPositionalDT3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("25g62000", "DT");
 	}
 
+	// controllo funzionamento DT Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDT5() throws IllegalArgumentException {
+	public void testNonPositionalDT4() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("32202000", "DT");
 	}
 
+	// controllo funzionamento DT Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDT6() throws IllegalArgumentException {
+	public void testNonPositionalDT5() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("25061800", "DT");
 	}
 
+	// controllo funzionamento DT Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDT7() throws IllegalArgumentException {
+	public void testNonPositionalDT6() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("25062020", "DT");
 	}
 
+	// controllo funzionamento DN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalDN1() {
+		String[] actual = IvaFields.getFormatField("25062000", "DN");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("25062000", "DN");
-
-		String expected = "        25062000";
-		assertEquals(expected, actual);
+		String[] expected = { "        25062000" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento DN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDN2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("25062000", "DN");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDN3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("2106", "DN");
 	}
 
+	// controllo funzionamento DN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDN4() throws IllegalArgumentException {
+	public void testNonPositionalDN3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("25g62000", "DN");
 	}
 
+	// controllo funzionamento DN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDN5() throws IllegalArgumentException {
+	public void testNonPositionalDN4() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("32202000", "DN");
 	}
 
+	// controllo funzionamento DN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDN6() throws IllegalArgumentException {
+	public void testNonPositionalDN5() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("25061900", "DN");
 	}
 
+	// controllo funzionamento DN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalDN7() throws IllegalArgumentException {
+	public void testNonPositionalDN6() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("25062100", "DN");
 	}
 
+	// controllo funzionamento D4 Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalD41() {
+		String[] actual = IvaFields.getFormatField("20102008", "D4");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("20102008", "D4");
-
-		String expected = "            2010";
-		assertEquals(expected, actual);
+		String[] expected = { "            2010" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento D4 Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalD42() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("20102008", "D4");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalD43() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("2010", "D4");
 	}
 
+	// controllo funzionamento D4 Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalD44() throws IllegalArgumentException {
+	public void testNonPositionalD43() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("20g020s8", "D4");
 	}
 
+	// controllo funzionamento D4 Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalD45() throws IllegalArgumentException {
+	public void testNonPositionalD44() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("50102008", "D4");
 	}
 
+	// controllo funzionamento D6 Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalD61() {
+		String[] actual = IvaFields.getFormatField("20102008", "D6");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("20102008", "D6");
-
-		String expected = "          102008";
-		assertEquals(expected, actual);
+		String[] expected = { "          102008" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento D6 Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalD62() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("20102008", "D6");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalD63() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("102008", "D6");
 	}
 
+	// controllo funzionamento D6 Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalD64() throws IllegalArgumentException {
+	public void testNonPositionalD63() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("20d020g8", "D6");
 	}
 
+	// controllo funzionamento D6 Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalD65() throws IllegalArgumentException {
+	public void testNonPositionalD64() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("202000", "D6");
 	}
 
+	// controllo funzionamento NP Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNP1() {
+		String[] actual = IvaFields.getFormatField("25", "NP");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("25", "NP");
-
-		String expected = "        25";
-		assertEquals(expected, actual);
+		String[] expected = { "              25" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento NP Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalNP2() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("-25", "NP");
 	}
 
+	// controllo funzionamento NP Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalNP3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("ghr", "NP");
 	}
 
+	// controllo funzionamento NU Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNU1() {
+		String[] actual = IvaFields.getFormatField("25", "NU");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("25", "NU");
-
-		String expected = "        25";
-		assertEquals(expected, actual);
+		String[] expected = { "              25" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento NU Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNU2() {
+		String[] actual = IvaFields.getFormatField("-25", "NU");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("-25", "NU");
-
-		String expected = "       -25";
-		assertEquals(expected, actual);
+		String[] expected = { "             -25" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento NU Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalNU3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("ghr", "NU");
 	}
 
+	// controllo funzionamento NX Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNX1() {
+		String[] actual = IvaFields.getFormatField("25", "N2");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("25", "Nx");
-
-		String expected = "        25";
-		assertEquals(expected, actual);
+		String[] expected = { "              25" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento NX Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalNX2() throws IllegalArgumentException {
 
-		IvaFields.getFormatField("56897894584455789553248654", "Nx");
+		IvaFields.getFormatField("56897894584455789553248654", "N2");
 	}
 
+	// controllo funzionamento NX Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalNX3() throws IllegalArgumentException {
 
-		IvaFields.getFormatField("ghr", "Nx");
+		IvaFields.getFormatField("ghr", "N2");
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1A() {
+		String[] actual = IvaFields.getFormatField("25", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("25", "PC");
-
-		String expected = "        25";
-		assertEquals(expected, actual);
+		String[] expected = { "              25" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1B() {
+		String[] actual = IvaFields.getFormatField("2", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("2", "PC");
-
-		String expected = "         2";
-		assertEquals(expected, actual);
+		String[] expected = { "               2" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1C() {
+		String[] actual = IvaFields.getFormatField("100", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("100", "PC");
-
-		String expected = "       100";
-		assertEquals(expected, actual);
+		String[] expected = { "             100" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1D() {
+		String[] actual = IvaFields.getFormatField("0.9", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("0.9", "PC");
-
-		String expected = "       0.9";
-		assertEquals(expected, actual);
+		String[] expected = { "             0.9" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1E() {
+		String[] actual = IvaFields.getFormatField("9.9", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("9.9", "PC");
-
-		String expected = "       9.9";
-		assertEquals(expected, actual);
+		String[] expected = { "             9.9" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1F() {
+		String[] actual = IvaFields.getFormatField("9.99", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("9.99", "PC");
-
-		String expected = "      9.99";
-		assertEquals(expected, actual);
+		String[] expected = { "            9.99" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1G() {
+		String[] actual = IvaFields.getFormatField("9.999", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("9.999", "PC");
-
-		String expected = "     9.999";
-		assertEquals(expected, actual);
+		String[] expected = { "           9.999" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1H() {
+		String[] actual = IvaFields.getFormatField("99.9", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("99.9", "PC");
-
-		String expected = "      99.9";
-		assertEquals(expected, actual);
+		String[] expected = { "            99.9" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1I() {
+		String[] actual = IvaFields.getFormatField("99.99", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("99.99", "PC");
-
-		String expected = "     99.99";
-		assertEquals(expected, actual);
+		String[] expected = { "           99.99" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPC1J() {
+		String[] actual = IvaFields.getFormatField("99.999", "PC");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("99.999", "PC");
-
-		String expected = "    99.999";
-		assertEquals(expected, actual);
+		String[] expected = { "          99.999" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PC Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalPC2() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("100.9", "PC");
 	}
-
+	
+	// controllo funzionamento PR Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPR1() {
+		String[] actual = IvaFields.getFormatField("BO", "PR");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("BO", "PR");
-
-		String expected = "BO              ";
-		assertEquals(expected, actual);
+		String[] expected = { "BO              " };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PR Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalPR2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("BO", "PR");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalPR3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("BOG", "PR");
 	}
 
+	// controllo funzionamento PR Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalPR4() throws IllegalArgumentException {
+	public void testNonPositionalPR3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("EE", "PR");
 	}
 
+	// controllo funzionamento PR Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalPR5() throws IllegalArgumentException {
+	public void testNonPositionalPR4() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("00", "PR");
 	}
 
+	// controllo funzionamento PN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPN1A() {
+		String[] actual = IvaFields.getFormatField("BO", "PN");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("BO", "PN");
-
-		String expected = "BO              ";
-		assertEquals(expected, actual);
+		String[] expected = { "BO              " };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPN1B() {
+		String[] actual = IvaFields.getFormatField("EE", "PN");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("EE", "PN");
-
-		String expected = "EE              ";
-		assertEquals(expected, actual);
+		String[] expected = { "EE              " };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPN1C() {
+		String[] actual = IvaFields.getFormatField("00", "PN");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("00", "PN");
-
-		String expected = "00              ";
-		assertEquals(expected, actual);
+		String[] expected = { "00              " };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
+	// controllo funzionamento PN Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalPN2() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("BO", "PN");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNonPositionalPN3() throws IllegalArgumentException {
 
 		IvaFields.getFormatField("BOG", "PN");
 	}
 
+	// controllo funzionamento QU Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalQU1A() {
+		String[] actual = IvaFields.getFormatField("0,2554", "QU");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("0,2554", "QU");
-
-		String expected = "          0,2554";
-		assertEquals(expected, actual);
+		String[] expected = { "          0,2554" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
 	@Test
 	public void testNonPositionalQU1B() {
+		String[] actual = IvaFields.getFormatField("0.2554", "QU");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("0.2554", "QU");
-
-		String expected = "          0.2554";
-		assertEquals(expected, actual);
+		String[] expected = { "          0.2554" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
 	@Test
 	public void testNonPositionalQU1C() {
+		String[] actual = IvaFields.getFormatField("500000000", "QU");
 
-		String[] actual = null;
-
-		actual = IvaFields.getFormatField("500000000", "QU");
-
-		String expected = "       500000000";
-		assertEquals(expected, actual);
+		String[] expected = { "       500000000" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -973,12 +950,12 @@ public class IvaFieldTest {
 	public void testBuildNonPositionalBigDecimal1() {
 
 		BigDecimal n = new BigDecimal("10.568");
-		String[] actual = null;
+		String[] actual = IvaFields.getFormatField(n, "NU");
 
-		actual = IvaFields.getFormatField(n, "NU");
-
-		String expected = "    10,568";
-		assertEquals(expected, actual);
+		String[] expected = { "          10,568" };
+		for (int i = 0; i < actual.length; i++) {
+			assertEquals(expected[i], actual[i]);
+		}
 	}
 
 	@Test
