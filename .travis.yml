@@ -10,8 +10,8 @@
 language: java
 install: true # The install step runs before script step, and with Maven you don't usually need the install step. 
               # Maven will download dependencies on script step anyway              
-export CODACY_PROJECT_TOKEN=de583c6e383243528533d8a9b81cbe5a
 before_install:
+  - export CODACY_PROJECT_TOKEN=de583c6e383243528533d8a9b81cbe5a
   - sudo apt-get install jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
 script: mvn clean verify
