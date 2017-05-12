@@ -12,6 +12,7 @@ install: true # The install step runs before script step, and with Maven you don
               # Maven will download dependencies on script step anyway              
 before_install:
   - sudo apt-get install jq
+  # The following command download the 2.0.0 version which throws the "NoClassDefFoundError" error when running CodacyCoverageReporter
   # - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
   - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/1.0.13/codacy-coverage-reporter-1.0.13-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
 script: mvn clean verify
