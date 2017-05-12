@@ -19,7 +19,9 @@ before_install:
   # See: https://github.com/codacy/codacy-coverage-reporter
   # - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
   - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/1.0.13/codacy-coverage-reporter-1.0.13-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
-script: mvn clean verify
+script: 
+  - mvn -v
+  - mvn clean verify
 after_success:
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r ./target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
 #
