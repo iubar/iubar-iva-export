@@ -18,7 +18,7 @@ after_success:
   - export CODACY_PROJECT_TOKEN=de583c6e383243528533d8a9b81cbe5a
   - ls -la
   - ls target/site/jacoco -la
-  - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r target/site/jacoco/jacoco.xml
+  - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r target/site/jacoco/jacoco.xml --projectToken de583c6e383243528533d8a9b81cbe5a
 #
 # In alternativa a codacy-coverage-reporter è possibile utilizzare il seguente plugin Maven
 # https://github.com/halkeye/codacy-maven-plugin
