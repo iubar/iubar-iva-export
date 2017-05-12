@@ -16,6 +16,7 @@ install: true # Skip the installation step entirely.
 before_install:
   - sudo apt-get install jq
   # The following command download the 2.0.0 version of "codacy-coverage-reporter" which throws the "NoClassDefFoundError" error when running CodacyCoverageReporter
+  # See: https://github.com/codacy/codacy-coverage-reporter
   # - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
   - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/1.0.13/codacy-coverage-reporter-1.0.13-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
 script: mvn clean verify
@@ -23,6 +24,6 @@ after_success:
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r ./target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
 #
 # In alternativa a "codacy-coverage-reporter" è possibile utilizzare il seguente plugin Maven
-# see: https://github.com/halkeye/codacy-maven-plugin
+# See: https://github.com/halkeye/codacy-maven-plugin
 # after_success: 
 #   - mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=./target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN
