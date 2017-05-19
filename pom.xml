@@ -43,6 +43,9 @@
                     <excludes>
                         <exclude>**/Protos*.class</exclude>
                         <!-- Exclude generated protobuf classes -->
+                        <exclude>src/test/*</exclude>
+                        <exclude>src/main/java/CreateConfigFile.java</exclude>
+                        <exclude>src/main/java/Export.java</exclude>
                         <exclude>org/example/jni/*</exclude>
                         <!-- Exclude JNI classes -->
                         <exclude>org/example/*</exclude>
