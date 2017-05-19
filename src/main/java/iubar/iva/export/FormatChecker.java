@@ -26,7 +26,7 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalPN(String value) {
-		return (value.length() == 0 || value.length() == 2) && (value.matches("[a-zA-Z]+") || value.matches("[0]{2}"));
+		return (value.length() == 0 || value.length() == 2) && (value.matches("[a-zA-Z]+") || value.matches("[0]{2}") || value.equals(""));
 	}
 
 	public boolean checkPositionalPR(String value) {
