@@ -41,7 +41,7 @@
                 <version>0.7.9</version>
                 <configuration>
                     <excludes>
-                        <exclude>${project.basedir}/src/test/**</exclude>
+                        <exclude>**/*Test.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
