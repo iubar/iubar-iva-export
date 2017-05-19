@@ -71,9 +71,9 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new BigDecimal("393273742087"), i);
+		export.writeField("393273742087", i);
 		i++;
-		export.writeField(new BigDecimal("0721805536"), i);
+		export.writeField("0721805536", i);
 		i++;
 		export.writeField("Pesaro e Urbino", i);
 		i++;

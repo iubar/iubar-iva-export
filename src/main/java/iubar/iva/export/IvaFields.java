@@ -149,7 +149,7 @@ public class IvaFields {
 			}
 		} else if (delta < 0) {
 			throw new IllegalArgumentException(
-					"La stringa è maggiore del campo" + "\nValore: " + value + " " + value.length() + "\nCampo: " + length);
+					"La stringa ï¿½ maggiore del campo" + "\nValore: " + value + " " + value.length() + "\nCampo: " + length);
 		}
 		return formattedString;
 	}
