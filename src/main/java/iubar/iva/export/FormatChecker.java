@@ -10,7 +10,7 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalCN(String value) {
-			return value.length() == 11 && value.matches("[0-9]+");
+		return (value.length() == 1 || value.length() == 11) && (value.matches("[0-9]+"));
 	}
 
 	public boolean checkPositionalPI(String value) {
@@ -18,36 +18,23 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalDT(String value) {
-		if (value.length() == 8) {
-			return value.matches("[0-9]+") && dateFormatCheck(value);
-		}
-		return false;
+		return (value.length() == 0 || value.length() == 8) && (value.matches("[0-9]+") && dateFormatCheck(value));
 	}
 
 	public boolean checkPositionalNU(String value) {
-		if (value.indexOf("-") == -1)
-			return (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"));
-		return false;
+		return (value.indexOf("-") == -1) && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"));
 	}
 
 	public boolean checkPositionalPN(String value) {
-		if (value.length() == 2)
-			return (value.matches("[a-zA-Z]+") || value.matches("[0]{2}"));
-		return false;
+		return (value.length() == 0 || value.length() == 2) && (value.matches("[a-zA-Z]+") || value.matches("[0]{2}"));
 	}
 
 	public boolean checkPositionalPR(String value) {
-		if (value.length() == 2) {
-			return value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value);
-		}
-		return false;
+		return (value.length() == 0 || value.length() == 2) && (value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value));
 	}
 
 	public boolean checkPositionalCB(String value) {
-		if (value.length() == 1) {
-			return "0".equals(value) || "1".equals(value);
-		}
-		return false;
+			return (value.length() == 0 || value.length() == 1) && ("0".equals(value) || "1".equals(value));
 	}
 
 	public boolean checkNonPositionalCB(String value) {
