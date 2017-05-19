@@ -67,8 +67,10 @@ public class Export {
 			return IvaFields.getFormatField((String) value, format, length);
 		} else if (value instanceof BigDecimal) {
 			return IvaFields.getFormatField((BigDecimal) value, format, length);
-		} else {
+		} else if (value instanceof Date) {
 			return IvaFields.getFormatField((Date) value, format, length);
+		} else {
+			return IvaFields.getFormatField((Boolean) value, format, length);
 		}
 	}
 
@@ -83,23 +85,37 @@ public class Export {
 			for (int i = 0 ; i < position ; i++) {
 				padding += " ";
 			}
-			return record.substring(0, this.record.length() - 1) +
-					padding +
-					value;
+			if (this.record.length() > 0) {
+				return record.substring(0, this.record.length() - 1) +
+						padding +
+						value;
+			} else {
+				return record.substring(0, this.record.length()) +
+						padding +
+						value;
+			}
+
 		}
 	}
 
 	private String getRecordToExamine(int field) {
 		if (field >= 118) { 			//start of record D
 			this.last_record = 2;
-			return fRecords.get(2);
+			if (fRecords.size() >= 3) {
+				return fRecords.get(2);
+			}
 		} else if (field >= 14) {	//start of record B
 			this.last_record = 1;
-			return fRecords.get(1);
+			if (fRecords.size() >= 2) {
+				return fRecords.get(1);
+			}
 		} else {
 			this.last_record = 0;
-			return fRecords.get(0);
+			if (fRecords.size() >= 1) {
+				return fRecords.get(0);
+			}
 		}
+		return "";
 	}
 
 	public <T> void writeField(T value, String field) {
