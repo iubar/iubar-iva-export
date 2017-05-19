@@ -87,7 +87,7 @@ public class IvaFields {
 					formattedString = fm.stringFormatterDelta(value, delta, 1);
 				} else {
 					throw new IllegalArgumentException(
-							"La stringa inserita non è coerente con il tipo di formattazione CODICE FISCALE");
+							"La stringa inserita non è coerente con il tipo di formattazione CODICE FISCALE" + "\nValore: " + value + " " + value.length() + "\nCampo: " + length);
 				}
 				break;
 			case "CN":
