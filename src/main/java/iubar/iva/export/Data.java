@@ -285,7 +285,7 @@
 		i++;
 		i++;		//22
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i += 100;  	//VB, VC (da riga 22, da riga 50), (122)
+		i += 100;  	//VB, VC (da riga 23, da riga 51), (122)
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
@@ -301,7 +301,7 @@
 		i++;
 		i++;
 		export.writeField(new Boolean(true), export.getFieldToString(i));
-		i++;	//VD (131)
+		i++;	//VD (132)
 		i++;
 		i++;	//133
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -429,13 +429,40 @@
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
         i++;
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-        
+        i += 4;
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i += 7;
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i += 16;
+        i++;		//Dopo inizia VX
+        export.writeField("VAVCVDVEVFVHVJVKVLVX", export.getFieldToString(i));
+        i += 15;
+        i++;
+        export.writeField(new Boolean(true), export.getFieldToString(i));
+        i += 3;		//Dopo inizia V0, (641)
+        i += 117;	//758
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i++;
+        export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+        i += 46;
+        i += 222;
+		i++;
+		export.writeField("", export.getFieldToString(i));
 		
 
 
+
+
 */
-
-
 package iubar.iva.export;
 
 import java.math.BigDecimal;

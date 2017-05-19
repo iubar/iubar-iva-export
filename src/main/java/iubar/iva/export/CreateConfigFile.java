@@ -13,6 +13,7 @@ public final class CreateConfigFile {
 
 	private PrintWriter writer;
 	private int field_count;
+	private boolean skip = false;
 
 	public void getTextFromPDF(int start_page, int end_page) {
 		try {
@@ -101,9 +102,8 @@ public final class CreateConfigFile {
 	private String checkType1(String pdfLine) {
 		String[] split = pdfLine.split("\\s+");
 
-		if (split.length > 0) {
+		if (split.length > 3) {
 			if (StringUtils.isNumeric(split[0])) {
-
 				for (int i = 0; i < split.length; i++) {
 					if ((i > 0) && split[i].matches("AN|CF|CN|PI|DT|NU|PN|PR|CB|D4|N1")) {
 						if (split[i].equals("N1")) {
@@ -122,17 +122,28 @@ public final class CreateConfigFile {
 	private String checkType2(String pdfLine) {
 		String[] split = pdfLine.split("\\s+");
 
-		if ((split.length > 0) && (split[0].matches("V[A-Z]{1}[0-9]{6}"))) {
 
-			for (int i = 0; i < split.length; i++) {
 
-				if (split[i].matches(
-						"AN|CB|CB12|CF|CN|PI|" +
-								"DA|DT|DN|D4|D6|NP|NU|" +
-								"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16|" +
-								"PC|PR|PN|QU")) {
+		if (split.length > 0 ) {
+			if (split[0].equals("VF071002")) {
+				if (skip) {
+					skip = false;
+				} else {
+					skip = true;
+					return null;
+				}
+			}
+			if ((split[0].matches("V[A-Z]{1}[0-9]{6}")) || split[0].matches("V[0-9]{1}[0-9]{6}")) {
+				for (int i = 0; i < split.length; i++) {
 
-					return split[0] + "+" + split[i];
+					if (split[i].matches(
+							"AN|CB|CB12|CF|CN|PI|" +
+									"DA|DT|DN|D4|D6|NP|NU|" +
+									"N1|N2|N3|N4|N5|N6|N7|N8|N9|N10|N11|N12|N13|N14|N15|N16|" +
+									"PC|PR|PN|QU")) {
+
+						return split[0] + "+" + split[i];
+					}
 				}
 			}
 		}
