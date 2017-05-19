@@ -245,8 +245,8 @@
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField("", i);
-		i++;
+		export.writeField("ASDFGHJKLMNBVCXZ", i);
+		i++;			//Inizio non posizionali
 		i++;
 		i++;
 		export.writeField(new Boolean(true), export.getFieldToString(i));
@@ -261,6 +261,8 @@
 		export.writeField("", export.getFieldToString(i));
 		i++;
 		export.writeField("", export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal(""), export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i++;
@@ -281,9 +283,10 @@
 		export.writeField(new BigDecimal("10000"), export.getFieldToString(i));
 		i++;///////////////////////////////////////////////////////////////////
 		i++;
-		i++;
+		i++;		//22
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i += 103;
+		i += 100;  	//VB, VC (da riga 22, da riga 50), (122)
+		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -298,12 +301,12 @@
 		i++;
 		i++;
 		export.writeField(new Boolean(true), export.getFieldToString(i));
+		i++;	//VD (131)
 		i++;
-		i++;
-		i++;
+		i++;	//133
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 40;
-		i += 40;
+		i += 40;	//213
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
@@ -313,10 +316,10 @@
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i++;
+		i++;		//219 dopo di questa inizia VE
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 22;
-		i += 8;
+		i += 8;		//249
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
@@ -324,15 +327,15 @@
 		i++;
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i++;
+		i++;		//254
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 6;
 		i += 3;
-		i += 14;
-		i++;
+		i += 14;	//277
+		i++;		//dopo questo inizia VF	
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 26;
-		i += 11;
+		i += 11;	//315
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
@@ -340,17 +343,17 @@
 		i++;
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 10;
+		i += 10;	//329
 		i++;
 		export.writeField(new Boolean(true), export.getFieldToString(i));
 		i += 7;
-		i += 12;
+		i += 12;	//349
 		i++;
 		i++;
 		i++;
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 24;
+		i += 24;	//377
 		i++;
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -363,41 +366,39 @@
 		i++;
 		i++;
 		export.writeField(new Boolean(true), export.getFieldToString(i));
-		i += 4;
+		i += 4;		//389
+		i++;		//Dopo di questa inizia VG, VH inizia a 446
+		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+		i += 55;	//445
+		i++; 		//Inizio VH
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;		//VH
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i++;
+		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 77;	//VJ inizia a 497 , (534)
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 36;
-		i += 27;
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
-		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i += 15;
-		i += 38;
-		i++;
-		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 12;
-		i++;
+		i += 12;	//VI inizia a 536 , (547)
+		i++;		//VK 548
 		export.writeField(new BigDecimal("12345678901"), export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("13"), export.getFieldToString(i));
@@ -414,13 +415,13 @@
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i++;
+		i++;		//557
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 9;
-        i++;
+		i += 9;		//(566)
+        i++;		//567
         export.writeField(new Boolean(true), export.getFieldToString(i));
-        i += 20;
-        i++;
+        i += 20;	//VN inizia a 568 , (587)
+        i++;		//VL (588)
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
         i++;
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -432,9 +433,9 @@
 		
 
 
-
-
 */
+
+
 package iubar.iva.export;
 
 import java.math.BigDecimal;
