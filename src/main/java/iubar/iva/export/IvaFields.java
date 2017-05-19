@@ -8,23 +8,23 @@ import java.util.Date;
 import java.util.Locale;
 
 public class IvaFields {
-	
+
 	private static final String DATE_PATTERN = "ddMMyyyy";
 	private static final int NON_POSITIONAL_STD_LENGHT = 16;
 
 	public static String getFormatField(BigDecimal value, String format, int length) {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
-		DecimalFormat myFormatter = (DecimalFormat)nf;
-//		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
-		
+		DecimalFormat myFormatter = (DecimalFormat) nf;
+		// DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
+
 		String str = myFormatter.format(value);
 		return getFormatField(str, format, length);
 	}
 
 	public static String[] getFormatField(BigDecimal value, String format) {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
-		DecimalFormat myFormatter = (DecimalFormat)nf;
-//		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
+		DecimalFormat myFormatter = (DecimalFormat) nf;
+		// DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
 		String str = myFormatter.format(value);
 		return getFormatField(str, format);
@@ -148,7 +148,8 @@ public class IvaFields {
 				break;
 			}
 		} else if (delta < 0) {
-			throw new IllegalArgumentException("La stringa inserita Ã¨ di dimensioni maggiori al campo indicato");
+			throw new IllegalArgumentException(
+					"La stringa è maggiore del campo" + "\nValore: " + value + " " + value.length() + "\nCampo: " + length);
 		}
 		return formattedString;
 	}
@@ -292,8 +293,8 @@ public class IvaFields {
 			case "N13":
 			case "N14":
 			case "N15":
-			case "N16":		 
-				if (fc.checkNonPositionalNX(split[i],format)) {
+			case "N16":
+				if (fc.checkNonPositionalNX(split[i], format)) {
 					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
 				} else {
 					throw new IllegalArgumentException(

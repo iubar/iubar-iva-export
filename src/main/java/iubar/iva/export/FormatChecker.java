@@ -6,20 +6,17 @@ import java.time.Year;
 public class FormatChecker {
 
 	public boolean checkPositionalCF(String value) {
-		if ((value.length() == 16 || value.length() == 11) && value.matches("^[a-zA-Z0-9]*$")) {
-			return true;
-		} else {
-			return false;
+		if (value.length() == 16 || value.length() == 11) {
+			return value.matches("^[a-zA-Z0-9]*$");
 		}
+		return false;
 	}
 
 	public boolean checkPositionalCN(String value) {
-		if (value.length() == 11 && value.matches("[0-9]+")) {
-			return true;
-		} else {
-		
-			return false;
+		if (value.length() == 11) {
+			return value.matches("[0-9]+");
 		}
+		return false;
 	}
 
 	public boolean checkPositionalPI(String value) {
@@ -27,11 +24,10 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalDT(String value) {
-		if (value.length() == 8 && value.matches("[0-9]+") && dateFormatCheck(value)) {
-			return true;
-		} else {
-			return false;
+		if (value.length() == 8) {
+			return value.matches("[0-9]+") && dateFormatCheck(value);
 		}
+		return false;
 	}
 
 	public boolean checkPositionalNU(String value) {
@@ -47,19 +43,17 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalPR(String value) {
-		if (value.length() == 2 && value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value)) {
-			return true;
-		} else {
-			return false;
+		if (value.length() == 2) {
+			return value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value);
 		}
+		return false;
 	}
 
 	public boolean checkPositionalCB(String value) {
-		if (value.length() == 1 && ("0".equals(value) || "1".equals(value))) {
-			return true;
-		} else {
-			return false;
+		if (value.length() == 1) {
+			return "0".equals(value) || "1".equals(value);
 		}
+		return false;
 	}
 
 	public boolean checkNonPositionalCB(String value) {
@@ -67,11 +61,10 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalCB12(String value) {
-		if (value.length() == 12 && value.matches("[0-1]+")) {
-			return true;
-		} else {
-			return false;
+		if (value.length() == 12) {
+			return value.matches("[0-1]+");
 		}
+		return false;
 	}
 
 	public boolean checkNonPositionalCF(String value) {
@@ -91,21 +84,17 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalDT(String value) {
-		
-		
-		if (this.checkNonPositionalDA(value) && this.dateRange(value, 1880,Year.now().getValue()/*Calendar.getInstance().get(Calendar.YEAR)*/)) {
-			return true;
-		} else {
-			return false;
+		if (this.checkNonPositionalDA(value)) {
+			return this.dateRange(value, 1880,Year.now().getValue()/*Calendar.getInstance().get(Calendar.YEAR)*/);
 		}
+		return false;
 	}
 
 	public boolean checkNonPositionalDN(String value) {
-		if (this.checkNonPositionalDA(value) && this.dateRange(value, 1980, 2050)) {
-			return true;
-		} else {
-			return false;
+		if (this.checkNonPositionalDA(value)) {
+			return this.dateRange(value, 1980, 2050);
 		}
+		return false;
 	}
 
 	public boolean checkNonPositionalD4(String value) {
