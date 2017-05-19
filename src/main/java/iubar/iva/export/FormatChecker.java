@@ -6,17 +6,11 @@ import java.time.Year;
 public class FormatChecker {
 
 	public boolean checkPositionalCF(String value) {
-		if (value.length() == 16 || value.length() == 11) {
-			return value.matches("^[a-zA-Z0-9]*$");
-		}
-		return false;
+		return (value.length() == 0 || value.length() == 16 || value.length() == 11) && (value.matches("^[a-zA-Z0-9]*$"));
 	}
 
 	public boolean checkPositionalCN(String value) {
-		if (value.length() == 11) {
-			return value.matches("[0-9]+");
-		}
-		return false;
+			return value.length() == 11 && value.matches("[0-9]+");
 	}
 
 	public boolean checkPositionalPI(String value) {
@@ -110,12 +104,8 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalNU(String value) {
-		if (value.matches("[0-9]+") || value.matches("[-]{1}[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+")
-				|| value.matches("[-]{1}[0-9]+[,.]?[0-9]+")) {
-			return true;
-		} else {
-			return false;
-		}
+			return (value.matches("[0-9]+") || value.matches("[-]{1}[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+")
+					|| value.matches("[-]{1}[0-9]+[,.]?[0-9]+"));
 	}
 
 	public boolean checkNonPositionalNX(String value, String format) {
