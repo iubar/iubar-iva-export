@@ -41,7 +41,7 @@
                 <version>0.7.9</version>
                 <configuration>
                     <excludes>
-                        <exclude>${project.basedir}/src/test/**</exclude>
+                        <exclude>**/*Test.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -86,7 +86,7 @@
                                             <counter>COMPLEXITY</counter>
                                             <value>COVEREDRATIO</value>
                                             <!-- <minimum>0.60</minimum> -->
-                                            <minimum>0.40</minimum>
+                                            <minimum>0.20</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
