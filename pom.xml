@@ -41,13 +41,7 @@
                 <version>0.7.9</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/Protos*.class</exclude>
-                        <!-- Exclude generated protobuf classes -->
                         <exclude>src/test/*</exclude>
-                        <exclude>org/example/jni/*</exclude>
-                        <!-- Exclude JNI classes -->
-                        <exclude>org/example/*</exclude>
-                        <!-- Exclude native classes -->
                     </excludes>
                 </configuration>
                 <executions>
@@ -92,7 +86,7 @@
                                             <counter>COMPLEXITY</counter>
                                             <value>COVEREDRATIO</value>
                                             <!-- <minimum>0.60</minimum> -->
-                                            <minimum>0.00</minimum>
+                                            <minimum>0.40</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
