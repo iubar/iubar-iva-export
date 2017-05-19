@@ -34,7 +34,7 @@ public class Export {
 	private int last_record;
 
 	public String getFieldToString(int field) {
-		if (field > 124 & field < 1148) {
+		if (field > 124 & field < 1153) {
 			return nKeys.get(field - 125);
 		} else return null;
 	}
@@ -258,12 +258,15 @@ public class Export {
 			String line;
 
 			while (null != (line = rw.readLine())) {
-				Matcher match = nonPositional.matcher(line);
-				if (!match.find()) {
-					pSpecs.put(positional.matcher(line).group(0), line);
+				Matcher n_match = nonPositional.matcher(line);
+				Matcher p_match = positional.matcher(line);
+				if (!n_match.find()) {
+					if (p_match.find()) {
+						pSpecs.put(p_match.group(0), line);
+					}
 				} else {
-					nSpecs.put(match.group(0), line);
-					nKeys.add(match.group(0));
+					nSpecs.put(n_match.group(0), line);
+					nKeys.add(n_match.group(0));
 				}
 			}
 			rw.close();

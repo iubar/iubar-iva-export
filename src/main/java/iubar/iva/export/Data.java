@@ -1,4 +1,14 @@
-		/*i++;
+package iubar.iva.export;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class Data {
+
+    public static void main(String[] args) {
+	    Export export = new Export();
+	    int i = 1;
+        //i++;
 		export.writeField("A", i);
 		i++;
 		export.writeField("", i);
@@ -39,9 +49,9 @@
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -55,9 +65,9 @@
 		i++;
 		export.writeField("12345678901", i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -69,7 +79,7 @@
 		i++;
 		export.writeField("PU", i);
 		i++;
-		export.writeField(new Data(926640000L), i);
+		export.writeField(new Date(926640000L), i);
 		i++;
 		export.writeField("M", i);
 		i++;
@@ -83,9 +93,9 @@
 		i++;
 		export.writeField(new BigDecimal("1"), i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -93,33 +103,33 @@
 		i++;
 		export.writeField("RSSDRL96F57I967O", i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
 		export.writeField(new BigDecimal(""), i);
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField(new BigDecimal(""), i);
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField(new BigDecimal(""), i);
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField(new BigDecimal(""), i);
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Boolean(), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -159,7 +169,7 @@
 		i++;
 		export.writeField(new BigDecimal(""), i);
 		i++;
-		export.writeField(new Data(0L), i);
+		export.writeField(new Date(0L), i);
 		i++;
 		export.writeField(new BigDecimal(""), i);
 		i++;
@@ -169,7 +179,7 @@
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Data(0L), i);
+		export.writeField(new Date(0L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -185,19 +195,19 @@
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Data(0L), i);
+		export.writeField(new Date(0L), i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Data(0L), i);
+		export.writeField(new Date(0L), i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -207,9 +217,9 @@
 		i++;
 		export.writeField(new BigDecimal("1"), i);
 		i++;
-		export.writeField(new Data(1493942400L), i);
+		export.writeField(new Date(1493942400L), i);
 		i++;
-		export.writeField(new Boolean(false), i);
+		export.writeField(Boolean.FALSE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -217,11 +227,11 @@
 		i++;
 		export.writeField("RSSDRL96F57I967O", i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
-		export.writeField(new Boolean(true), i);
+		export.writeField(Boolean.TRUE, i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -249,7 +259,7 @@
 		i++;			//Inizio non posizionali
 		i++;
 		i++;
-		export.writeField(new Boolean(true), export.getFieldToString(i));
+		export.writeField(Boolean.TRUE, export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal(""), export.getFieldToString(i));
 		i++;
@@ -300,7 +310,7 @@
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
 		i++;
-		export.writeField(new Boolean(true), export.getFieldToString(i));
+		export.writeField(Boolean.TRUE, export.getFieldToString(i));
 		i++;	//VD (132)
 		i++;
 		i++;	//133
@@ -345,7 +355,7 @@
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 10;	//329
 		i++;
-		export.writeField(new Boolean(true), export.getFieldToString(i));
+		export.writeField(Boolean.TRUE, export.getFieldToString(i));
 		i += 7;
 		i += 12;	//349
 		i++;
@@ -365,7 +375,7 @@
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
 		i++;
-		export.writeField(new Boolean(true), export.getFieldToString(i));
+		export.writeField(Boolean.TRUE, export.getFieldToString(i));
 		i += 4;		//389
 		i++;		//Dopo di questa inizia VG, VH inizia a 446
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -419,7 +429,7 @@
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 9;		//(566)
         i++;		//567
-        export.writeField(new Boolean(true), export.getFieldToString(i));
+        export.writeField(Boolean.TRUE, export.getFieldToString(i));
         i += 20;	//VN inizia a 568 , (587)
         i++;		//VL (588)
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -442,7 +452,7 @@
         export.writeField("VAVCVDVEVFVHVJVKVLVX", export.getFieldToString(i));
         i += 15;
         i++;
-        export.writeField(new Boolean(true), export.getFieldToString(i));
+        export.writeField(Boolean.TRUE, export.getFieldToString(i));
         i += 3;		//Dopo inizia V0, (641)
         i += 117;	//758
         i++;
@@ -457,23 +467,25 @@
         i += 222;
 		i++;
 		export.writeField("", export.getFieldToString(i));
-		
-
-
-
-
-*/
-package iubar.iva.export;
-
-import java.math.BigDecimal;
-
-public class Data {
-
-	public static void main(String[] args) {
-	    Export export = new Export();
-        export.writeField("A", 1);
-        export.writeField("IVA17", 3);
-        export.writeField(Boolean.TRUE, export.getFieldToString(127));
-        export.writeField(new BigDecimal(""), export.getFieldToString(128));
+		i++;
+		export.writeField("", i - 1152 + 124);
+		i++;
+		export.writeField("A", i - 1152 + 124);
+		i++;
+		export.writeField("\r\n", i - 1152 + 124);
+		i++;
+		export.writeField("Z", i - 1152 + 124);
+		i++;
+		export.writeField("", i - 1152 + 124);
+		i++;
+		export.writeField("1", i - 1152 + 124);
+		i++;
+		export.writeField("1", i - 1152 + 124);
+		i++;
+		export.writeField("", i - 1152 + 124);
+		i++;
+		export.writeField("A", i - 1152 + 124);
+		i++;
+		export.writeField("\r\n", i - 1152 + 124);
     }
 }

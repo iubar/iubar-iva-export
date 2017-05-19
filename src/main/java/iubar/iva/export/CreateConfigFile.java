@@ -133,9 +133,10 @@ public final class CreateConfigFile {
 					return null;
 				}
 			}
-			if ((split[0].matches("V[A-Z]{1}[0-9]{6}")) ||
+			if (split[0].matches("V[A-Z]{1}[0-9]{6}|V1{1}[0-9]{6}|V[A-Z]{1}[0-9]{5}[A-D]")
+					/*split[0].matches("V[A-Z]{1}[0-9]{6}")) ||
 					split[0].matches("V[0-9]{1}[0-9]{6}") ||
-					split[0].matches("V[A-Z]{1}[0-9]{5}[A-D]")) {
+					split[0].matches("V[A-Z]{1}[0-9]{5}[A-D]"*/) {
 				for (int i = 0; i < split.length; i++) {
 
 					if (split[i].matches(
