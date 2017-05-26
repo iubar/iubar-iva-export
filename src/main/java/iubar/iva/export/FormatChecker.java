@@ -19,11 +19,11 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalDT(String value) {
-		return (value.length() == 0 || value.length() == 8) && (value.matches("[0-9]+") && dateFormatCheck(value));
+		return (value.length() == 0 || value.length() == 8);
 	}
 
 	public boolean checkPositionalNU(String value) {
-		return (value.indexOf("-") == -1) && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"));
+		return (value.indexOf("-") == -1);
 	}
 
 	public boolean checkPositionalPN(String value) {
@@ -70,7 +70,7 @@ public class FormatChecker {
 	public boolean checkNonPositionalDT(String value) {
 		if (this.checkNonPositionalDA(value)) {
 			return this.dateRange(value, 1880, Year.now()
-					.getValue()/* Calendar.getInstance().get(Calendar.YEAR) */);
+					.getValue());
 		}
 		return false;
 	}
@@ -95,8 +95,7 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalNU(String value) {
-		return ((value.matches("[0-9]+") || value.matches("[-]{1}[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+")
-				|| value.matches("[-]{1}[0-9]+[,.]?[0-9]+")));
+		return true;
 	}
 
 	public boolean checkNonPositionalNX(String value, String format) {
@@ -106,7 +105,8 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalPC(String value) {
-		return Double.parseDouble(value) <= 100 && (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
+		
+		return Double.parseDouble(value.replace(',', '.')) <= 100 && (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
 	}
 
 	public boolean checkNonPositionalPR(String value) {
@@ -120,7 +120,7 @@ public class FormatChecker {
 	public boolean checkNonPositionalQU(String value) {
 		return (value.matches("[0-9]") || value.matches("[0-9]+[,.]?[0-9]{1,5}"));
 	}
-
+/*
 	private boolean dateFormatCheck(String date) {
 		if (date.length() == 8 || date.length() == 4) {
 			String s1 = (String) date.subSequence(0, 2);
@@ -137,7 +137,7 @@ public class FormatChecker {
 			return (Integer.parseInt(s1) > 0 && Integer.parseInt(s1) < 13);
 		}
 		return false;
-	}
+	}*/
 
 	private boolean dateRange(String date, int start, int end) {
 		Integer year = Integer.parseInt((String) date.subSequence(4, 8));
