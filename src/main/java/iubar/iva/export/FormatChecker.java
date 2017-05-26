@@ -11,7 +11,7 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalCN(String value) {
-		return (value.length() == 0 || value.length() == 11) && (value.matches("[0-9]+"));
+		return ((value.length() == 11) && (value.matches("[0-9]+")) || (value.length() == 0));
 	}
 
 	public boolean checkPositionalPI(String value) {

@@ -338,14 +338,8 @@ public class IvaFields {
 		return out;
 	}
 
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * String a = "abcdefghijklmnopabcdefgh";
-	 * 
-	 * String[] out = getFormatField(a, "AN");
-	 * 
-	 * for (int i = 0; i < out.length; i++) { System.out.println(out[i] + "a");
-	 * } }
-	 */
+	 public static void main(String[] args) {
+		 String a = new String("");
+		 System.out.println(a.length()); 
+	 }
 }
