@@ -73,7 +73,7 @@ public class IvaFieldTest {
 
 		actual = IvaFields.getFormatField("02685978945", "CN", 16);
 
-		String expected = "02685978945";
+		String expected = "0000002685978945";
 		assertEquals(expected, actual);
 	}
 
@@ -96,7 +96,7 @@ public class IvaFieldTest {
 
 		actual = IvaFields.getFormatField("02685978945", "PI", 16);
 
-		String expected = "02685978945";
+		String expected = "0000002685978945";
 		assertEquals(expected, actual);
 	}
 
@@ -247,7 +247,7 @@ public class IvaFieldTest {
 
 		actual = IvaFields.getFormatField("1", "CB", 2);
 
-		String expected = "1";
+		String expected = "01";
 		assertEquals(expected, actual);
 	}
 
@@ -302,7 +302,7 @@ public class IvaFieldTest {
 
 		String[] actual = IvaFields.getFormatField("1", "CB");
 
-		String[] expected = { "0000000000000001" };
+		String[] expected = { "               1" };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -328,7 +328,7 @@ public class IvaFieldTest {
 
 		String[] actual = IvaFields.getFormatField("101101001011", "CB12");
 
-		String[] expected = { "0000101101001011" };
+		String[] expected = { "    101101001011" };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
