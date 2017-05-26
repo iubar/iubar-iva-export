@@ -80,11 +80,11 @@ public class IvaFields {
 		if (delta >= 0) {
 			switch (format.toUpperCase()) {
 			case "AN":
-				formattedString = fm.stringFormatterDelta(value, delta, 1);
+				formattedString = fm.stringFormatterDelta(value, delta, FormatType.SXSPACE);
 				break;
 			case "CF":
 				if (fc.checkPositionalCF(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 1);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa non e' un codice fiscale" + "\nValore: " + value + " Campo: " + length);
@@ -92,7 +92,7 @@ public class IvaFields {
 				break;
 			case "CN":
 				if (fc.checkPositionalCN(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 0);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.DXZERO);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione CODICE FISCALE NUMERICO");
@@ -100,7 +100,7 @@ public class IvaFields {
 				break;
 			case "PI":
 				if (fc.checkPositionalPI(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 0);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.DXZERO);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione PARTITA IVA");
@@ -108,7 +108,7 @@ public class IvaFields {
 				break;
 			case "DT":
 				if (fc.checkPositionalDT(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 0);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.DXZERO);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione DATA");
@@ -116,7 +116,7 @@ public class IvaFields {
 				break;
 			case "NU":
 				if (fc.checkPositionalNU(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 3);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.DXZERO);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione CAMPO NUMERICO POSITIVO");
@@ -124,7 +124,7 @@ public class IvaFields {
 				break;
 			case "PN":
 				if (fc.checkPositionalPN(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 0);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione SIGLA PROVINCIALE");
@@ -132,7 +132,7 @@ public class IvaFields {
 				break;
 			case "PR":
 				if (fc.checkPositionalPR(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 0);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione SIGLA PROVINCIALE");
@@ -140,11 +140,13 @@ public class IvaFields {
 				break;
 			case "CB":
 				if (fc.checkPositionalCB(value)) {
-					formattedString = fm.stringFormatterDelta(value, delta, 0);
+					formattedString = fm.stringFormatterDelta(value, delta, FormatType.DXZERO);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione CASELLA BARRATA");
 				}
+				break;
+			default:
 				break;
 			}
 		} else if (delta < 0) {
@@ -152,27 +154,6 @@ public class IvaFields {
 					"La stringa � maggiore del campo" + "\nValore: " + value + " " + value.length() + "\nCampo: " + length);
 		}
 		return formattedString;
-	}
-
-	private static String[] splitter(String value) {
-		int fieldNumber = value.length() / NON_POSITIONAL_STD_LENGHT;
-		int modulo = value.length() % NON_POSITIONAL_STD_LENGHT;
-		String[] out;
-
-		if (modulo == 0) {
-			out = new String[fieldNumber];
-		} else {
-			out = new String[fieldNumber + 1];
-			out[out.length - 1] = value.substring(NON_POSITIONAL_STD_LENGHT * fieldNumber,
-					(NON_POSITIONAL_STD_LENGHT * fieldNumber) + modulo);
-		}
-
-		for (int i = 0; i < fieldNumber; i++) {
-			out[i] = value.substring(NON_POSITIONAL_STD_LENGHT * i,
-					NON_POSITIONAL_STD_LENGHT * i + (NON_POSITIONAL_STD_LENGHT));
-		}
-
-		return out;
 	}
 
 	public static String[] getFormatField(String value, String format) {
@@ -188,18 +169,18 @@ public class IvaFields {
 
 			switch (format.toUpperCase()) {
 			case "AN":
-				formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
+				formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.SXSPACE);
 				break;
 			case "CB":
 				if (fc.checkNonPositionalCB(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 3);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo CASELLA BARRATA");
 				}
 				break;
 			case "CB12":
 				if (fc.checkNonPositionalCB12(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 3);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"Lunghezza del campo non conforme al tipo CASELLA BARRATA 12 VALORI");
@@ -207,14 +188,14 @@ public class IvaFields {
 				break;
 			case "CF":
 				if (fc.checkNonPositionalCF(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo CODICE FISCALE");
 				}
 				break;
 			case "CN":
 				if (fc.checkNonPositionalCN(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"Lunghezza del campo non conforme al tipo CODICE FISCALE NUMERICO");
@@ -222,49 +203,49 @@ public class IvaFields {
 				break;
 			case "PI":
 				if (fc.checkNonPositionalPI(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo PARTITA IVA");
 				}
 				break;
 			case "DA":
 				if (fc.checkNonPositionalDA(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i].substring(4, 8), delta + 4, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i].substring(4, 8), delta + 4, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo DATA ANNO");
 				}
 				break;
 			case "DT":
 				if (fc.checkNonPositionalDT(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo DATA 1880 - OGGI");
 				}
 				break;
 			case "DN":
 				if (fc.checkNonPositionalDN(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo DATA 1980 - 2050");
 				}
 				break;
 			case "D4":
 				if (fc.checkNonPositionalD4(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i].substring(0, 4), delta + 4, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i].substring(0, 4), delta + 4, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo DATA GGMM");
 				}
 				break;
 			case "D6":
 				if (fc.checkNonPositionalD6(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i].substring(2, 8), delta + 2, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i].substring(2, 8), delta + 2, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo DATA MMAAAA");
 				}
 				break;
 			case "NP":
 				if (fc.checkNonPositionalNP(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione CAMPO NUMERICO POSITIVO");
@@ -272,7 +253,7 @@ public class IvaFields {
 				break;
 			case "NU":
 				if (fc.checkNonPositionalNU(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione CAMPO NUMERICO");
@@ -295,7 +276,7 @@ public class IvaFields {
 			case "N15":
 			case "N16":
 				if (fc.checkNonPositionalNX(split[i], format)) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"Lunghezza del campo non conforme al tipo CAMPO NUMERICO MAX 16");
@@ -303,7 +284,7 @@ public class IvaFields {
 				break;
 			case "PC":
 				if (fc.checkNonPositionalPC(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione PERCENTUALE");
@@ -311,31 +292,55 @@ public class IvaFields {
 				break;
 			case "PR":
 				if (fc.checkNonPositionalPR(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo SIGLA PROVINCIALE");
 				}
 				break;
 			case "PN":
 				if (fc.checkNonPositionalPN(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 1);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.SXSPACE);
 				} else {
 					throw new IllegalArgumentException("Lunghezza del campo non conforme al tipo SIGLA PROVINCIALE");
 				}
 				break;
 			case "QU":
 				if (fc.checkNonPositionalQU(split[i])) {
-					formattedString[i] = fm.stringFormatterDelta(split[i], delta, 2);
+					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
 					throw new IllegalArgumentException(
 							"La stringa inserita non è coerente con il tipo di formattazione VALORE DECIMALE ");
 				}
 				break;
+			default:
+				break;
 			}
 		}
 		return formattedString;
 	}
+	
+	private static String[] splitter(String value) {
+		int fieldNumber = value.length() / NON_POSITIONAL_STD_LENGHT;
+		int modulo = value.length() % NON_POSITIONAL_STD_LENGHT;
+		String[] out;
 
+		if (modulo == 0) {
+			out = new String[fieldNumber];
+		} else {
+			out = new String[fieldNumber + 1];
+			out[out.length - 1] = value.substring(NON_POSITIONAL_STD_LENGHT * fieldNumber,
+					(NON_POSITIONAL_STD_LENGHT * fieldNumber) + modulo);
+		}
+
+		for (int i = 0; i < fieldNumber; i++) {
+			out[i] = value.substring(NON_POSITIONAL_STD_LENGHT * i,
+					NON_POSITIONAL_STD_LENGHT * i + (NON_POSITIONAL_STD_LENGHT));
+		}
+
+		return out;
+	}
+
+	/*
 	public static void main(String[] args) {
 
 		String a = "abcdefghijklmnopabcdefgh";
@@ -345,6 +350,6 @@ public class IvaFields {
 		for (int i = 0; i < out.length; i++) {
 			System.out.println(out[i] + "a");
 		}
-
 	}
+	*/
 }

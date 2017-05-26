@@ -16,32 +16,29 @@ public class Formatter {
 	 * IllegalArgumentException("Tipo di formattazzione errato"); } return
 	 * local; }
 	 */
-	public String stringFormatterDelta(String value, int delta, int type) {
+	public String stringFormatterDelta(String value, int delta, FormatType type) {
 		String local = value;
-
-		if (type >= 0 && type < 4) {
-			if (type == 0) { // NO FORMATTAZIONE
+		
+			if (type.equals(FormatType.NOFORMAT)) { // NO FORMATTAZIONE
 				return local;
-			} else if (type == 1) { // sinistra + spazi
+			} else if (type.equals(FormatType.SXSPACE)) { // sinistra + spazi
 				for (int i = 0; i < delta; i++) {
 					local += " ";
 				}
-			} else if (type == 2) { // destra + spazi
+			} else if (type.equals(FormatType.DXSPACE)) { // destra + spazi
 				String prefix = "";
 				for (int i = 0; i < delta; i++) {
 					prefix += " ";
 				}
 				local = prefix + local;
-			} else { // destra + zeri
+			} else if(type.equals(FormatType.DXZERO)) { // destra + zeri
 				String prefix = "";
 				for (int i = 0; i < delta; i++) {
 					prefix += "0";
 				}
 				local = prefix + local;
 			}
-		} else {
-			throw new IllegalArgumentException("Tipo di formattazzione errato");
-		}
+		
 		return local;
 	}
 }
