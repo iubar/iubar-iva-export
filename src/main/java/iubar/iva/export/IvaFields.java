@@ -252,12 +252,7 @@ public class IvaFields {
 				}
 				break;
 			case "NU":
-				if (fc.checkNonPositionalNU(split[i])) {
 					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
-				} else {
-					throw new IllegalArgumentException(
-							"La stringa inserita non è coerente con il tipo di formattazione CAMPO NUMERICO");
-				}
 				break;
 			case "N1":
 			case "N2":
