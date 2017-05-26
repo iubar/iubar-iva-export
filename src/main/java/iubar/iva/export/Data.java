@@ -71,9 +71,9 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new BigDecimal("393273742087"), i);
+		export.writeField("393273742087", i);
 		i++;
-		export.writeField(new BigDecimal("0721805536"), i);
+		export.writeField("0721805536", i);
 		i++;
 		export.writeField("Pesaro e Urbino", i);
 		i++;
@@ -409,7 +409,7 @@ public class Data {
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 12;	//VI inizia a 536 , (547)
 		i++;		//VK 548
-		export.writeField(new BigDecimal("12345678901"), export.getFieldToString(i));
+		export.writeField("12345678901", export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("13"), export.getFieldToString(i));
 		i++;
