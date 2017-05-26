@@ -9,13 +9,6 @@ import java.util.regex.Pattern;
 
 public class Export {
 
-	/* TO-DO
-	*
-	* Classe data
-	* Testing
-	*
-	 */
-
 	private final static String FILE_PATH = "/home/yawn/Desktop/iva_out.txt";
 	private final static String SPECS_PATH = "/home/yawn/temp/iva.cfg";
 
@@ -29,9 +22,12 @@ public class Export {
 	private List<String> fRecords;
 
 	private RandomAccessFile rw;
+	
+	private Pattern nField = Pattern.compile("V[A-Z]([0-9]{6}|[0-9]{5}[A-D])|V1{1}[0-9]{6}");
 
 	private String record;
 	private int last_record;
+	private int next_b_record = 0;
 
 	public String getFieldToString(int field) {
 		if (field > 124 & field < 1153) {
@@ -54,10 +50,9 @@ public class Export {
 			format = split[3];
 		}
 
-		String val = getRightValue(value, format, length);
+		String val = this.getFinalRecord(getRightValue(value, format, length), field, position, length);
 
-		this.fRecords.set(this.last_record,
-				this.getFinalRecord(val, field, position, length));
+		this.fRecords.set(this.last_record, val);
 
 		this.writeOnFile();
 	}
@@ -99,22 +94,43 @@ public class Export {
 	}
 
 	private String getRecordToExamine(int field) {
-		if (field >= 118) { 			//start of record D
-			this.last_record = 2;
-			if (fRecords.size() >= 3) {
-				return fRecords.get(2);
-			}
-		} else if (field >= 14) {	//start of record B
-			this.last_record = 1;
-			if (fRecords.size() >= 2) {
-				return fRecords.get(1);
-			}
+		if (next_b_record > 0 && field > 13 && field < 118) {
+			return getNextBRecord(next_b_record);
 		} else {
-			this.last_record = 0;
-			if (fRecords.size() >= 1) {
-				return fRecords.get(0);
+			if (field > 117) { 			//start of record D
+				this.last_record = 2;
+				this.next_b_record += 1;
+				if (fRecords.size() >= 3) {
+					return fRecords.get(2);
+				}
+			} else if (field > 13) {	//start of record B
+				this.last_record = 1;
+				if (fRecords.size() >= 2) {
+					return fRecords.get(1);
+				}
+			} else {
+				this.last_record = 0;
+				if (fRecords.size() >= 1) {
+					return fRecords.get(0);
+				}
 			}
 		}
+		return "";
+	}
+	
+	private String getNextBRecord(int number) {
+		int counter = 0;
+		for (int i = 4 ; i < this.fRecords.size() ; i++) {
+			if (! this.nField.matcher(this.fRecords.get(i)).find()) {
+				counter++;
+				if (counter == number) {
+					this.last_record = i;
+					return this.fRecords.get(i);
+				}
+			}
+		}
+		this.last_record = this.fRecords.size();
+		this.fRecords.set(this.last_record, "");
 		return "";
 	}
 
@@ -131,6 +147,7 @@ public class Export {
 		String[] val = this.getRightValue(value, format);
 
 		this.record = this.getFinalRecord(field, val);
+
 		if (this.record.length() > 1800) {
 			this.fRecords.set(this.last_record, this.record.substring(0, 1800));
 			this.fRecords.set(this.last_record, this.record.substring(1800) +
@@ -161,24 +178,34 @@ public class Export {
 
 	private String getFinalRecord(String field, String[] value) {
 		int line = N_BEGINNING;
-		int index = 0;
+		int index = -1;
+		int counter = 1;
 		String tmp = null;
 
-		do {
-			if (-1 != this.setNRecord(line)) {
+		if (this.next_b_record > 0) {
+			while (this.setNRecord(line)) {
 				index = getIndexOfLastNField(field, 0);
+				if (index != -1 && counter == this.next_b_record) {
+					break;
+				} else {
+					counter++;
+				}
 				line++;
-			} else {
-				System.out.println("setNRecord(line) == -1");
 			}
+		} else {
+			while (this.setNRecord(line)) {
+				index = getIndexOfLastNField(field, 0);
+				if (index != -1) {
+					break;
+				}
+				line++;
+			}
+		}
 
-		} while ((index == -1) && (this.record != null));
-
-		this.last_record = line;
-
-		if (this.record == null) {
+		if (index == -1) {
 			index = this.getIndexOfPrecedentField(field);
 		} else {
+			this.last_record = line;
 			index += N_LENGTH + 7;	//8 = number of digits of the header(field) - 1
 		}
 
@@ -191,12 +218,12 @@ public class Export {
 				this.record.substring(index);
 	}
 
-	private int setNRecord(int line) {
-		if (line < this.fRecords.size()) {
+	private boolean setNRecord(int line) {
+		if (line < fRecords.size() - 1) {
 			this.record = this.fRecords.get(line);
-			return 0;
+			return true;
 		}
-		return -1;
+		return false;
 	}
 
 	private int getIndexOfLastNField(String field, int fromIndex) {
@@ -217,23 +244,37 @@ public class Export {
 	private int getIndexOfPrecedentField(String field) {
 		int line = N_BEGINNING;
 		int index = 0;
+		int counter = 0;
 		String before_field;
-		do {
-			if (-1 != this.setNRecord(line)) {
-				for (int i = nKeys.indexOf(field) - 1; i > -1; i--) {
-					before_field = nKeys.get(i);
+
+		if (this.next_b_record > 0) {
+			for (int i = nKeys.indexOf(field) - 1; i > -1; i--) {
+				before_field = nKeys.get(i);
+				while (this.setNRecord(line)) {
+					index = getIndexOfLastNField(before_field, 0);
+					if (index != -1 && counter == this.next_b_record) {
+						i = -1;
+						break;
+					} else {
+						counter++;
+					}
+					line++;
+				}
+			}
+		} else {
+			for (int i = nKeys.indexOf(field) - 1; i > -1; i--) {
+				before_field = nKeys.get(i);
+				while (this.setNRecord(line)) {
 					index = getIndexOfLastNField(before_field, 0);
 					if (index != -1) {
 						break;
 					}
+					line++;
 				}
-				line++;
-			} else {
-				System.out.println("setNRecord(line) == -1");
 			}
-		} while ((index == -1) && (this.record != null));
+		}
 
-		if (this.record == null) {
+		if (index == -1) {
 			this.record = "";
 			index = 0;
 			this.last_record = 3;

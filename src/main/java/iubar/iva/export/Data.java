@@ -409,7 +409,7 @@ public class Data {
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 12;	//VI inizia a 536 , (547)
 		i++;		//VK 548
-		export.writeField(new BigDecimal("12345678901"), export.getFieldToString(i));
+		export.writeField("12345678901", export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("13"), export.getFieldToString(i));
 		i++;
