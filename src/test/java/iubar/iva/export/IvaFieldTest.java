@@ -114,15 +114,15 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalDT1() {
-		
+
 		String actual = null;
 
-		actual = IvaFields.getFormatField(new Date(1514678400000L), "DT", 8); //31122017
+		actual = IvaFields.getFormatField(new Date(1514678400000L), "DT", 8); // 31122017
 
 		String expected = "31122017";
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testPositionalDT2() throws IllegalArgumentException {
 
@@ -139,7 +139,7 @@ public class IvaFieldTest {
 		String expected = "00009";
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testPositionalNU2() {
 
@@ -150,7 +150,7 @@ public class IvaFieldTest {
 		String expected = "9.999";
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testPositionalNU3() {
 
@@ -406,7 +406,7 @@ public class IvaFieldTest {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-	
+
 	// controllo funzionamento PI Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalPI2() throws IllegalArgumentException {
@@ -424,7 +424,7 @@ public class IvaFieldTest {
 	// controllo funzionamento DA Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalDA1() {
-		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "DA");//20102008
+		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "DA");// 20102008
 
 		String[] expected = { "            2008" };
 		for (int i = 0; i < actual.length; i++) {
@@ -442,7 +442,7 @@ public class IvaFieldTest {
 	// controllo funzionamento DT Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalDT1() {
-		String[] actual = IvaFields.getFormatField(new Date(961891200000L), "DT"); //25062000
+		String[] actual = IvaFields.getFormatField(new Date(961891200000L), "DT"); // 25062000
 
 		String[] expected = { "        25062000" };
 		for (int i = 0; i < actual.length; i++) {
@@ -474,7 +474,7 @@ public class IvaFieldTest {
 	// controllo funzionamento DN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalDN1() {
-		String[] actual = IvaFields.getFormatField(new Date(961891200000L), "DN"); //25062000
+		String[] actual = IvaFields.getFormatField(new Date(961891200000L), "DN"); // 25062000
 
 		String[] expected = { "        25062000" };
 		for (int i = 0; i < actual.length; i++) {
@@ -506,7 +506,7 @@ public class IvaFieldTest {
 	// controllo funzionamento D4 Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalD41() {
-		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "D4"); //20102008
+		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "D4"); // 20102008
 
 		String[] expected = { "            2010" };
 		for (int i = 0; i < actual.length; i++) {
@@ -524,7 +524,7 @@ public class IvaFieldTest {
 	// controllo funzionamento D6 Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalD61() {
-		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "D6"); //20102008
+		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "D6"); // 20102008
 
 		String[] expected = { "          102008" };
 		for (int i = 0; i < actual.length; i++) {
@@ -549,24 +549,24 @@ public class IvaFieldTest {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-	
+
 	// controllo funzionamento NP Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNP2() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("999999999999999999999999"), "NP");
-		
-		String[] expected = { "999.999.999.999."," 999.999.999.999" };
+
+		String[] expected = { "999.999.999.999.", " 999.999.999.999" };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-	
+
 	// controllo funzionamento NP Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNP3() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("999999999999999999999.999"), "NP");
-		
-		String[] expected = { "999.999.999.999."," 999.999.999,999" };
+
+		String[] expected = { "999.999.999.999.", " 999.999.999,999" };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -600,24 +600,24 @@ public class IvaFieldTest {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-	
+
 	// controllo funzionamento NU Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNU3() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("999999999999999999999999"), "NU");
-		
-		String[] expected = { "999.999.999.999."," 999.999.999.999" };
+
+		String[] expected = { "999.999.999.999.", " 999.999.999.999" };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-	
+
 	// controllo funzionamento NU Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalNU4() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("-999999999999999999999999"), "NU");
-		
-		String[] expected = { "-999.999.999.999",".999.999.999.999" };
+
+		String[] expected = { "-999.999.999.999", ".999.999.999.999" };
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -757,7 +757,7 @@ public class IvaFieldTest {
 
 		IvaFields.getFormatField(new BigDecimal("100.9"), "PC");
 	}
-	
+
 	// controllo funzionamento PR Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalPR1() {
@@ -892,7 +892,7 @@ public class IvaFieldTest {
 			assertEquals(expected[i], actual[i]);
 		}
 	}
-	
+
 	@Test
 	public void testBuildDate1() {
 		String actual = IvaFields.getFormatField(new Date(1224460800000L), "DT", 8);// 20/10/2008
@@ -916,6 +916,5 @@ public class IvaFieldTest {
 		String[] expected = { "            2008" };
 		assertEquals(expected[0], actual[0]);
 	}
-	
 
 }

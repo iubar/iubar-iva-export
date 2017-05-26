@@ -69,8 +69,7 @@ public class FormatChecker {
 
 	public boolean checkNonPositionalDT(String value) {
 		if (this.checkNonPositionalDA(value)) {
-			return this.dateRange(value, 1880, Year.now()
-					.getValue());
+			return this.dateRange(value, 1880, Year.now().getValue());
 		}
 		return false;
 	}
@@ -105,8 +104,9 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalPC(String value) {
-		
-		return Double.parseDouble(value.replace(',', '.')) <= 100 && (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
+
+		return Double.parseDouble(value.replace(',', '.')) <= 100
+				&& (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
 	}
 
 	public boolean checkNonPositionalPR(String value) {
@@ -120,28 +120,10 @@ public class FormatChecker {
 	public boolean checkNonPositionalQU(String value) {
 		return (value.matches("[0-9]") || value.matches("[0-9]+[,.]?[0-9]{1,5}"));
 	}
-/*
-	private boolean dateFormatCheck(String date) {
-		if (date.length() == 8 || date.length() == 4) {
-			String s1 = (String) date.subSequence(0, 2);
-			String s2 = (String) date.subSequence(2, 4);
-
-			if (Integer.parseInt(s1) > 0 && Integer.parseInt(s1) < 32) {
-				return (Integer.parseInt(s2) > 0 && Integer.parseInt(s2) < 13);
-			} else {
-				return false;
-			}
-		} else if (date.length() == 6) {
-			String s1 = (String) date.subSequence(0, 2);
-
-			return (Integer.parseInt(s1) > 0 && Integer.parseInt(s1) < 13);
-		}
-		return false;
-	}*/
 
 	private boolean dateRange(String date, int start, int end) {
 		Integer year = Integer.parseInt((String) date.subSequence(4, 8));
-		
+
 		return (year > start && year < end);
 	}
 }
