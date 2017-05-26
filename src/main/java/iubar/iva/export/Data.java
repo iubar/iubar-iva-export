@@ -171,7 +171,7 @@ public class Data {
 		i++;
 		export.writeField(new Date(0L), i);
 		i++;
-		export.writeField(new BigDecimal("0"), i);
+		export.writeField("", i);
 		i++;
 		export.writeField("", i);
 		i++;

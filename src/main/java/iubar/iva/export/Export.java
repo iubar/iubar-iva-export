@@ -50,11 +50,18 @@ public class Export {
 			format = split[3];
 		}
 
-		String val = this.getFinalRecord(getRightValue(value, format, length), field, position, length);
-
-		this.fRecords.set(this.last_record, val);
-
+		this.record = this.getFinalRecord(getRightValue(value, format, length), field, position, length);
+		this.fixFRecordSize();
+		this.fRecords.set(this.last_record, this.record);
 		this.writeOnFile();
+	}
+
+	private void fixFRecordSize() {
+		if (this.fRecords.size() - 1 < this.last_record) {
+			for (int i = this.fRecords.size() - 1 ; i < this.last_record ; i++) {
+				this.fRecords.add("");
+			}
+		}
 	}
 
 	private <T> String getRightValue(T value, String format, int length) {
@@ -71,25 +78,28 @@ public class Export {
 
 	private String getFinalRecord(String value, int field, int position, int length) {
 		this.setRecordToExamine(field);
-		if (this.record.length() > position && this.record.length() < position + length) {
+		if (this.record == null) {
+			this.record = "";
+		}
+		if (this.record.length() > position - 1 && this.record.length() < position + length - 1) {
 			return this.record.substring(0, position - 1) +
 					value +
 					this.record.substring(position - 1);
-		} else if (this.record.length() >= position + length) {
+		} else if (this.record.length() >= position + length - 1) {
 			return this.record.substring(0, position - 1) +
 					value +
-					this.record.substring(position + length);
+					this.record.substring(position + length - 1);
 		} else {
-			String padding = null;
-			for (int i = 0 ; i < position ; i++) {
+			String padding = "";
+			for (int i = 0 ; i < position - 1; i++) {
 				padding += " ";
 			}
 			if (this.record.length() > 0) {
-				return record.substring(0, this.record.length() - 1) +
+				return this.record.substring(0, this.record.length() - 1) +
 						padding +
 						value;
 			} else {
-				return record.substring(0, this.record.length()) +
+				return this.record.substring(0, this.record.length()) +
 						padding +
 						value;
 			}
@@ -116,14 +126,16 @@ public class Export {
 				if (fRecords.size() >= 2) {
 					this.record = fRecords.get(1);
 				}
-			} else{
+			} else if (field > 0) {
 				this.last_record = 0;
 				if (fRecords.size() >= 1) {
 					this.record = fRecords.get(0);
 				}
+			} else {
+				this.record = "";
 			}
 		}
-		this.record = "";
+
 	}
 	
 	private String getNextBRecord(int number) {
@@ -152,12 +164,12 @@ public class Export {
 			format = split[1];
 		}
 
-		String[] val = this.getRightValue(value, format);
-
-		this.record = this.getFinalRecord(field, val);
+		this.record = this.getFinalRecord(field, this.getRightValue(value, format));
 
 		if (this.record.length() > 1889) {
-			this.fRecords.set(this.last_record, this.record.substring(0, 1890));
+			this.last_record++;
+			this.fixFRecordSize();
+			this.fRecords.set(this.last_record - 1, this.record.substring(0, 1890));
 			this.fRecords.set(this.last_record, this.record.substring(1890) +
 					this.fRecords.get(this.last_record));
 		} else {
@@ -179,8 +191,10 @@ public class Export {
 			return IvaFields.getFormatField((String) value, format);
 		} else if (value instanceof BigDecimal) {
 			return IvaFields.getFormatField((BigDecimal) value, format);
-		} else {
+		} else if (value instanceof Date){
 			return IvaFields.getFormatField((Date) value, format);
+		} else {
+			return IvaFields.getFormatField((Boolean) value, format);
 		}
 	}
 
@@ -188,7 +202,7 @@ public class Export {
 		int line = N_BEGINNING;
 		int index = -1;
 		int counter = 1;
-		String tmp = null;
+		String tmp = "";
 
 		if (this.next_b_record > 0) {
 			while (this.setNRecord(line)) {
@@ -297,7 +311,6 @@ public class Export {
 			this.rw.seek(0);
 			for (String line : fRecords) {
 				this.rw.writeBytes(line);
-				this.rw.writeBytes("\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
