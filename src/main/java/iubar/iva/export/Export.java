@@ -13,7 +13,7 @@ public class Export {
 	private final static String SPECS_PATH = "/home/yawn/temp/iva.cfg";
 
 	private final static int N_LENGTH = 16;
-	private final static int N_BEGINNING = 3;
+	private final static int N_BEGINNING = 2;
 
 	private Map<String, String> pSpecs;
 	private Map<String, String> nSpecs;
@@ -27,7 +27,7 @@ public class Export {
 
 	private String record;
 	private int last_record;
-	private int next_b_record = 0;
+	private int next_b_record = -1;
 
 	public String getFieldToString(int field) {
 		if (field > 124 & field < 1153) {
@@ -70,11 +70,15 @@ public class Export {
 	}
 
 	private String getFinalRecord(String value, int field, int position, int length) {
-		this.record = this.getRecordToExamine(field);
-		if (this.record.length() >= position + length) {
-			return record.substring(0, position - 1) +
+		this.setRecordToExamine(field);
+		if (this.record.length() > position && this.record.length() < position + length) {
+			return this.record.substring(0, position - 1) +
 					value +
-					record.substring(position - 1);
+					this.record.substring(position - 1);
+		} else if (this.record.length() >= position + length) {
+			return this.record.substring(0, position - 1) +
+					value +
+					this.record.substring(position + length);
 		} else {
 			String padding = null;
 			for (int i = 0 ; i < position ; i++) {
@@ -89,38 +93,42 @@ public class Export {
 						padding +
 						value;
 			}
-
 		}
 	}
 
-	private String getRecordToExamine(int field) {
-		if (next_b_record > 0 && field > 13 && field < 118) {
-			return getNextBRecord(next_b_record);
+	private void setRecordToExamine(int field) {
+		if (next_b_record > -1 && field > 13 && field < 118) {
+			if (field == 117) {
+				this.next_b_record++;
+			}
+			this.record = getNextBRecord(next_b_record);
 		} else {
 			if (field > 117) { 			//start of record D
 				this.last_record = 2;
-				this.next_b_record += 1;
 				if (fRecords.size() >= 3) {
-					return fRecords.get(2);
+					this.record = fRecords.get(2);
 				}
 			} else if (field > 13) {	//start of record B
+				if (field == 117) {
+					this.next_b_record++;
+				}
 				this.last_record = 1;
 				if (fRecords.size() >= 2) {
-					return fRecords.get(1);
+					this.record = fRecords.get(1);
 				}
-			} else {
+			} else{
 				this.last_record = 0;
 				if (fRecords.size() >= 1) {
-					return fRecords.get(0);
+					this.record = fRecords.get(0);
 				}
 			}
 		}
-		return "";
+		this.record = "";
 	}
 	
 	private String getNextBRecord(int number) {
 		int counter = 0;
-		for (int i = 4 ; i < this.fRecords.size() ; i++) {
+		for (int i = 3 ; i < this.fRecords.size() ; i++) {
 			if (! this.nField.matcher(this.fRecords.get(i)).find()) {
 				counter++;
 				if (counter == number) {
@@ -148,9 +156,9 @@ public class Export {
 
 		this.record = this.getFinalRecord(field, val);
 
-		if (this.record.length() > 1800) {
-			this.fRecords.set(this.last_record, this.record.substring(0, 1800));
-			this.fRecords.set(this.last_record, this.record.substring(1800) +
+		if (this.record.length() > 1889) {
+			this.fRecords.set(this.last_record, this.record.substring(0, 1890));
+			this.fRecords.set(this.last_record, this.record.substring(1890) +
 					this.fRecords.get(this.last_record));
 		} else {
 			this.fRecords.set(this.last_record, this.record);
@@ -275,9 +283,8 @@ public class Export {
 		}
 
 		if (index == -1) {
-			this.record = "";
-			index = 0;
-			this.last_record = 3;
+			index = this.record.length() - 1;
+			this.last_record = 2;
 		} else {
 			index += N_LENGTH + 7;
 			this.last_record = line;
@@ -311,7 +318,7 @@ public class Export {
 		try {
 			rw = new RandomAccessFile(SPECS_PATH, "r");
 			Pattern positional = Pattern.compile("[0-9]+");
-			Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}");
+			Pattern nonPositional = Pattern.compile("V[A-Z][0-9]{6}");
 			String line;
 
 			while (null != (line = rw.readLine())) {
