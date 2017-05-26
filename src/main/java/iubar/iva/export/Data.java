@@ -169,7 +169,7 @@ public class Data {
 		i++;
 		export.writeField(new BigDecimal("0"), i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -179,7 +179,7 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -195,11 +195,11 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField(Boolean.FALSE, i);
 		i++;
@@ -377,7 +377,7 @@ public class Data {
 		i++;
 		export.writeField(Boolean.TRUE, export.getFieldToString(i));
 		i += 4;		//389
-		i++;		//Dopo di questa inizia VG, VH inizia a 446
+		i++;		//Dopo di questa inizia VG
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i += 55;	//445
 		i++; 		//Inizio VH

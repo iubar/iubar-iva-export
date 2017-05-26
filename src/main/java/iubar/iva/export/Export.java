@@ -254,7 +254,7 @@ public class Export {
 		if (index == -1) {
 			return -1;
 		} else {
-			response = getIndexOfLastNField(field, this.record.indexOf(field, index));
+			response = getIndexOfLastNField(field, index + 1);
 			if (response == -1) {
 				return index;
 			} else {

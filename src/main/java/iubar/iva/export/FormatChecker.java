@@ -6,12 +6,12 @@ import java.time.Year;
 public class FormatChecker {
 
 	public boolean checkPositionalCF(String value) {
-		return (value.length() == 0 || value.length() == 16 || value.length() == 11)
+		return (value.length() == 0 || value.length() == 16 || value.length() == 11 || value.equals("0"))
 				&& (value.matches("^[a-zA-Z0-9]*$"));
 	}
 
 	public boolean checkPositionalCN(String value) {
-		return ((value.length() == 11) && (value.matches("[0-9]+")) || (value.length() == 0));
+		return ((value.length() == 11) && (value.matches("[0-9]+")) || (value.length() == 0) || (value.equals("0")));
 	}
 
 	public boolean checkPositionalPI(String value) {

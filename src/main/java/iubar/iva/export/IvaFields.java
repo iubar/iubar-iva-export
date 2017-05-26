@@ -220,7 +220,7 @@ public class IvaFields {
 				if (fc.checkNonPositionalDT(split[i])) {
 					formattedString[i] = fm.stringFormatterDelta(split[i], delta, FormatType.DXSPACE);
 				} else {
-					throw new IllegalArgumentException("La stringa non e' una DATA 1880 - OGGI" + "\nValore: " + value);
+					throw new IllegalArgumentException("La data deve essere tra 1880 - OGGI" + "\nValore: " + value);
 				}
 				break;
 			case "DN":
