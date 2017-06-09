@@ -5,16 +5,13 @@ import java.time.Year;
 
 public class FormatChecker {
 
-	private static final String cfPattern = "[a-zA-Z]{6}[0-9]{2}[a-zA-Z]{1}[0-9]{2}[a-zA-Z]{1}[0-9]{3}[a-zA-Z]{1}";
-	private static final String cnPattern = "[0-9]{11}";
-	private static final String pnPattern = "[a-zA-Z0]{2}";
-
 	public boolean checkPositionalCF(String value) {
-		return ((value.length() == 0 || value.length() == 16 || value.length() == 11) && ("".equals(value) || value.matches(cfPattern) || value.matches(cnPattern)));
+		return (value.length() == 0 || value.length() == 16 || value.length() == 11 || value.equals("0"))
+				&& (value.matches("^[a-zA-Z0-9]*$"));
 	}
 
 	public boolean checkPositionalCN(String value) {
-		return ((value.length() == 0 || value.length() == 11) && (value.matches(cnPattern) || "".equals(value)));
+		return ((value.length() == 11) && (value.matches("[0-9]+")) || (value.length() == 0) || (value.equals("0")));
 	}
 
 	public boolean checkPositionalPI(String value) {
@@ -30,11 +27,13 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalPN(String value) {
-		return ((value.length() == 0 || value.length() == 2) && (value.matches(pnPattern) || "".equals(value)));
+		return (value.length() == 0 || value.length() == 2)
+				&& (value.matches("[a-zA-Z]+") || value.matches("[0]{2}") || "".equals(value));
 	}
 
 	public boolean checkPositionalPR(String value) {
-		return ((value.length() == 0 || value.length() == 2) && ((value.matches("[a-zA-Z]{2}") && !"EE".equals(value) && !"00".equals(value)) || "".equals(value)));
+		return (value.length() == 0 || value.length() == 2)
+				&& (value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value));
 	}
 
 	public boolean checkPositionalCB(String value) {
