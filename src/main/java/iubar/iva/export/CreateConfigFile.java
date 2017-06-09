@@ -8,7 +8,7 @@ import java.io.*;
 
 public final class CreateConfigFile {
 
-	private static final String PDF_PATH = "C:\\Users\\Utente\\Desktop\\Specifiche_Iva_2017.pdf";
+	private static final String PDF_PATH = "C:\\Users\\Utente\\Desktop\\Specifiche_Iva_2017 Origin.pdf";
 	private static final String FILE_PATH = "C:\\Users\\Utente\\Desktop\\iva.cfg";
 
 	private PrintWriter writer;
