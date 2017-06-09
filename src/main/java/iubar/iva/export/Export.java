@@ -331,7 +331,7 @@ public class Export {
 		try {
 			rw = new RandomAccessFile(SPECS_PATH, "r");
 			Pattern positional = Pattern.compile("[0-9]+");
-			Pattern nonPositional = Pattern.compile("V[A-Z][0-9]{6}");
+			Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}|V1{1}[0-9]{6}|V[A-Z]{1}[0-9]{5}[A-D]");
 			String line;
 
 			while (null != (line = rw.readLine())) {

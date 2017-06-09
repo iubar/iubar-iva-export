@@ -7,8 +7,9 @@ public class Data {
 
     public static void main(String[] args) {
 	    Export export = new Export();
+	    ///
+	    ///
 	    int i = 1;
-        //i++;
 		export.writeField("A", i);
 		i++;
 		export.writeField("", i);
@@ -169,7 +170,7 @@ public class Data {
 		i++;
 		export.writeField(new BigDecimal("0"), i);
 		i++;
-		export.writeField(new Date(958262400L), i);
+		export.writeField(new Date(0L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -179,7 +180,7 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Date(958262400L), i);
+		export.writeField(new Date(0L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -195,11 +196,11 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Date(958262400L), i);
+		export.writeField(new Date(0L), i);
 		i++;
 		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Date(958262400L), i);
+		export.writeField(new Date(0L), i);
 		i++;
 		export.writeField(Boolean.FALSE, i);
 		i++;
@@ -363,7 +364,7 @@ public class Data {
 		i++;
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 24;	//377
+		i += 23;	//377
 		i++;
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -376,39 +377,51 @@ public class Data {
 		i++;
 		i++;
 		export.writeField(Boolean.TRUE, export.getFieldToString(i));
-		i += 4;		//389
+		i += 4;		//388
 		i++;		//Dopo di questa inizia VG
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 55;	//445
+		i += 55;	//444
 		i++; 		//Inizio VH
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;		//VH
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
+		i += 2;
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
-		i += 77;	//VJ inizia a 497 , (534)
+		i += 2;
+		i += 53;	//VJ inizia a 497 , (533)
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 12;	//VI inizia a 536 , (547)
-		i++;		//VK 548
+		i += 12;	//VI inizia a 536 , (546)
+		i++;		//VK 547
 		export.writeField("12345678901", export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("13"), export.getFieldToString(i));
@@ -427,11 +440,11 @@ public class Data {
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i++;		//557
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		i += 9;		//(566)
-        i++;		//567
+		i += 9;		//(565)
+        i++;		//566
         export.writeField(Boolean.TRUE, export.getFieldToString(i));
-        i += 20;	//VN inizia a 568 , (587)
-        i++;		//VL (588)
+        i += 20;	//VN inizia a 567 , (586)
+        i++;		//VL (587)
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
         i++;
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -448,14 +461,14 @@ public class Data {
         i++;
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
         i += 16;
-        i++;		//Dopo inizia VX
+        i++;		//V1, Dopo inizia VX
         export.writeField("VAVCVDVEVFVHVJVKVLVX", export.getFieldToString(i));
         i += 15;
         i++;
         export.writeField(Boolean.TRUE, export.getFieldToString(i));
-        i += 3;		//Dopo inizia V0, (641)
-        i += 117;	//758
-        i++;
+        i += 3;		//Dopo inizia V0, (640)
+        i += 117;	//757
+        i++;		//VT 758
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
         i++;
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
@@ -463,9 +476,9 @@ public class Data {
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
         i++;
         export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-        i += 46;
-        i += 222;
-		i++;
+        i += 44;
+        i += 222; 	//1027
+		i++;		//1028
 		export.writeField("", export.getFieldToString(i));
 		i++;
 		export.writeField("", i - 1152 + 124);
