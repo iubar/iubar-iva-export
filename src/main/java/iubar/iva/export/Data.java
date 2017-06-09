@@ -170,7 +170,7 @@ public class Data {
 		i++;
 		export.writeField(new BigDecimal("0"), i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -180,7 +180,7 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField("", i);
 		i++;
@@ -196,11 +196,11 @@ public class Data {
 		i++;
 		export.writeField("", i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField(Boolean.FALSE, i);
 		i++;
-		export.writeField(new Date(0L), i);
+		export.writeField(new Date(958262400L), i);
 		i++;
 		export.writeField(Boolean.FALSE, i);
 		i++;
@@ -264,7 +264,7 @@ public class Data {
 		i++;
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		i++;
-		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+		export.writeField("12345678910", export.getFieldToString(i));
 		i++;
 		export.writeField("1", export.getFieldToString(i));
 		i++;
@@ -273,7 +273,7 @@ public class Data {
 		i++;
 		export.writeField("", export.getFieldToString(i));
 		i++;
-		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
+		export.writeField("12345678910", export.getFieldToString(i));
 		i++;
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i++;
