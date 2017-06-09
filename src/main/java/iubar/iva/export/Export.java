@@ -81,7 +81,7 @@ public class Export {
 		if (this.record == null) {
 			this.record = "";
 		}
-		if (this.record.length() > position - 1 && this.record.length() < position + length - 1) {
+		if (this.record.length() >= position - 1 && this.record.length() < position + length - 1) {
 			return this.record.substring(0, position - 1) +
 					value +
 					this.record.substring(position - 1);
@@ -306,7 +306,7 @@ public class Export {
 		return index;
 	}
 
-	private void writeOnFile() {
+	public void writeOnFile() {
 		try {
 			this.rw.seek(0);
 			for (String line : fRecords) {
