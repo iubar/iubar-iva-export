@@ -7,7 +7,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import java.io.*;
 
 public final class CreateConfigFile {
-	
+
 	private static final String PDF_PATH = "/home/yawn/temp/SpecificheIva2017";
 	private static final String FILE_PATH = "/home/yawn/temp/iva.cfg";
 
