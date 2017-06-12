@@ -391,7 +391,8 @@ public class Data {
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
 		////////////////////////////////////////////////////////////////////
 		i += 55;	//444
-		i++; 		//Inizio VH
+		///////////////////////////////////////////////////////////////////
+		i++; 		//Inizio VH (445)
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i += 2;
 		i++;
@@ -428,10 +429,11 @@ public class Data {
 		export.writeField(new BigDecimal("1"), export.getFieldToString(i));
 		i += 2;
 		i += 15;	//Dopo inizio VJ (495)
-		i += 38;	//
+		////////////////////////////////////////////////////////////////////
+		i += 38;	
 		i++;		//Dopo inizio VI (534)
 		export.writeField(new BigDecimal("0"), export.getFieldToString(i));
-		
+		////////////////////////////////////////////////////////////////////
 		i += 12;	//VI inizia a 536 , (546)
 		i++;		//VK 547
 		export.writeField("12345678901", export.getFieldToString(i));
@@ -512,6 +514,5 @@ public class Data {
 		export.writeField("A", i - 1152 + 124);
 		i++;
 		export.writeField("\r\n", i - 1152 + 124);
-		export.writeOnFile();
     }
 }

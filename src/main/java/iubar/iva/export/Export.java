@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 
 public class Export {
 
-	private final static String FILE_PATH = "/home/yawn/Desktop/iva_out.txt";
-	private final static String SPECS_PATH = "/home/yawn/temp/iva.cfg";
+	private final static String FILE_PATH = "C:\\Users\\Utente\\Desktop\\iva_out.txt";
+	private final static String SPECS_PATH = "C:\\Users\\Utente\\Desktop\\iva.cfg";
 
 	private final static int N_LENGTH = 16;
 	private final static int N_BEGINNING = 2;
