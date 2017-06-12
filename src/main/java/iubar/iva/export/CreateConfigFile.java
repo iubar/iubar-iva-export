@@ -15,7 +15,7 @@ public final class CreateConfigFile {
 			"Iva" +
 			System.getProperty("file.separator");
 
-	private static final String PDF_PATH = FOLDER_PATH + "SpecificheIva2017";
+	private static final String PDF_PATH = FOLDER_PATH + "SpecificheIva2017.pdf";
 	private static final String FILE_PATH = FOLDER_PATH + "iva.cfg";
 
 	private PrintWriter writer;
