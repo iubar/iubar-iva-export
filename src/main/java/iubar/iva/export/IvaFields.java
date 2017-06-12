@@ -323,10 +323,17 @@ public class IvaFields {
 	}
 
 	private static String[] splitter(String value) {
-		int fieldNumber = value.length() / NON_POSITIONAL_STD_LENGHT;
+		
+		if(value.length() == 0) {
+			value = "                ";
+		}
+		
+		int fieldNumber = value.length() / NON_POSITIONAL_STD_LENGHT; 
 		int modulo = value.length() % NON_POSITIONAL_STD_LENGHT;
 		String[] out;
-
+		
+		
+		
 		if (modulo == 0) {
 			out = new String[fieldNumber];
 		} else {
@@ -339,7 +346,7 @@ public class IvaFields {
 			out[i] = value.substring(NON_POSITIONAL_STD_LENGHT * i,
 					NON_POSITIONAL_STD_LENGHT * i + (NON_POSITIONAL_STD_LENGHT));
 		}
-
+		
 		return out;
 	}
 
