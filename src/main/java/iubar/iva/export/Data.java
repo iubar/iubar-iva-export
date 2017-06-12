@@ -500,6 +500,5 @@ public class Data {
 		export.writeField("A", i - 1152 + 124);
 		i++;
 		export.writeField("\r\n", i - 1152 + 124);
-		export.writeOnFile();
     }
 }
