@@ -39,8 +39,7 @@ public class NonPositionalExport {
         }
 
         if (index == -1) {
-            index = this.getIndexOfPrecedentField(field,
-                    PositionalExport.next_b_record);
+            index = this.getIndexOfPrecedentField(field);
         } else {
             index += FIELD_LENGHT + KEY_LENGHT;
         }
@@ -90,7 +89,7 @@ public class NonPositionalExport {
         }
     }
 
-    private int getIndexOfPrecedentField(String field, int fromIndex) {
+    private int getIndexOfPrecedentField(String field) {
         String precedent_field;
         int index = -1;
         int frecord_index = 0;
