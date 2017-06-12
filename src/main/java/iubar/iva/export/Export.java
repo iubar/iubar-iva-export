@@ -77,9 +77,7 @@ public class Export {
 		}
 
 		String[] val = NonPositionalExport.getRightValue(value, format);
-		if (val.length == 0) {
-			val = new String[]{"                "};
-		}
+		
 		String finalRecord = n_pos_export.getFinalRecord(field, val);
 
 		if (finalRecord.length() > 1889) {

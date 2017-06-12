@@ -314,7 +314,12 @@ public class IvaFields {
 				break;
 			}
 		}
-		return formattedString;
+		
+		if(formattedString.length == 0){
+			formattedString[0] = "";
+		}
+		
+		return formattedString;	
 	}
 
 	private static String[] splitter(String value) {
