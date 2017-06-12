@@ -8,8 +8,15 @@ import java.util.regex.Pattern;
 
 public class Export {
 
-	private final static String FILE_PATH = "/home/yawn/Desktop/iva_out.txt";
-	private final static String SPECS_PATH = "/home/yawn/temp/iva.cfg";
+	private static final String FOLDER_PATH = System.getProperty("user.home") +
+			System.getProperty("file.separator") +
+			"Desktop" +
+			System.getProperty("file.separator") +
+			"Iva" +
+			System.getProperty("file.separator");
+
+	private static final String FILE_PATH = FOLDER_PATH + "iva_out.txt";
+	private static final String SPECS_PATH = FOLDER_PATH + "iva.cfg";
 
 	private PositionalExport pos_export;
 	private NonPositionalExport n_pos_export;

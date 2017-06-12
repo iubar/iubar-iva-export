@@ -22,13 +22,15 @@ public class CheckFile {
         }
 
         line = this.file.get(2);
-        String[] lines = line.split("\\S+");
+        String[] lines = line.split("V[A-Z]{1}[0-9]{6}|V1{1}[0-9]{6}|V[A-Z]{1}[0-9]{5}[A-D]");
         for(String aLine : lines) {
             System.out.println(aLine + " - " + aLine.length());
         }
     }
 
     public static void main(String[] args) {
+        //CheckFile a = new CheckFile();
+        System.out.println(System.getProperty("user.home") + System.getProperty("file.separator"));
 
     }
 
