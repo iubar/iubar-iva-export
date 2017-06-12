@@ -314,22 +314,18 @@ public class IvaFields {
 				break;
 			}
 		}
-		
-		if(formattedString.length == 0){
-			formattedString[0] = "";
-		}
-		
+				
 		return formattedString;	
 	}
 
 	private static String[] splitter(String value) {
-		
-		if(value.length() == 0) {
-			value = "                ";
+		String tmp = value;
+		if(tmp.length() == 0) {
+			tmp = "                ";
 		}
 		
-		int fieldNumber = value.length() / NON_POSITIONAL_STD_LENGHT; 
-		int modulo = value.length() % NON_POSITIONAL_STD_LENGHT;
+		int fieldNumber = tmp.length() / NON_POSITIONAL_STD_LENGHT; 
+		int modulo = tmp.length() % NON_POSITIONAL_STD_LENGHT;
 		String[] out;
 		
 		
@@ -338,20 +334,15 @@ public class IvaFields {
 			out = new String[fieldNumber];
 		} else {
 			out = new String[fieldNumber + 1];
-			out[out.length - 1] = value.substring(NON_POSITIONAL_STD_LENGHT * fieldNumber,
+			out[out.length - 1] = tmp.substring(NON_POSITIONAL_STD_LENGHT * fieldNumber,
 					(NON_POSITIONAL_STD_LENGHT * fieldNumber) + modulo);
 		}
 
 		for (int i = 0; i < fieldNumber; i++) {
-			out[i] = value.substring(NON_POSITIONAL_STD_LENGHT * i,
+			out[i] = tmp.substring(NON_POSITIONAL_STD_LENGHT * i,
 					NON_POSITIONAL_STD_LENGHT * i + (NON_POSITIONAL_STD_LENGHT));
 		}
 		
 		return out;
 	}
-
-	 public static void main(String[] args) {
-		 String a = new String("");
-		 System.out.println(a.length()); 
-	 }
 }
