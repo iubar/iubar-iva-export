@@ -1,7 +1,7 @@
 package iubar.iva.export;
 
-//import java.util.Calendar;
-import java.time.Year;
+import java.util.Calendar;
+//import java.time.Year;
 
 public class FormatChecker {
 
@@ -70,7 +70,7 @@ public class FormatChecker {
 
 	public boolean checkNonPositionalDT(String value) {
 		if (this.checkNonPositionalDA(value)) {
-			return this.dateRange(value, 1880, Year.now().getValue());
+			return this.dateRange(value, 1880, /*Year.now().getValue()*/Calendar.getInstance().get(Calendar.YEAR));
 		}
 		return false;
 	}
