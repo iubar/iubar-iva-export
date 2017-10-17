@@ -1,17 +1,20 @@
 package iubar.iva.export;
 
-//import java.util.Calendar;
-import java.time.Year;
+import java.util.Calendar;
+//import java.time.Year;
 
 public class FormatChecker {
 
+	private static final String cfPattern = "[a-zA-Z]{6}[0-9]{2}[a-zA-Z]{1}[0-9]{2}[a-zA-Z]{1}[0-9]{3}[a-zA-Z]{1}";
+	private static final String cnPattern = "[0-9]{11}";
+	private static final String pnPattern = "[a-zA-Z0]{2}";
+
 	public boolean checkPositionalCF(String value) {
-		return (value.length() == 0 || value.length() == 16 || value.length() == 11)
-				&& (value.matches("^[a-zA-Z0-9]*$"));
+		return ((value.length() == 0 || value.length() == 16 || value.length() == 11) && ("".equals(value) || value.matches(cfPattern) || value.matches(cnPattern)));
 	}
 
 	public boolean checkPositionalCN(String value) {
-		return (value.length() == 1 || value.length() == 11) && (value.matches("[0-9]+"));
+		return ((value.length() == 0 || value.length() == 11) && (value.matches(cnPattern) || "".equals(value)));
 	}
 
 	public boolean checkPositionalPI(String value) {
@@ -19,21 +22,19 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalDT(String value) {
-		return (value.length() == 0 || value.length() == 8) && (value.matches("[0-9]+") && dateFormatCheck(value));
+		return (value.length() == 0 || value.length() == 8);
 	}
 
 	public boolean checkPositionalNU(String value) {
-		return (value.indexOf("-") == -1) && (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+"));
+		return (value.indexOf("-") == -1);
 	}
 
 	public boolean checkPositionalPN(String value) {
-		return (value.length() == 0 || value.length() == 2)
-				&& (value.matches("[a-zA-Z]+") || value.matches("[0]{2}") || "".equals(value));
+		return ((value.length() == 0 || value.length() == 2) && (value.matches(pnPattern) || "".equals(value)));
 	}
 
 	public boolean checkPositionalPR(String value) {
-		return (value.length() == 0 || value.length() == 2)
-				&& (value.matches("[a-zA-Z]+") && !"EE".equals(value) && !"00".equals(value));
+		return ((value.length() == 0 || value.length() == 2) && ((value.matches("[a-zA-Z]{2}") && !"EE".equals(value) && !"00".equals(value)) || "".equals(value)));
 	}
 
 	public boolean checkPositionalCB(String value) {
@@ -69,8 +70,7 @@ public class FormatChecker {
 
 	public boolean checkNonPositionalDT(String value) {
 		if (this.checkNonPositionalDA(value)) {
-			return this.dateRange(value, 1880, Year.now()
-					.getValue()/* Calendar.getInstance().get(Calendar.YEAR) */);
+			return this.dateRange(value, 1880, /*Year.now().getValue()*/Calendar.getInstance().get(Calendar.YEAR));
 		}
 		return false;
 	}
@@ -95,8 +95,7 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalNU(String value) {
-		return ((value.matches("[0-9]+") || value.matches("[-]{1}[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+")
-				|| value.matches("[-]{1}[0-9]+[,.]?[0-9]+")));
+		return true;
 	}
 
 	public boolean checkNonPositionalNX(String value, String format) {
@@ -106,7 +105,9 @@ public class FormatChecker {
 	}
 
 	public boolean checkNonPositionalPC(String value) {
-		return Double.parseDouble(value) <= 100 && (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
+
+		return Double.parseDouble(value.replace(',', '.')) <= 100
+				&& (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
 	}
 
 	public boolean checkNonPositionalPR(String value) {
@@ -121,27 +122,9 @@ public class FormatChecker {
 		return (value.matches("[0-9]") || value.matches("[0-9]+[,.]?[0-9]{1,5}"));
 	}
 
-	private boolean dateFormatCheck(String date) {
-		if (date.length() == 8 || date.length() == 4) {
-			String s1 = (String) date.subSequence(0, 2);
-			String s2 = (String) date.subSequence(2, 4);
-
-			if (Integer.parseInt(s1) > 0 && Integer.parseInt(s1) < 32) {
-				return (Integer.parseInt(s2) > 0 && Integer.parseInt(s2) < 13);
-			} else {
-				return false;
-			}
-		} else if (date.length() == 6) {
-			String s1 = (String) date.subSequence(0, 2);
-
-			return (Integer.parseInt(s1) > 0 && Integer.parseInt(s1) < 13);
-		}
-		return false;
-	}
-
 	private boolean dateRange(String date, int start, int end) {
 		Integer year = Integer.parseInt((String) date.subSequence(4, 8));
-		
+
 		return (year > start && year < end);
 	}
 }

@@ -2,25 +2,24 @@ package iubar.iva.export;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Export {
 
-	/* TO-DO
-	*
-	* Classe data
-	* Testing
-	*
-	 */
+	private static final String FOLDER_PATH = System.getProperty("user.home") +
+			System.getProperty("file.separator") +
+			"Desktop" +
+			System.getProperty("file.separator") +
+			"Iva" +
+			System.getProperty("file.separator");
 
-	private final static String FILE_PATH = "/home/yawn/Desktop/iva_out.txt";
-	private final static String SPECS_PATH = "/home/yawn/temp/iva.cfg";
+	private static final String FILE_PATH = FOLDER_PATH + "iva_out.txt";
+	private static final String SPECS_PATH = FOLDER_PATH + "iva.cfg";
 
-	private final static int N_LENGTH = 16;
-	private final static int N_BEGINNING = 3;
+	private PositionalExport pos_export;
+	private NonPositionalExport n_pos_export;
 
 	private Map<String, String> pSpecs;
 	private Map<String, String> nSpecs;
@@ -30,13 +29,12 @@ public class Export {
 
 	private RandomAccessFile rw;
 
-	private String record;
-	private int last_record;
-
 	public String getFieldToString(int field) {
 		if (field > 124 & field < 1153) {
 			return nKeys.get(field - 125);
-		} else return null;
+		} else {
+			return null;
+		}
 	}
 
 	public <T> void writeField(T value, int field) {
@@ -54,68 +52,25 @@ public class Export {
 			format = split[3];
 		}
 
-		String val = getRightValue(value, format, length);
+		String val = PositionalExport.getRightValue(value, format, length);
+		String finalRecord = pos_export.getFinalRecord(val,
+		 field,
+		 position,
+		 length);
 
-		this.fRecords.set(this.last_record,
-				this.getFinalRecord(val, field, position, length));
+		int index = pos_export.getCurrentIndex(field);
 
+		this.fixFRecordSize(index);
+		this.fRecords.set(index, finalRecord);
 		this.writeOnFile();
 	}
 
-	private <T> String getRightValue(T value, String format, int length) {
-		if (value instanceof String) {
-			return IvaFields.getFormatField((String) value, format, length);
-		} else if (value instanceof BigDecimal) {
-			return IvaFields.getFormatField((BigDecimal) value, format, length);
-		} else if (value instanceof Date) {
-			return IvaFields.getFormatField((Date) value, format, length);
-		} else {
-			return IvaFields.getFormatField((Boolean) value, format, length);
-		}
-	}
-
-	private String getFinalRecord(String value, int field, int position, int length) {
-		this.record = this.getRecordToExamine(field);
-		if (this.record.length() >= position + length) {
-			return record.substring(0, position - 1) +
-					value +
-					record.substring(position - 1);
-		} else {
-			String padding = null;
-			for (int i = 0 ; i < position ; i++) {
-				padding += " ";
-			}
-			if (this.record.length() > 0) {
-				return record.substring(0, this.record.length() - 1) +
-						padding +
-						value;
-			} else {
-				return record.substring(0, this.record.length()) +
-						padding +
-						value;
-			}
-
-		}
-	}
-
-	private String getRecordToExamine(int field) {
-		if (field >= 118) { 			//start of record D
-			this.last_record = 2;
-			if (fRecords.size() >= 3) {
-				return fRecords.get(2);
-			}
-		} else if (field >= 14) {	//start of record B
-			this.last_record = 1;
-			if (fRecords.size() >= 2) {
-				return fRecords.get(1);
-			}
-		} else {
-			this.last_record = 0;
-			if (fRecords.size() >= 1) {
-				return fRecords.get(0);
+	private void fixFRecordSize(int index) {
+		if (this.fRecords.size() - 1 < index) {
+			for (int i = this.fRecords.size() - 1 ; i < index ; i++) {
+				this.fRecords.add("");
 			}
 		}
-		return "";
 	}
 
 	public <T> void writeField(T value, String field) {
@@ -128,149 +83,40 @@ public class Export {
 			format = split[1];
 		}
 
-		String[] val = this.getRightValue(value, format);
+		String[] val = NonPositionalExport.getRightValue(value, format);
+		String finalRecord = n_pos_export.getFinalRecord(field, val);
 
-		this.record = this.getFinalRecord(field, val);
-		if (this.record.length() > 1800) {
-			this.fRecords.set(this.last_record, this.record.substring(0, 1800));
-			this.fRecords.set(this.last_record, this.record.substring(1800) +
-					this.fRecords.get(this.last_record));
+		if (finalRecord.length() > 1889) {
+			PositionalExport.next_b_record++;
+			int next_index = NonPositionalExport.last_nrecord_index + 1;
+			this.fixFRecordSize(next_index);
+			this.fRecords.set(next_index - 1, finalRecord.substring(0, 1890));
+			this.fRecords.set(next_index, finalRecord.substring(1890) +
+				this.fRecords.get(next_index));
 		} else {
-			this.fRecords.set(this.last_record, this.record);
+			int index = NonPositionalExport.last_nrecord_index;
+			this.fixFRecordSize(index);
+			this.fRecords.set(index, finalRecord);
 		}
-
 		this.writeOnFile();
 	}
 
-	/*private <T> boolean checkCB(T value) {
-		if (value instanceof Boolean) {
-			return ((Boolean) value).booleanValue();
-		}
-		return true;
-	}*/
-
-	private <T> String[] getRightValue(T value, String format) {
-		if (value instanceof String) {
-			return IvaFields.getFormatField((String) value, format);
-		} else if (value instanceof BigDecimal) {
-			return IvaFields.getFormatField((BigDecimal) value, format);
-		} else {
-			return IvaFields.getFormatField((Date) value, format);
-		}
-	}
-
-	private String getFinalRecord(String field, String[] value) {
-		int line = N_BEGINNING;
-		int index = 0;
-		String tmp = null;
-
-		do {
-			if (-1 != this.setNRecord(line)) {
-				index = getIndexOfLastNField(field, 0);
-				line++;
-			} else {
-				System.out.println("setNRecord(line) == -1");
-			}
-
-		} while ((index == -1) && (this.record != null));
-
-		this.last_record = line;
-
-		if (this.record == null) {
-			index = this.getIndexOfPrecedentField(field);
-		} else {
-			index += N_LENGTH + 7;	//8 = number of digits of the header(field) - 1
-		}
-
-		for (String aValue : value) {
-			tmp += field + aValue;
-		}
-
-		return this.record.substring(0, index) +
-				tmp +
-				this.record.substring(index);
-	}
-
-	private int setNRecord(int line) {
-		if (line < this.fRecords.size()) {
-			this.record = this.fRecords.get(line);
-			return 0;
-		}
-		return -1;
-	}
-
-	private int getIndexOfLastNField(String field, int fromIndex) {
-		int response;
-		int index = this.record.indexOf(field, fromIndex);
-		if (index == -1) {
-			return -1;
-		} else {
-			response = getIndexOfLastNField(field, this.record.indexOf(field, index));
-			if (response == -1) {
-				return index;
-			} else {
-				return response;
-			}
-		}
-	}
-
-	private int getIndexOfPrecedentField(String field) {
-		int line = N_BEGINNING;
-		int index = 0;
-		String before_field;
-		do {
-			if (-1 != this.setNRecord(line)) {
-				for (int i = nKeys.indexOf(field) - 1; i > -1; i--) {
-					before_field = nKeys.get(i);
-					index = getIndexOfLastNField(before_field, 0);
-					if (index != -1) {
-						break;
-					}
-				}
-				line++;
-			} else {
-				System.out.println("setNRecord(line) == -1");
-			}
-		} while ((index == -1) && (this.record != null));
-
-		if (this.record == null) {
-			this.record = "";
-			index = 0;
-			this.last_record = 3;
-		} else {
-			index += N_LENGTH + 7;
-			this.last_record = line;
-		}
-		return index;
-	}
-
-	private void writeOnFile() {
+	public void writeOnFile() {
 		try {
 			this.rw.seek(0);
 			for (String line : fRecords) {
 				this.rw.writeBytes(line);
-				this.rw.writeBytes("\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	/*public void close () {
-		if (rw != null) {
-			try {
-				rw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}*/
-
 	private void getSpecs() {
 		try {
 			rw = new RandomAccessFile(SPECS_PATH, "r");
 			Pattern positional = Pattern.compile("[0-9]+");
-			Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}");
+			Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}|V1{1}[0-9]{6}|V[A-Z]{1}[0-9]{5}[A-D]");
 			String line;
 
 			while (null != (line = rw.readLine())) {
@@ -312,6 +158,10 @@ public class Export {
 
 		getSpecs();
 		getFile();
+
+		pos_export = new PositionalExport(this.fRecords);
+		n_pos_export = new NonPositionalExport(this.fRecords, this.nKeys);
 	}
+
 
 }
