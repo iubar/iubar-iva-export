@@ -58,11 +58,6 @@ pipeline {
                 sh 'mvn -B -DskipTests=true deploy'
             }
         }
-        stage('Analyze') {
-            steps {
-                sh 'sonar-scanner'
-            }
-        }
     }
 	post {
         changed {
