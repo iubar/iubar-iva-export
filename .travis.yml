@@ -28,6 +28,7 @@ script:
 after_success:
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
 # - export CODACY_PROJECT_TOKEN=%Project_Token%
+  - echo 'Running codacy-coverage-reporter...'
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r ./target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
 #
 # In alternativa a "codacy-coverage-reporter" è possibile utilizzare il seguente plugin Maven
