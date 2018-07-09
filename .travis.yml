@@ -22,7 +22,8 @@ before_install:
 install: true # Skip the installation step entirely.
               # Note that the install step runs before script step, and with Maven you don't usually need the install step. 
               # Maven will download dependencies on script step anyway.
-script: 
+script:
+  - echo 'Running maven...'
   - mvn -v
   - mvn clean verify
 after_success:
