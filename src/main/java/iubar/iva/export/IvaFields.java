@@ -13,7 +13,7 @@ public class IvaFields {
 	private static final int NON_POSITIONAL_STD_LENGHT = 16;
 
 	public static String getFormatField(BigDecimal value, String format, int length) {
-		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALY);
 		DecimalFormat myFormatter = (DecimalFormat) nf;
 		// DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
@@ -22,7 +22,7 @@ public class IvaFields {
 	}
 
 	public static String[] getFormatField(BigDecimal value, String format) {
-		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALIAN);
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALY);
 		DecimalFormat myFormatter = (DecimalFormat) nf;
 		// DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
