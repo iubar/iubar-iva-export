@@ -1,3 +1,5 @@
+DEPRECATO
+
 # iubar-iva-export
 Modulo esportazione Dichiarazione Iva verso Agenzia Entrate, per software Paghe Open (http://www.pagheopen.it)<br>
 [![Build Status](https://travis-ci.org/iubar/iubar-iva-export.svg?branch=master)](https://travis-ci.org/iubar/iubar-iva-export)
