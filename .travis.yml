@@ -9,7 +9,7 @@
 #
 language: java
 jdk:
-  - oraclejdk8
+  - oraclejdk9
 before_install:
   - sudo apt-get install jq
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
@@ -18,7 +18,7 @@ before_install:
 # The old version:
 # - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/1.0.13/codacy-coverage-reporter-1.0.13-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
 # The last donwloadable version:
-  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/2.0.0/codacy-coverage-reporter-2.0.0-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
+  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/11.2.4/codacy-coverage-reporter-assembly-11.2.4.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
 install: true # Skip the installation step entirely.
               # Note that the install step runs before script step, and with Maven you don't usually need the install step. 
               # Maven will download dependencies on script step anyway.
