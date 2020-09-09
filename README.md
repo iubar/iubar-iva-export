@@ -1,4 +1,5 @@
 DEPRECATO
+(tuttavia il progetto costituisce un esempio di utilizzo del codacy-coverage-reporter)
 
 # iubar-iva-export
 Modulo esportazione Dichiarazione Iva verso Agenzia Entrate, per software Paghe Open (http://www.pagheopen.it)<br>
