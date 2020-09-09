@@ -25,6 +25,10 @@ install: true # Skip the installation step entirely.
 script:
   - echo 'Running maven...'
   - mvn -v
+  - echo ${JAVA_HOME}
+  - mv "${JAVA_HOME}/lib/security/cacerts" "${JAVA_HOME}/lib/security/cacerts.jdk"
+  # TODO: Support for other distros than Debian/Ubuntu could be provided
+  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"  
   #- mvn clean verify
   - mvn install
 after_success:
