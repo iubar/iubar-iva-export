@@ -24,12 +24,14 @@ install: true # Skip the installation step entirely.
               # Maven will download dependencies on script step anyway.
 script:
   - echo 'Running maven...'
-  - mvn -v
   - echo ${JAVA_HOME}
+  # Se non configuro correttamente i certificati, maven potrebbe restituire errore quando tenta di scaricare alcune dipendenze
+  - la -la ${JAVA_HOME}/lib/security
   - mv "${JAVA_HOME}/lib/security/cacerts" "${JAVA_HOME}/lib/security/cacerts.jdk"
-  # TODO: Support for other distros than Debian/Ubuntu could be provided
-  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"  
-  #- mvn clean verify
+  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+  #
+  - mvn -v  
+  - mvn clean verify
   - mvn install
 after_success:
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
