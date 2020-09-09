@@ -25,7 +25,8 @@ install: true # Skip the installation step entirely.
 script:
   - echo 'Running maven...'
   - mvn -v
-  - mvn clean verify
+  #- mvn clean verify
+  - mvn install
 after_success:
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
 # - export CODACY_PROJECT_TOKEN=%Project_Token%
