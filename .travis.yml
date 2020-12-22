@@ -9,7 +9,7 @@
 #
 language: java
 jdk:
-  - oraclejdk7
+  - oraclejdk9
 before_install:
   - sudo apt-get install jq
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
@@ -18,16 +18,25 @@ before_install:
 # The old version:
 # - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/1.0.13/codacy-coverage-reporter-1.0.13-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
 # The last donwloadable version:
-  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/2.0.0/codacy-coverage-reporter-2.0.0-assembly.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
+  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/11.2.4/codacy-coverage-reporter-assembly-11.2.4.jar -O ~/codacy-coverage-reporter-assembly-latest.jar
 install: true # Skip the installation step entirely.
               # Note that the install step runs before script step, and with Maven you don't usually need the install step. 
               # Maven will download dependencies on script step anyway.
-script: 
-  - mvn -v
+script:
+  - echo 'Running maven...'
+  - echo ${JAVA_HOME}
+  # Se non configuro correttamente i certificati, maven potrebbe restituire errore quando tenta di scaricare alcune dipendenze
+  - ls -la ${JAVA_HOME}/lib/security
+  - mv "${JAVA_HOME}/lib/security/cacerts" "${JAVA_HOME}/lib/security/cacerts.jdk"
+  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+  #
+  - mvn -v  
   - mvn clean verify
+  - mvn install
 after_success:
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
 # - export CODACY_PROJECT_TOKEN=%Project_Token%
+  - echo 'Running codacy-coverage-reporter...'
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r ./target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
 #
 # In alternativa a "codacy-coverage-reporter" è possibile utilizzare il seguente plugin Maven
