@@ -1,7 +1,6 @@
 package iubar.iva.export;
 
 import java.util.Calendar;
-//import java.time.Year;
 
 public class FormatChecker {
 
@@ -10,11 +9,13 @@ public class FormatChecker {
 	private static final String pnPattern = "[a-zA-Z0]{2}";
 
 	public boolean checkPositionalCF(String value) {
-		return ((value.length() == 0 || value.length() == 16 || value.length() == 11) && ("".equals(value) || value.matches(cfPattern) || value.matches(cnPattern)));
+		return ((value.length() == 0 || value.length() == 16 || value.length() == 11)
+			&& ("".equals(value) || value.matches(cfPattern) || value.matches(cnPattern)));
 	}
 
 	public boolean checkPositionalCN(String value) {
-		return ((value.length() == 0 || value.length() == 11) && (value.matches(cnPattern) || "".equals(value)));
+		return ((value.length() == 0 || value.length() == 11)
+			&& (value.matches(cnPattern) || "".equals(value)));
 	}
 
 	public boolean checkPositionalPI(String value) {
@@ -30,15 +31,18 @@ public class FormatChecker {
 	}
 
 	public boolean checkPositionalPN(String value) {
-		return ((value.length() == 0 || value.length() == 2) && (value.matches(pnPattern) || "".equals(value)));
+		return ((value.length() == 0 || value.length() == 2)
+			&& (value.matches(pnPattern) || "".equals(value)));
 	}
 
 	public boolean checkPositionalPR(String value) {
-		return ((value.length() == 0 || value.length() == 2) && ((value.matches("[a-zA-Z]{2}") && !"EE".equals(value) && !"00".equals(value)) || "".equals(value)));
+		return ((value.length() == 0 || value.length() == 2)
+			&& ((value.matches("[a-zA-Z]{2}") && !"EE".equals(value) && !"00".equals(value)) || "".equals(value)));
 	}
 
 	public boolean checkPositionalCB(String value) {
-		return (value.length() == 0 || value.length() == 1) && ("0".equals(value) || "1".equals(value));
+		return ((value.length() == 0 || value.length() == 1)
+			&& ("0".equals(value) || "1".equals(value)));
 	}
 
 	public boolean checkNonPositionalCB(String value) {
@@ -70,7 +74,7 @@ public class FormatChecker {
 
 	public boolean checkNonPositionalDT(String value) {
 		if (this.checkNonPositionalDA(value)) {
-			return this.dateRange(value, 1880, /*Year.now().getValue()*/Calendar.getInstance().get(Calendar.YEAR));
+			return this.dateRange(value, 1880, Calendar.getInstance().get(Calendar.YEAR));
 		}
 		return false;
 	}
@@ -100,14 +104,12 @@ public class FormatChecker {
 
 	public boolean checkNonPositionalNX(String value, String format) {
 		return (value.length() == Integer.parseInt(format.substring(1)) && value.length() < 17
-				&& (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+")));
-
+			&& (value.matches("[0-9]+") || value.matches("[0-9]+[,.]?[0-9]+")));
 	}
 
 	public boolean checkNonPositionalPC(String value) {
-
-		return Double.parseDouble(value.replace(',', '.')) <= 100
-				&& (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}"));
+		return (Double.parseDouble(value.replace(',', '.')) <= 100
+			&& (value.matches("[0-9]") || value.matches("[0-9]{1,3}[,.]?[0-9]{1,3}")));
 	}
 
 	public boolean checkNonPositionalPR(String value) {

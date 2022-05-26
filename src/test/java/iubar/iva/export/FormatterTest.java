@@ -39,13 +39,14 @@ public class FormatterTest {
 	 * throws IllegalArgumentException { Formatter fm = new Formatter(); String
 	 * actual = null; actual = fm.stringFormatter("ciao", 8, 4); }
 	 */
+
 	@Test
 	public void test0Delta() { //
 		Formatter fm = new Formatter();
 		String actual = null;
+		String expected = "ciao";
 
 		actual = fm.stringFormatterDelta("ciao", 0, FormatType.NOFORMAT);
-		String expected = "ciao";
 		assertEquals(expected, actual);
 	}
 
@@ -53,9 +54,9 @@ public class FormatterTest {
 	public void test1Delta() { //
 		Formatter fm = new Formatter();
 		String actual = null;
+		String expected = "ciao    ";
 
 		actual = fm.stringFormatterDelta("ciao", 4, FormatType.SXSPACE);
-		String expected = "ciao    ";
 		assertEquals(expected, actual);
 	}
 
@@ -63,9 +64,9 @@ public class FormatterTest {
 	public void test2Delta() { //
 		Formatter fm = new Formatter();
 		String actual = null;
+		String expected = "    ciao";
 
 		actual = fm.stringFormatterDelta("ciao", 4, FormatType.DXSPACE);
-		String expected = "    ciao";
 		assertEquals(expected, actual);
 	}
 
@@ -73,9 +74,9 @@ public class FormatterTest {
 	public void test3Delta() { //
 		Formatter fm = new Formatter();
 		String actual = null;
+		String expected = "0000ciao";
 
 		actual = fm.stringFormatterDelta("ciao", 4, FormatType.DXZERO);
-		String expected = "0000ciao";
 		assertEquals(expected, actual);
 	}
 }

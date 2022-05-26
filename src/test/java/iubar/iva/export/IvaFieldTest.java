@@ -1,7 +1,5 @@
 package iubar.iva.export;
 
-import iubar.iva.export.IvaFields;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -12,23 +10,19 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalAN1() {
-
 		String actual = null;
+		String expected = "ciao    ";
 
 		actual = IvaFields.getFormatField("ciao", "AN", 8);
-
-		String expected = "ciao    ";
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testPositionalAN2() {
-
 		String actual = null;
+		String expected = "ciao    ";
 
 		actual = IvaFields.getFormatField("ciao", "an", 8);
-
-		String expected = "ciao    ";
 		assertEquals(expected, actual);
 	}
 
@@ -40,23 +34,19 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalCF1() {
-
 		String actual = null;
+		String expected = "RSSDRL96F57I967O";
 
 		actual = IvaFields.getFormatField("RSSDRL96F57I967O", "CF", 16);
-
-		String expected = "RSSDRL96F57I967O";
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testPositionalCF2() {
-
 		String actual = null;
+		String expected = "02685978945     ";
 
 		actual = IvaFields.getFormatField("02685978945", "CF", 16);
-
-		String expected = "02685978945     ";
 		assertEquals(expected, actual);
 	}
 
@@ -68,12 +58,10 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalCN1() {
-
 		String actual = null;
+		String expected = "0000002685978945";
 
 		actual = IvaFields.getFormatField("02685978945", "CN", 16);
-
-		String expected = "0000002685978945";
 		assertEquals(expected, actual);
 	}
 
@@ -91,12 +79,10 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalPI1() {
-
 		String actual = null;
+		String expected = "0000002685978945";
 
 		actual = IvaFields.getFormatField("02685978945", "PI", 16);
-
-		String expected = "0000002685978945";
 		assertEquals(expected, actual);
 	}
 
@@ -114,12 +100,10 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalDT1() {
-
 		String actual = null;
+		String expected = "31122017";
 
 		actual = IvaFields.getFormatField(new Date(1514678400000L), "DT", 8); // 31122017
-
-		String expected = "31122017";
 		assertEquals(expected, actual);
 	}
 
@@ -131,40 +115,34 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalNU1() {
-
 		String actual = null;
+		String expected = "00009";
 
 		actual = IvaFields.getFormatField(new BigDecimal("9"), "NU", 5);
-
-		String expected = "00009";
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testPositionalNU2() {
-
 		String actual = null;
+		String expected = "9.999";
 
 		actual = IvaFields.getFormatField(new BigDecimal("9999"), "NU", 5);
-
-		String expected = "9.999";
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testPositionalNU3() {
-
 		String actual = null;
+		String expected = "09.999,999";
 
 		actual = IvaFields.getFormatField(new BigDecimal("9999.999"), "NU", 10);
-
-		String expected = "09.999,999";
 		assertEquals(expected, actual);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testPositionalNU4() throws IllegalArgumentException {
-
+		
 		IvaFields.getFormatField(new BigDecimal("9999"), "DT", 4);
 	}
 
@@ -176,12 +154,10 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalPN1() {
-
 		String actual = null;
+		String expected = "BO";
 
 		actual = IvaFields.getFormatField("BO", "PN", 2);
-
-		String expected = "BO";
 		assertEquals(expected, actual);
 	}
 
@@ -199,12 +175,10 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalPR1() {
-
 		String actual = null;
+		String expected = "BO";
 
 		actual = IvaFields.getFormatField("BO", "PR", 2);
-
-		String expected = "BO";
 		assertEquals(expected, actual);
 	}
 
@@ -234,12 +208,10 @@ public class IvaFieldTest {
 
 	@Test
 	public void testPositionalCB1() {
-
 		String actual = null;
+		String expected = "01";
 
 		actual = IvaFields.getFormatField("1", "CB", 2);
-
-		String expected = "01";
 		assertEquals(expected, actual);
 	}
 
@@ -254,10 +226,9 @@ public class IvaFieldTest {
 	// controllo funzionamento AN Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalAN1() {
-
 		String[] actual = IvaFields.getFormatField("ciao", "AN");
-
 		String[] expected = { "ciao            " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -267,10 +238,9 @@ public class IvaFieldTest {
 	// campi
 	@Test
 	public void testNonPositionalAN2() {
-
 		String[] actual = IvaFields.getFormatField("|              ||      |", "AN");
-
 		String[] expected = { "|              |", "|      |        " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -279,10 +249,9 @@ public class IvaFieldTest {
 	// controllo funzionamento AN Non posizionale, errore nella formattazione
 	@Test
 	public void testNonPositionalAN3() {
-
 		String[] actual = IvaFields.getFormatField("ciao", "an");
-
 		String[] expected = { "ciao            " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -291,10 +260,9 @@ public class IvaFieldTest {
 	// controllo funzionamento CB Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalCB1() {
-
 		String[] actual = IvaFields.getFormatField("1", "CB");
-
 		String[] expected = { "               1" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -317,10 +285,9 @@ public class IvaFieldTest {
 	// controllo funzionamento CB12 Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalCB121() {
-
 		String[] actual = IvaFields.getFormatField("101101001011", "CB12");
-
 		String[] expected = { "    101101001011" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -343,10 +310,9 @@ public class IvaFieldTest {
 	// controllo funzionamento CF Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalCF1() {
-
 		String[] actual = IvaFields.getFormatField("RSSDRL96F57I967O", "CF");
-
 		String[] expected = { "RSSDRL96F57I967O" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -355,10 +321,9 @@ public class IvaFieldTest {
 	// controllo funzionamento CF Non posizionale, inserimento corretto
 	@Test
 	public void testNonPositionalCF2() {
-
 		String[] actual = IvaFields.getFormatField("02685978945", "CF");
-
 		String[] expected = { "02685978945     " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -375,8 +340,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalCN1() {
 		String[] actual = IvaFields.getFormatField("02685978945", "CN");
-
 		String[] expected = { "02685978945     " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -400,8 +365,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPI1() {
 		String[] actual = IvaFields.getFormatField("02685978945", "PI");
-
 		String[] expected = { "02685978945     " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -425,8 +390,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalDA1() {
 		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "DA");// 20102008
-
 		String[] expected = { "            2008" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -443,8 +408,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalDT1() {
 		String[] actual = IvaFields.getFormatField(new Date(961891200000L), "DT"); // 25062000
-
 		String[] expected = { "        25062000" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -475,8 +440,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalDN1() {
 		String[] actual = IvaFields.getFormatField(new Date(961891200000L), "DN"); // 25062000
-
 		String[] expected = { "        25062000" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -507,8 +472,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalD41() {
 		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "D4"); // 20102008
-
 		String[] expected = { "            2010" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -525,8 +490,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalD61() {
 		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "D6"); // 20102008
-
 		String[] expected = { "          102008" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -543,8 +508,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNP1() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("25"), "NP");
-
 		String[] expected = { "              25" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -554,8 +519,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNP2() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("999999999999999999999999"), "NP");
-
 		String[] expected = { "999.999.999.999.", " 999.999.999.999" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -565,8 +530,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNP3() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("999999999999999999999.999"), "NP");
-
 		String[] expected = { "999.999.999.999.", " 999.999.999,999" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -583,8 +548,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNU1() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("25"), "NU");
-
 		String[] expected = { "              25" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -594,8 +559,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNU2() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("-25"), "NU");
-
 		String[] expected = { "             -25" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -605,8 +570,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNU3() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("999999999999999999999999"), "NU");
-
 		String[] expected = { "999.999.999.999.", " 999.999.999.999" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -616,8 +581,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNU4() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("-999999999999999999999999"), "NU");
-
 		String[] expected = { "-999.999.999.999", ".999.999.999.999" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -627,8 +592,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalNX1() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("25"), "N2");
-
 		String[] expected = { "              25" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -645,8 +610,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1A() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("25"), "PC");
-
 		String[] expected = { "              25" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -656,8 +621,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1B() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("2"), "PC");
-
 		String[] expected = { "               2" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -667,8 +632,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1C() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("100"), "PC");
-
 		String[] expected = { "             100" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -678,8 +643,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1D() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("0.9"), "PC");
-
 		String[] expected = { "             0,9" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -689,8 +654,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1E() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("9.9"), "PC");
-
 		String[] expected = { "             9,9" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -700,8 +665,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1F() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("9.99"), "PC");
-
 		String[] expected = { "            9,99" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -711,8 +676,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1G() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("9.999"), "PC");
-
 		String[] expected = { "           9,999" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -722,8 +687,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1H() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("99.9"), "PC");
-
 		String[] expected = { "            99,9" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -733,8 +698,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1I() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("99.99"), "PC");
-
 		String[] expected = { "           99,99" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -744,8 +709,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPC1J() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("99.999"), "PC");
-
 		String[] expected = { "          99,999" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -762,8 +727,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPR1() {
 		String[] actual = IvaFields.getFormatField("BO", "PR");
-
 		String[] expected = { "BO              " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -794,8 +759,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPN1A() {
 		String[] actual = IvaFields.getFormatField("BO", "PN");
-
 		String[] expected = { "BO              " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -805,8 +770,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPN1B() {
 		String[] actual = IvaFields.getFormatField("EE", "PN");
-
 		String[] expected = { "EE              " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -816,8 +781,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalPN1C() {
 		String[] actual = IvaFields.getFormatField("00", "PN");
-
 		String[] expected = { "00              " };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -834,8 +799,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalQU1A() {
 		String[] actual = IvaFields.getFormatField("0,2554", "QU");
-
 		String[] expected = { "          0,2554" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -844,8 +809,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalQU1B() {
 		String[] actual = IvaFields.getFormatField("0.2554", "QU");
-
 		String[] expected = { "          0.2554" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -854,8 +819,8 @@ public class IvaFieldTest {
 	@Test
 	public void testNonPositionalQU1C() {
 		String[] actual = IvaFields.getFormatField("500000000", "QU");
-
 		String[] expected = { "       500000000" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -870,24 +835,24 @@ public class IvaFieldTest {
 	@Test
 	public void testBuildBigDecimal1() {
 		String actual = IvaFields.getFormatField(new BigDecimal("10"), "NU", 10);
-
 		String expected = "0000000010";
+
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testBuildBigDecimal2() {
 		String actual = IvaFields.getFormatField(new BigDecimal("10.568"), "NU", 10);
-
 		String expected = "000010,568";
+
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testBuildNonPositionalBigDecimal1() {
 		String[] actual = IvaFields.getFormatField(new BigDecimal("10.568"), "NU");
-
 		String[] expected = { "          10,568" };
+
 		for (int i = 0; i < actual.length; i++) {
 			assertEquals(expected[i], actual[i]);
 		}
@@ -896,24 +861,24 @@ public class IvaFieldTest {
 	@Test
 	public void testBuildDate1() {
 		String actual = IvaFields.getFormatField(new Date(1224460800000L), "DT", 8);// 20/10/2008
-
 		String expected = "20102008";
+
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testBuildNonPositionalDate1() {
 		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "DT");// 20/10/2008
-
 		String[] expected = { "        20102008" };
+
 		assertEquals(expected[0], actual[0]);
 	}
 
 	@Test
 	public void testBuildNonPositionalDate2() {
 		String[] actual = IvaFields.getFormatField(new Date(1224460800000L), "DA");// 20/10/2008
-
 		String[] expected = { "            2008" };
+		
 		assertEquals(expected[0], actual[0]);
 	}
 
