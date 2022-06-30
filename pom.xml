@@ -12,6 +12,7 @@
     <url>http://www.pagheopen.it</url>
 	 <properties>
 	   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	   <artifactory.host>192.168.0.119</artifactory.host>
 	 </properties>
     <build>
         <plugins>
