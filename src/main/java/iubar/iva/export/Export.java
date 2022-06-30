@@ -27,7 +27,7 @@ public class Export {
 	private List<String> nKeys;
 	private List<String> fRecords;
 
-	private RandomAccessFile rw;
+	private RandomAccessFile file;
 
 	public String getFieldToString(int field) {
 		if (field > 124 & field < 1153) {
@@ -54,9 +54,9 @@ public class Export {
 
 		String val = PositionalExport.getRightValue(value, format, length);
 		String finalRecord = pos_export.getFinalRecord(val,
-		 field,
-		 position,
-		 length);
+			field,
+			position,
+			length);
 
 		int index = pos_export.getCurrentIndex(field);
 
@@ -67,6 +67,7 @@ public class Export {
 
 	private void fixFRecordSize(int index) {
 		if (this.fRecords.size() - 1 < index) {
+
 			for (int i = this.fRecords.size() - 1 ; i < index ; i++) {
 				this.fRecords.add("");
 			}
@@ -87,14 +88,16 @@ public class Export {
 		String finalRecord = n_pos_export.getFinalRecord(field, val);
 
 		if (finalRecord.length() > 1889) {
-			PositionalExport.next_b_record++;
 			int next_index = NonPositionalExport.last_nrecord_index + 1;
+			PositionalExport.next_b_record++;
+			
 			this.fixFRecordSize(next_index);
 			this.fRecords.set(next_index - 1, finalRecord.substring(0, 1890));
 			this.fRecords.set(next_index, finalRecord.substring(1890) +
 				this.fRecords.get(next_index));
 		} else {
 			int index = NonPositionalExport.last_nrecord_index;
+			
 			this.fixFRecordSize(index);
 			this.fRecords.set(index, finalRecord);
 		}
@@ -103,9 +106,10 @@ public class Export {
 
 	public void writeOnFile() {
 		try {
-			this.rw.seek(0);
+			this.file.seek(0);
+
 			for (String line : fRecords) {
-				this.rw.writeBytes(line);
+				this.file.writeBytes(line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,15 +117,17 @@ public class Export {
 	}
 
 	private void getSpecs() {
-		try {
-			rw = new RandomAccessFile(SPECS_PATH, "r");
-			Pattern positional = Pattern.compile("[0-9]+");
-			Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}|V1{1}[0-9]{6}|V[A-Z]{1}[0-9]{5}[A-D]");
-			String line;
+		Pattern positional = Pattern.compile("[0-9]+");
+		Pattern nonPositional = Pattern.compile("V[A-Z]{1}[0-9]{6}|V1{1}[0-9]{6}|V[A-Z]{1}[0-9]{5}[A-D]");
+		String line;
 
-			while (null != (line = rw.readLine())) {
+		try {
+			file = new RandomAccessFile(SPECS_PATH, "r");
+
+			while (null != (line = file.readLine())) {
 				Matcher n_match = nonPositional.matcher(line);
 				Matcher p_match = positional.matcher(line);
+
 				if (!n_match.find()) {
 					if (p_match.find()) {
 						pSpecs.put(p_match.group(0), line);
@@ -131,20 +137,24 @@ public class Export {
 					nKeys.add(n_match.group(0));
 				}
 			}
-			rw.close();
+
+			file.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void getFile() {
+		String line;
+
 		try {
-			this.rw = new RandomAccessFile(FILE_PATH, "rw");
-			String line;
-			while (null != (line = this.rw.readLine())) {
+			this.file = new RandomAccessFile(FILE_PATH, "rw");
+			
+			while (null != (line = this.file.readLine())) {
 				this.fRecords.add(line);
 			}
-			//this.rw.close();
+
+			this.file.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

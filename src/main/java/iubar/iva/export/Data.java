@@ -7,9 +7,8 @@ public class Data {
 
     public static void main(String[] args) {
 	    Export export = new Export();
-	    ///
-	    ///
 	    int i = 1;
+		
 		export.writeField("A", i);
 		i++;
 		export.writeField("", i);

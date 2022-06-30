@@ -15,18 +15,18 @@ public class IvaFields {
 	public static String getFormatField(BigDecimal value, String format, int length) {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALY);
 		DecimalFormat myFormatter = (DecimalFormat) nf;
-		// DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
 		String str = myFormatter.format(value);
+
 		return getFormatField(str, format, length);
 	}
 
 	public static String[] getFormatField(BigDecimal value, String format) {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ITALY);
 		DecimalFormat myFormatter = (DecimalFormat) nf;
-		// DecimalFormat myFormatter = new DecimalFormat(DECIMAL_PATTERN);
 
 		String str = myFormatter.format(value);
+
 		return getFormatField(str, format);
 	}
 
@@ -77,7 +77,7 @@ public class IvaFields {
 
 		int delta = length - value.length();
 
-		if (delta >= 0) {
+		if (delta >= 0) {	// Uhm, da riscrivere evitando tutto questo nesting di switch e if
 			switch (format.toUpperCase()) {
 			case "AN":
 				formattedString = fm.stringFormatterDelta(value, delta, FormatType.SXSPACE);
@@ -320,6 +320,7 @@ public class IvaFields {
 
 	private static String[] splitter(String value) {
 		String tmp = value;
+
 		if(tmp.length() == 0) {
 			tmp = "                ";
 		}
@@ -327,8 +328,6 @@ public class IvaFields {
 		int fieldNumber = tmp.length() / NON_POSITIONAL_STD_LENGHT; 
 		int modulo = tmp.length() % NON_POSITIONAL_STD_LENGHT;
 		String[] out;
-		
-		
 		
 		if (modulo == 0) {
 			out = new String[fieldNumber];
