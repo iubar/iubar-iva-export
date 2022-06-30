@@ -7,9 +7,9 @@
 # Travis
 # https://docs.travis-ci.com/user/customizing-the-build
 #
+dist: bionic # https://docs.travis-ci.com/user/reference/bionic/
 language: java
-jdk:
-  - oraclejdk9
+jdk: openjdk10 # https://docs.travis-ci.com/user/reference/bionic/#jvm-clojure-groovy-java-scala-support
 before_install:
   - sudo apt-get install jq
 # See: https://github.com/codacy/codacy-coverage-reporter#setup
