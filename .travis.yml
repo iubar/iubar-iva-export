@@ -24,11 +24,12 @@ install: true # Skip the installation step entirely.
               # Maven will download dependencies on script step anyway.
 script:
   - echo 'Running maven...'
-  - echo ${JAVA_HOME}
+  - echo "JAVA_HOME: ${JAVA_HOME}"
+  - echo 'JAVA_HOME: ${JAVA_HOME}'
   # Se non configuro correttamente i certificati, maven potrebbe restituire errore quando tenta di scaricare alcune dipendenze
-  - ls -la ${JAVA_HOME}/lib/security
-  - mv "${JAVA_HOME}/lib/security/cacerts" "${JAVA_HOME}/lib/security/cacerts.jdk"
-  - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+  #- ls -la ${JAVA_HOME}/lib/security
+  #- mv "${JAVA_HOME}/lib/security/cacerts" "${JAVA_HOME}/lib/security/cacerts.jdk"
+  #- ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
   #
   - mvn -v  
   - mvn clean verify
