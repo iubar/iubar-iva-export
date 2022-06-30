@@ -467,8 +467,7 @@ public class IvaFieldTest {
 	// controllo funzionamento DT Non posizionale, errore di inserimento
 	@Test(expected = IllegalArgumentException.class)
 	public void testNonPositionalDT4() throws IllegalArgumentException {
-
-		IvaFields.getFormatField("25062020", "DT");
+		IvaFields.getFormatField("25063099", "DT");
 	}
 
 	// controllo funzionamento DN Non posizionale, inserimento corretto
