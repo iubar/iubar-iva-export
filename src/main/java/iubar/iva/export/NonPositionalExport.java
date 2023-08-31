@@ -57,12 +57,13 @@ public class NonPositionalExport {
     }
 
     private boolean setRecord(int index) {
-        if (this.fRecords.size() - 1 > PositionalExport.next_b_record &&
-                this.fRecords.size() - index -1 > PositionalExport.next_b_record &&
-                index < this.fRecords.size()) {
+        if (this.fRecords.size() - 1 > PositionalExport.next_b_record
+                && this.fRecords.size() - index -1 > PositionalExport.next_b_record
+                && index < this.fRecords.size()) {
 
             this.record = this.fRecords.get(this.fRecords.size() - index -1);
             last_nrecord_index = this.fRecords.size() - index - 1;
+            
             return true;
         } else {
             this.record = "";
@@ -71,22 +72,21 @@ public class NonPositionalExport {
     }
 
     private int getIndexOfLastNField(String field, int fromIndex) {
-        if (this.record.length() > 0) {
-            int response;
-            int index = this.record.indexOf(field, fromIndex);
-            if (index == -1) {
-                return -1;
-            } else {
-                response = getIndexOfLastNField(field, index + 1);
-                if (response == -1) {
-                    return index;
-                } else {
-                    return response;
-                }
-            }
-        } else {
+        if (this.record.length() <= 0)
             return -1;
-        }
+        
+        int response;
+        int index = this.record.indexOf(field, fromIndex);
+
+        if (index == -1)
+            return -1;
+
+        response = getIndexOfLastNField(field, index + 1);
+
+        if (response == -1)
+            return index;
+        else
+            return response;
     }
 
     private int getIndexOfPrecedentField(String field) {
@@ -97,8 +97,10 @@ public class NonPositionalExport {
         for (int i = nKeys.indexOf(field) - 1; i > -1; i--) {
             precedent_field = nKeys.get(i);
             frecord_index = 0;
+
             while (this.setRecord(frecord_index)) {
                 index = getIndexOfLastNField(precedent_field, 0);
+
                 if (index != -1) {
                     i = -1;
                     break;
@@ -113,6 +115,7 @@ public class NonPositionalExport {
         } else {
             index += FIELD_LENGHT + KEY_LENGHT;
         }
+        
         return index;
     }
 
